@@ -2,6 +2,7 @@
    contact details and prices are in js/config.js. */
 (function () {
   "use strict";
+  if (window.NodeList && !NodeList.prototype.forEach) NodeList.prototype.forEach = Array.prototype.forEach;   // older phones
   var C = window.PP_CONFIG || {};
   var AR = window.PP_AR || {};
   var root = document.documentElement;
@@ -160,4 +161,5 @@
   if (q) start = q; else { try { start = localStorage.getItem("pp-lang") || "en"; } catch (e) {} }
   applyLang(start);
   var y = document.getElementById("year"); if (y) y.textContent = new Date().getFullYear();
+  window.PP_READY = true;
 })();

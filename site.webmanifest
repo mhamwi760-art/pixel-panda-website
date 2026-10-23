@@ -1,0 +1,12 @@
+{
+  "name": "Pixel Panda",
+  "short_name": "Pixel Panda",
+  "start_url": "./",
+  "display": "browser",
+  "background_color": "#006D6F",
+  "theme_color": "#006D6F",
+  "icons": [
+    { "src": "assets/share/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "assets/share/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

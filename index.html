@@ -6,12 +6,34 @@
 <title>Pixel Panda | Social media that makes brands look good online</title>
 <meta name="description" content="Pixel Panda is a social media management company: product and model photography, account management, posts, stories and ad design.">
 <meta name="theme-color" content="#006D6F">
-<link rel="icon" type="image/png" href="assets/logo/pixel-panda-logo-black.png">
+<meta name="format-detection" content="telephone=no">
+<!-- Link preview when the site is shared (WhatsApp, iMessage, Instagram, X, LinkedIn...).
+     These need full web addresses; update them if the site moves to its own domain. -->
+<link rel="canonical" href="https://mhamwi760-art.github.io/pixel-panda-website/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Pixel Panda">
+<meta property="og:title" content="Pixel Panda | Social media that makes brands look good online">
+<meta property="og:description" content="Product and model photography, account management, posts, stories and ad design. Get 3 free designs before you start.">
+<meta property="og:url" content="https://mhamwi760-art.github.io/pixel-panda-website/">
+<meta property="og:image" content="https://mhamwi760-art.github.io/pixel-panda-website/assets/share/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Pixel Panda: social media that makes brands look good online">
+<meta name="twitter:card" content="summary_large_image">
+<!-- Icons: browser tab, iPhone/iPad home screen, Android home screen -->
+<link rel="icon" type="image/png" sizes="512x512" href="assets/share/icon-512.png">
+<link rel="apple-touch-icon" href="assets/share/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="apple-mobile-web-app-title" content="Pixel Panda">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
-<script>document.documentElement.classList.remove('no-js');</script>
+<script>
+  document.documentElement.classList.remove('no-js');
+  // Safety net: if the site scripts fail on an old browser, show everything anyway.
+  window.addEventListener('load', function () { setTimeout(function () { if (!window.PP_READY) document.documentElement.classList.add('no-js'); }, 1500); });
+</script>
 </head>
 <body>
 <!--
