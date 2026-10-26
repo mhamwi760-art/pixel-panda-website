@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="en" dir="ltr" class="no-js">
+<html lang="en" dir="ltr" class="no-js" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Pixel Panda | Social media that makes brands look good online</title>
-<meta name="description" content="Pixel Panda is a social media management company: product and model photography, account management, posts, stories and ad design.">
+<meta name="description" content="Pixel Panda is a social media and branding company: product and model photography, posts, stories, reels, ad design and brand identity.">
 <meta name="theme-color" content="#006D6F">
 <meta name="format-detection" content="telephone=no">
 <!-- Link preview when the site is shared (WhatsApp, iMessage, Instagram, X, LinkedIn...).
@@ -13,7 +13,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Pixel Panda">
 <meta property="og:title" content="Pixel Panda | Social media that makes brands look good online">
-<meta property="og:description" content="Product and model photography, account management, posts, stories and ad design. Get 3 free designs before you start.">
+<meta property="og:description" content="Social media packages, branding and 3 free designs before you start.">
 <meta property="og:url" content="https://mhamwi760-art.github.io/pixel-panda-website/">
 <meta property="og:image" content="https://mhamwi760-art.github.io/pixel-panda-website/assets/share/og-image.png">
 <meta property="og:image:width" content="1200">
@@ -28,23 +28,35 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=2">
+<link rel="stylesheet" href="css/styles.css?v=3">
 <script>
-  document.documentElement.classList.remove('no-js');
-  // Safety net: if the site scripts fail on an old browser, show everything anyway.
-  window.addEventListener('load', function () { setTimeout(function () { if (!window.PP_READY) document.documentElement.classList.add('no-js'); }, 1500); });
+  /* Runs first: light/dark theme and language, so the page never flashes the wrong one.
+     Safety net: if the site scripts fail on an old browser, show everything anyway. */
+  (function (d) {
+    d.classList.remove('no-js');
+    var t, l; try { t = localStorage.getItem('pp-theme'); l = localStorage.getItem('pp-lang'); } catch (e) {}
+    if (!t) t = window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    d.setAttribute('data-theme', t);
+    var q = (location.search.match(/[?&]lang=(ar|en)/) || [])[1]; if (q) l = q;
+    if (l === 'ar') { d.lang = 'ar'; d.dir = 'rtl'; d.classList.add('pp-ar-pending'); }
+    window.addEventListener('load', function () { setTimeout(function () { if (!window.PP_READY) { d.classList.add('no-js'); d.classList.remove('pp-ar-pending'); } }, 1500); });
+  })(document.documentElement);
 </script>
 </head>
-<body>
+<body data-page="home">
 <!--
   =====================================================================
   HOW TO EDIT
-  - Phone, email, WhatsApp, Instagram, prices, policy numbers and
-    portfolio images are all in ONE place: js/config.js
+  - The site has 4 pages: index.html (Panda Time), packages.html
+    (PP Packages), branding.html (PP Branding) and contact.html.
+  - WhatsApp, Instagram, prices and portfolio images are all in ONE
+    place: js/config.js
   - Text for the Arabic version lives in js/i18n-ar.js
-  - English text is written directly in this file.
-  - After changing a css/js file, raise the ?v=2 number on its line at
-    the top/bottom of this file so visitors get the new version at once.
+  - English text is written directly in each page.
+  - The menu (header) and footer are repeated on every page: if you
+    change them, change all 4 pages.
+  - After changing a css/js file, raise the ?v=3 number on its line in
+    all 4 pages so visitors get the new version at once.
   =====================================================================
 -->
 
@@ -56,15 +68,13 @@
     <symbol id="i-pen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 20l1-5L16 4l4 4L9 19z"/><path d="M13.5 6.5l4 4"/></symbol>
     <symbol id="i-story" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8.5"/><path d="M10 8.5l5 3.5-5 3.5z" fill="currentColor"/></symbol>
     <symbol id="i-ad" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 10v4h3l7 4V6L7 10z"/><path d="M18 9.5a4 4 0 010 5"/></symbol>
-    <symbol id="i-photos" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14"/><circle cx="9" cy="10" r="1.6"/><path d="M3 17l5-5 4 4 3-3 6 6"/></symbol>
-    <symbol id="i-bolt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M13 3L5 14h6l-1 7 8-11h-6z"/></symbol>
-    <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a1 1 0 01-1 1A16 16 0 014 5a1 1 0 011-1z"/></symbol>
-    <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14"/><path d="M3 6l9 7 9-7"/></symbol>
-    <symbol id="i-insta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="4.5"/><circle cx="12" cy="12" r="3.6"/><circle cx="16.8" cy="7.2" r="1" fill="currentColor" stroke="none"/></symbol>
-    <symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.5 2.6 3.5 5.4 3.5 8.5s-1 5.9-3.5 8.5c-2.5-2.6-3.5-5.4-3.5-8.5s1-5.9 3.5-8.5z"/></symbol>
-    <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0114 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+    <symbol id="i-reel" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M3 9h18M8 4l3 5M14 4l3 5"/><path d="M10.5 12.5l4 2.5-4 2.5z" fill="currentColor"/></symbol>
+    <symbol id="i-brand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="9" cy="10" r="1.4" fill="currentColor"/><circle cx="14.5" cy="8.5" r="1.4" fill="currentColor"/><circle cx="16" cy="13.5" r="1.4" fill="currentColor"/><path d="M12 20.5c-1.5 0-2-1-2-2s1-1.5 2-1.5"/></symbol>
     <symbol id="i-wa" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.2A9.8 9.8 0 003.6 17l-1.4 4.8 4.9-1.3A9.8 9.8 0 1012 2.2zm0 17.8a8 8 0 01-4.1-1.1l-.3-.2-2.9.8.8-2.8-.2-.3A8 8 0 1112 20zm4.4-6c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.5.1l-.8 1c-.1.2-.3.2-.5.1a6.6 6.6 0 01-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 00-.6.3 2.7 2.7 0 00-.9 2 4.7 4.7 0 001 2.5 10.7 10.7 0 004.1 3.6c1.5.7 2.1.7 2.9.6.5-.1 1.4-.6 1.6-1.1.2-.6.2-1 .1-1.1l-.3-.3z"/></symbol>
-    <symbol id="i-image" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16"/><circle cx="9" cy="9.5" r="1.8"/><path d="M3 17l5-5 4 4 3-3 6 6"/></symbol>
+    <symbol id="i-insta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="4.5"/><circle cx="12" cy="12" r="3.6"/><circle cx="16.8" cy="7.2" r="1" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 019.5 4a8.5 8.5 0 1010.5 10.5z"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></symbol>
   </defs>
 </svg>
 
@@ -72,25 +82,36 @@
 
 <header class="site-header" id="top">
   <div class="wrap nav">
-    <a class="brand" href="#top" aria-label="Pixel Panda, home">
+    <a class="brand" href="index.html" aria-label="Pixel Panda, home" data-i18n-attr="aria-label:homeLabel">
       <img src="assets/logo/pixel-panda-logo-white.png" alt="" width="297" height="198">
       <span data-i18n="brand">PIXEL PANDA</span>
     </a>
-    <nav aria-label="Main" data-i18n-attr="aria-label:navLabel">
+    <nav class="mainnav" aria-label="Main" data-i18n-attr="aria-label:navLabel">
       <ul class="menu" id="menu">
-        <li><a href="#about" data-i18n="nav.about">About</a></li>
-        <li><a href="#services" data-i18n="nav.services">Services</a></li>
-        <li><a href="#how" data-i18n="nav.how">How we work</a></li>
-        <li><a href="#packages" data-i18n="nav.packages">Packages</a></li>
-        <li><a href="#offer" data-i18n="nav.offer">Free designs</a></li>
-        <li><a href="#policies" data-i18n="nav.policies">Policies</a></li>
-        <li><a href="#work" data-i18n="nav.work">Our work</a></li>
-        <li class="menu-cta"><a href="#contact" data-i18n="nav.contact">Contact us</a></li>
+        <li class="has-sub"><a class="top active" aria-current="page" href="index.html" data-i18n="nav.time">Panda Time</a><button class="sub-toggle" type="button" aria-expanded="false" aria-label="Panda Time sections" data-i18n-attr="aria-label:nav.timeSub"><svg aria-hidden="true"><use href="#i-chev"/></svg></button>
+          <ul class="sub">
+            <li><a href="index.html#about" data-i18n="nav.about">About us</a></li>
+            <li><a href="index.html#services" data-i18n="nav.services">Services</a></li>
+            <li><a href="index.html#policies" data-i18n="nav.policies">Policies</a></li>
+          </ul></li>
+        <li class="has-sub"><a class="top" href="packages.html" data-i18n="nav.pkgs">PP Packages</a><button class="sub-toggle" type="button" aria-expanded="false" aria-label="PP Packages sections" data-i18n-attr="aria-label:nav.pkgsSub"><svg aria-hidden="true"><use href="#i-chev"/></svg></button>
+          <ul class="sub">
+            <li><a href="packages.html#packages" data-i18n="nav.packages">Packages</a></li>
+            <li><a href="packages.html#offer" data-i18n="nav.offer">Free designs</a></li>
+            <li><a href="packages.html#how" data-i18n="nav.how">How we work</a></li>
+          </ul></li>
+        <li class="has-sub"><a class="top" href="branding.html" data-i18n="nav.branding">PP Branding</a><button class="sub-toggle" type="button" aria-expanded="false" aria-label="PP Branding sections" data-i18n-attr="aria-label:nav.brandingSub"><svg aria-hidden="true"><use href="#i-chev"/></svg></button>
+          <ul class="sub">
+            <li><a href="branding.html#packages" data-i18n="nav.packages">Packages</a></li>
+            <li><a href="branding.html#how" data-i18n="nav.how">How we work</a></li>
+          </ul></li>
+        <li class="menu-cta"><a href="contact.html" data-i18n="nav.contact">Contact us</a></li>
       </ul>
     </nav>
     <div class="nav-actions">
+      <button class="theme-btn" type="button" id="themeBtn" aria-label="Switch to dark mode"><svg class="i-moon" aria-hidden="true"><use href="#i-moon"/></svg><svg class="i-sun" aria-hidden="true"><use href="#i-sun"/></svg></button>
       <button class="lang-btn" type="button" id="langBtn" aria-label="اقرأ الموقع بالعربية"><span lang="ar">عربي</span></button>
-      <a class="btn btn-yellow nav-cta" href="#contact" data-i18n="nav.contact">Contact us</a>
+      <a class="btn btn-yellow nav-cta" href="contact.html" data-i18n="nav.contact">Contact us</a>
       <button class="burger" type="button" id="burger" aria-controls="menu" aria-expanded="false" aria-label="Menu" data-i18n-attr="aria-label:menuLabel"><span></span><span></span><span></span></button>
     </div>
   </div>
@@ -103,12 +124,12 @@
   <div class="wrap">
     <div class="hero-copy">
       <img class="hero-mark" data-depth="6" src="assets/logo/pixel-panda-logo-white@4x.png" alt="Pixel Panda logo" data-i18n-attr="alt:logoAlt" width="1188" height="792">
-      <p class="label" data-i18n="hero.label">Social media management</p>
+      <p class="label" data-i18n="hero.label">Panda Time</p>
       <h1 id="hero-title" data-i18n="hero.title">Social media that makes brands <em>look good online.</em></h1>
-      <p class="lead" data-i18n="hero.lead">We photograph your products and models, design your posts and stories, run your accounts and create ads that get noticed.</p>
+      <p class="lead" data-i18n="hero.lead">We photograph your products and models, design your posts, stories and reels, create ads that get noticed and build brand identities people remember.</p>
       <div class="hero-ctas">
-        <a class="btn btn-yellow" href="#packages"><span data-i18n="hero.cta1">See our packages</span> <span class="arrow" aria-hidden="true">→</span></a>
-        <a class="btn btn-ghost" href="#offer" data-i18n="hero.cta2">Get 3 free designs</a>
+        <a class="btn btn-yellow" href="packages.html#packages"><span data-i18n="hero.cta1">See our packages</span> <span class="arrow" aria-hidden="true">→</span></a>
+        <a class="btn btn-ghost" href="packages.html#offer" data-i18n="hero.cta2">Get 3 free designs</a>
       </div>
     </div>
     <div class="hero-art" aria-hidden="true">
@@ -130,12 +151,12 @@
     <div class="about-copy reveal">
       <p class="label"><b>01</b> <span data-i18n="about.label">About us</span></p>
       <h2 id="about-title" data-i18n="about.title">We make brands look good online.</h2>
-      <p class="big" data-i18n="about.body">Pixel Panda is a social media management company. We photograph your products and models, design your posts and stories, run your accounts and create ads that get noticed, so you can focus on running your business.</p>
+      <p class="big" data-i18n="about.body">Pixel Panda is a social media and branding company. We photograph your products and models, design your posts, stories, highlights and reels, create ads that get noticed and build your brand identity. On request, we can also publish to your accounts for you, so you can focus on running your business.</p>
       <div class="pillars">
         <div class="pillar"><span class="ico"><svg aria-hidden="true"><use href="#i-cam"/></svg></span><div><strong data-i18n="about.p1">We shoot</strong><span data-i18n="about.p1s">Products and models</span></div></div>
-        <div class="pillar"><span class="ico q"><svg aria-hidden="true"><use href="#i-pen"/></svg></span><div><strong data-i18n="about.p2">We design</strong><span data-i18n="about.p2s">Posts, stories and ads</span></div></div>
-        <div class="pillar"><span class="ico y"><svg aria-hidden="true"><use href="#i-grid"/></svg></span><div><strong data-i18n="about.p3">We manage</strong><span data-i18n="about.p3s">Your social accounts</span></div></div>
-        <div class="pillar"><span class="ico c"><svg aria-hidden="true"><use href="#i-ad"/></svg></span><div><strong data-i18n="about.p4">We advertise</strong><span data-i18n="about.p4s">Ads that get noticed</span></div></div>
+        <div class="pillar"><span class="ico q"><svg aria-hidden="true"><use href="#i-pen"/></svg></span><div><strong data-i18n="about.p2">We design</strong><span data-i18n="about.p2s">Posts, stories, reels and ads</span></div></div>
+        <div class="pillar"><span class="ico y"><svg aria-hidden="true"><use href="#i-brand"/></svg></span><div><strong data-i18n="about.p3">We brand</strong><span data-i18n="about.p3s">Logos and brand identities</span></div></div>
+        <div class="pillar"><span class="ico c"><svg aria-hidden="true"><use href="#i-grid"/></svg></span><div><strong data-i18n="about.p4">We manage</strong><span data-i18n="about.p4s">Your accounts, on request</span></div></div>
       </div>
     </div>
     <div class="about-art reveal" aria-hidden="true">
@@ -152,8 +173,8 @@
     <div class="sec-head reveal">
       <div>
         <p class="label"><b>02</b> <span data-i18n="services.label">Our services</span></p>
-        <h2 id="services-title" data-i18n="services.title">Everything your feed needs</h2>
-        <p class="sub" data-i18n="services.sub">One team for your photos, your content and your accounts.</p>
+        <h2 id="services-title" data-i18n="services.title">Everything your brand needs</h2>
+        <p class="sub" data-i18n="services.sub">One team for your photos, your content and your brand identity.</p>
       </div>
     </div>
     <div class="services">
@@ -164,353 +185,133 @@
         <span class="num">01</span>
       </article>
       <article class="service reveal" style="--acc:var(--yellow)">
-        <span class="ico"><svg aria-hidden="true"><use href="#i-grid"/></svg></span>
-        <h3 data-i18n="services.s2">Social media management</h3>
-        <p data-i18n="services.s2d">We plan, publish and manage your accounts so they stay active and on brand.</p>
+        <span class="ico"><svg aria-hidden="true"><use href="#i-story"/></svg></span>
+        <h3 data-i18n="services.s2">Posts, stories &amp; highlights</h3>
+        <p data-i18n="services.s2d">Instagram posts, stories and highlight covers, designed in your brand style.</p>
         <span class="num">02</span>
       </article>
       <article class="service reveal" style="--acc:var(--coral)">
-        <span class="ico"><svg aria-hidden="true"><use href="#i-story"/></svg></span>
-        <h3 data-i18n="services.s3">Posts &amp; stories design</h3>
-        <p data-i18n="services.s3d">Everyday posts and stories designed to keep your audience watching.</p>
+        <span class="ico"><svg aria-hidden="true"><use href="#i-reel"/></svg></span>
+        <h3 data-i18n="services.s3">Reels</h3>
+        <p data-i18n="services.s3d">Short videos of any type, made to keep your audience watching.</p>
         <span class="num">03</span>
       </article>
       <article class="service reveal" style="--acc:var(--pink)">
         <span class="ico"><svg aria-hidden="true"><use href="#i-ad"/></svg></span>
         <h3 data-i18n="services.s4">Ad design</h3>
-        <p data-i18n="services.s4d">Paid social ads designed to get noticed and get clicks.</p>
+        <p data-i18n="services.s4d">Social media ads designed to get noticed and get clicks.</p>
         <span class="num">04</span>
       </article>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 03 HOW WE WORK ============ -->
-<section class="section" id="how" aria-labelledby="how-title">
-  <div class="wrap how">
-    <div class="reveal">
-      <div class="sec-head"><div>
-        <p class="label"><b>03</b> <span data-i18n="how.label">How we work</span></p>
-        <h2 id="how-title" data-i18n="how.title">Four simple steps</h2>
-      </div></div>
-      <ol class="steps">
-        <li><span class="n">01</span><div><h3 data-i18n="how.s1">Discover</h3><p data-i18n="how.s1d">We get to know your brand, your audience and your goals.</p></div></li>
-        <li><span class="n">02</span><div><h3 data-i18n="how.s2">Plan</h3><p data-i18n="how.s2d">We build a monthly content plan and share it for your approval.</p></div></li>
-        <li><span class="n">03</span><div><h3 data-i18n="how.s3">Create</h3><p data-i18n="how.s3d">We shoot, design and write your posts, stories and ads.</p></div></li>
-        <li><span class="n">04</span><div><h3 data-i18n="how.s4">Publish</h3><p data-i18n="how.s4d">We post, manage your accounts and review the month with you.</p></div></li>
-      </ol>
-    </div>
-    <div class="plan-art reveal">
-      <img src="assets/mockups/content-plan.png" alt="Example monthly content plan calendar with posts, stories, ads and shoots" data-i18n-attr="alt:how.imgAlt" width="720" height="567">
-      <p data-i18n="how.note">Every month starts with a clear plan, so you always know what is coming to your feed.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 04 PACKAGES ============ -->
-<section class="section mist" id="packages" aria-labelledby="packages-title">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div>
-        <p class="label"><b>04</b> <span data-i18n="pk.label">Our packages</span></p>
-        <h2 id="packages-title" data-i18n="pk.title">Pick your bamboo</h2>
-        <p class="sub" data-i18n="pk.sub">All quantities are per month. Ad budget is not included and is paid separately by the client.</p>
-      </div>
-    </div>
-
-    <div class="packages">
-      <!-- Package 01 -->
-      <article class="pkg pkg-1 reveal">
-        <div class="pkg-top">
-          <span class="num">01</span>
-          <h3><span data-i18n="pk.p1">The Cub</span><span class="ar-name" lang="ar">الباندا الصغير</span></h3>
-          <p data-i18n="pk.p1d">A strong, steady start for new and growing brands.</p>
-        </div>
-        <ul>
-          <li><span data-i18n="pk.posts">Posts per month</span><b>8</b></li>
-          <li><span data-i18n="pk.stories">Stories per month</span><b>8</b></li>
-          <li><span data-i18n="pk.ads">Ad designs</span><b class="dash" aria-label="none">—</b></li>
-          <li><span data-i18n="pk.shoots">Photo shoots</span><b>1</b></li>
-          <li><span data-i18n="pk.photos">Edited photos</span><b>15</b></li>
-        </ul>
-        <div class="pkg-price">
-          <small data-i18n="pk.price">Price</small>
-          <div class="amount" data-cfg="price_cub"></div>
-          <div class="per" data-i18n="pk.per">per month</div>
-          <a class="btn btn-teal" href="#contact" data-pkg="cub" data-i18n="pk.choose">Choose this plan</a>
-        </div>
+      <article class="service reveal" style="--acc:var(--turq)">
+        <span class="ico"><svg aria-hidden="true"><use href="#i-grid"/></svg></span>
+        <h3 data-i18n="services.s5">Account management</h3>
+        <p data-i18n="services.s5d">A clear content calendar every month and, on request, we publish to your accounts for you.</p>
+        <a class="more" href="packages.html#packages" data-i18n="services.s5l">See PP Packages →</a>
       </article>
-      <!-- Package 02 -->
-      <article class="pkg pkg-2 featured reveal">
-        <div class="pkg-top">
-          <span class="num">02</span>
-          <h3><span data-i18n="pk.p2">The Bamboo Grove</span><span class="ar-name" lang="ar">غابة البامبو</span></h3>
-          <p data-i18n="pk.p2d">More content, plus ads, for brands ready to grow.</p>
-        </div>
-        <ul>
-          <li><span data-i18n="pk.posts">Posts per month</span><b>12</b></li>
-          <li><span data-i18n="pk.stories">Stories per month</span><b>16</b></li>
-          <li><span data-i18n="pk.ads">Ad designs</span><b>2</b></li>
-          <li><span data-i18n="pk.shoots">Photo shoots</span><b>1</b></li>
-          <li><span data-i18n="pk.photos">Edited photos</span><b>30</b></li>
-        </ul>
-        <div class="pkg-price">
-          <small data-i18n="pk.price">Price</small>
-          <div class="amount" data-cfg="price_grove"></div>
-          <div class="per" data-i18n="pk.per">per month</div>
-          <a class="btn btn-teal" href="#contact" data-pkg="grove" data-i18n="pk.choose">Choose this plan</a>
-        </div>
-      </article>
-      <!-- Package 03 -->
-      <article class="pkg pkg-3 reveal">
-        <div class="pkg-top">
-          <span class="num">03</span>
-          <h3><span data-i18n="pk.p3">The Panda Empire</span><span class="ar-name" lang="ar">مملكة الباندا</span></h3>
-          <p data-i18n="pk.p3d">Full-scale content for brands that want to own their feed.</p>
-        </div>
-        <ul>
-          <li><span data-i18n="pk.posts">Posts per month</span><b>20</b></li>
-          <li><span data-i18n="pk.stories">Stories per month</span><b>30</b></li>
-          <li><span data-i18n="pk.ads">Ad designs</span><b>4</b></li>
-          <li><span data-i18n="pk.shoots">Photo shoots</span><b>2</b></li>
-          <li><span data-i18n="pk.photos">Edited photos</span><b>50</b></li>
-        </ul>
-        <div class="pkg-price">
-          <small data-i18n="pk.price">Price</small>
-          <div class="amount" data-cfg="price_empire"></div>
-          <div class="per" data-i18n="pk.per">per month</div>
-          <a class="btn btn-teal" href="#contact" data-pkg="empire" data-i18n="pk.choose">Choose this plan</a>
-        </div>
-      </article>
-      <!-- Package 04: custom -->
-      <article class="pkg pkg-4 reveal">
-        <div class="pkg-top">
-          <span class="num">04 / <span data-i18n="pk.custom">Custom plan</span></span>
-          <h3><span data-i18n="pk.p4">Build Your Bamboo</span><span class="ar-name" lang="ar">بامبو على مقاسك</span></h3>
-          <p data-i18n="pk.p4d">Pick exactly what you need. Nothing you don't.</p>
-        </div>
-        <ol class="pkg-steps">
-          <li><span class="s">1</span><div><strong data-i18n="pk.b1">Choose your services</strong><span data-i18n="pk.b1d">Posts, stories, ad designs, photo shoots or account management.</span></div></li>
-          <li><span class="s">2</span><div><strong data-i18n="pk.b2">Set your quantities</strong><span data-i18n="pk.b2d">Tell us how much of each you need every month.</span></div></li>
-          <li><span class="s">3</span><div><strong data-i18n="pk.b3">Get your quote</strong><span data-i18n="pk.b3d">We send you a clear price for your plan.</span></div></li>
-        </ol>
-        <div class="pkg-price">
-          <small data-i18n="pk.price">Price</small>
-          <div class="amount" data-cfg="price_custom"></div>
-          <div class="per" data-i18n="pk.youChoose">You choose the quantities</div>
-          <a class="btn btn-ink" href="#contact" data-pkg="custom" data-i18n="pk.quote">Request your quote</a>
-        </div>
+      <article class="service reveal" style="--acc:var(--yellow)">
+        <span class="ico"><svg aria-hidden="true"><use href="#i-brand"/></svg></span>
+        <h3 data-i18n="services.s6">Branding &amp; logo design</h3>
+        <p data-i18n="services.s6d">Logos, colours, typography and mockups for a brand that looks good everywhere.</p>
+        <a class="more" href="branding.html#packages" data-i18n="services.s6l">See PP Branding →</a>
       </article>
     </div>
-    <p class="note" data-i18n="pk.note">Per month. Ad budget not included; paid separately by the client.</p>
-
-    <details class="compare">
-      <summary data-i18n="pk.compare">Compare all packages</summary>
-      <div class="table-scroll" tabindex="0" role="region" aria-label="Package comparison" data-i18n-attr="aria-label:pk.compare">
-        <table>
-          <thead><tr><th scope="col"><span class="sr-only" data-i18n="pk.feature">Feature</span></th><th scope="col" data-i18n="pk.p1">The Cub</th><th scope="col" data-i18n="pk.p2">The Bamboo Grove</th><th scope="col" data-i18n="pk.p3">The Panda Empire</th><th scope="col" data-i18n="pk.p4">Build Your Bamboo</th></tr></thead>
-          <tbody>
-            <tr><th scope="row" data-i18n="pk.postsM">Posts / month</th><td>8</td><td>12</td><td>20</td><td class="choose" data-i18n="pk.yc">You choose</td></tr>
-            <tr><th scope="row" data-i18n="pk.storiesM">Stories / month</th><td>8</td><td>16</td><td>30</td><td class="choose" data-i18n="pk.yc">You choose</td></tr>
-            <tr><th scope="row" data-i18n="pk.ads">Ad designs</th><td>—</td><td>2</td><td>4</td><td class="choose" data-i18n="pk.yc">You choose</td></tr>
-            <tr><th scope="row" data-i18n="pk.shoots">Photo shoots</th><td>1</td><td>1</td><td>2</td><td class="choose" data-i18n="pk.yc">You choose</td></tr>
-            <tr><th scope="row" data-i18n="pk.photos">Edited photos</th><td>15</td><td>30</td><td>50</td><td class="choose" data-i18n="pk.yc">You choose</td></tr>
-            <tr><th scope="row" data-i18n="pk.monthly">Monthly price</th><td data-cfg="price_cub"></td><td data-cfg="price_grove"></td><td data-cfg="price_empire"></td><td data-cfg="price_custom"></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </details>
   </div>
 </section>
 
-<!-- ============ 05 ADD-ONS ============ -->
-<section class="section" id="addons" aria-labelledby="addons-title">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div>
-        <p class="label"><b>05</b> <span data-i18n="ad.label">Add-ons</span></p>
-        <h2 id="addons-title" data-i18n="ad.title">Need a little extra?</h2>
-        <p class="sub" data-i18n="ad.sub">Add more to any package, whenever you need it.</p>
-      </div>
-    </div>
-    <div class="addons">
-      <div class="addon reveal"><span class="ico"><svg aria-hidden="true"><use href="#i-pen"/></svg></span><div><h3 data-i18n="ad.a1">Extra post design</h3><p data-i18n="ad.a1d">One more post, designed in your brand style.</p><div class="price" data-cfg="addon_post"></div></div></div>
-      <div class="addon reveal"><span class="ico q"><svg aria-hidden="true"><use href="#i-story"/></svg></span><div><h3 data-i18n="ad.a2">Extra story design</h3><p data-i18n="ad.a2d">One more story for your audience.</p><div class="price" data-cfg="addon_story"></div></div></div>
-      <div class="addon reveal"><span class="ico y"><svg aria-hidden="true"><use href="#i-ad"/></svg></span><div><h3 data-i18n="ad.a3">Extra ad design</h3><p data-i18n="ad.a3d">One more ad design for your campaign.</p><div class="price" data-cfg="addon_ad"></div></div></div>
-      <div class="addon reveal"><span class="ico c"><svg aria-hidden="true"><use href="#i-cam"/></svg></span><div><h3 data-i18n="ad.a4">Extra photo shoot</h3><p data-i18n="ad.a4d">An additional product or model shoot.</p><div class="price" data-cfg="addon_shoot"></div></div></div>
-      <div class="addon reveal"><span class="ico p"><svg aria-hidden="true"><use href="#i-photos"/></svg></span><div><h3 data-i18n="ad.a5">Extra edited photos</h3><p data-i18n="ad.a5d">A pack of 10 more edited photos.</p><div class="price" data-cfg="addon_photos"></div></div></div>
-      <div class="addon reveal"><span class="ico"><svg aria-hidden="true"><use href="#i-bolt"/></svg></span><div><h3 data-i18n="ad.a6">Rush delivery</h3><p data-i18n="ad.a6d">Faster turnaround when you need it soon.</p><div class="price" data-cfg="addon_rush"></div></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 06 WELCOME OFFER ============ -->
-<section class="section dark" id="offer" aria-labelledby="offer-title">
-  <div class="wrap offer-grid">
-    <div class="reveal">
-      <p class="label"><b>06</b> <span data-i18n="of.label">Our welcome offer</span></p>
-      <h2 id="offer-title" data-i18n="of.title">3 free designs, <em>before we start.</em></h2>
-      <p class="big" data-i18n="of.body">Before your plan begins, we design 3 free designs for your brand, so you can see our work on your brand first.</p>
-      <span class="pill" data-i18n="of.pill">One time only, per brand</span>
-      <p class="fine" data-i18n="of.fine">The free designs are offered once per brand, before the first month starts.</p>
-      <a class="btn btn-yellow" href="#contact" data-pkg="free"><span data-i18n="of.cta">Claim my 3 free designs</span> <span class="arrow" aria-hidden="true">→</span></a>
-    </div>
-    <div class="offer-cards reveal" aria-hidden="true">
-      <img data-depth="12" src="assets/mockups/free-design-1.png" alt="" width="720" height="932">
-      <img data-depth="24" src="assets/mockups/free-design-3.png" alt="" width="720" height="932">
-      <img data-depth="16" src="assets/mockups/free-design-2.png" alt="" width="720" height="932">
-    </div>
-  </div>
-  <div class="pixels corner-steps" data-depth="-9" style="--cols:3" aria-hidden="true">
-    <i class="y"></i><i></i><i></i>
-    <i class="q"></i><i class="y"></i><i></i>
-    <i class="q"></i><i class="d"></i><i class="q"></i>
-  </div>
-</section>
-
-<!-- ============ 07-09 PAYMENT / REFUNDS / TERMS ============ -->
-<section class="section mist" id="policies" aria-labelledby="policies-title">
+<!-- ============ 03 POLICIES (the Terms & Conditions the contact form links to) ============ -->
+<section class="section" id="policies" aria-labelledby="policies-title">
   <div class="wrap policy-grid">
     <div class="sec-head reveal">
-      <p class="label"><b>07—09</b> <span data-i18n="po.label">The fine print</span></p>
-      <h2 id="policies-title" data-i18n="po.title">Good to know</h2>
-      <p class="sub" data-i18n="po.sub">How payment works, our refund policy and the terms of every plan. Clear and fair, with no surprises.</p>
+      <p class="label"><b>03</b> <span data-i18n="po.label">Policies</span></p>
+      <h2 id="policies-title" data-i18n="po.title">Policies &amp; Terms of Service</h2>
+      <p class="sub" data-i18n="po.sub">Clear and fair, with no surprises. By confirming a package, approving a quotation or asking us to start work, you accept these policies.</p>
+      <div class="acc-tools"><button class="link-btn" type="button" id="accAll" data-i18n="js.openAll">Open all</button></div>
     </div>
-    <div class="acc reveal">
-      <div class="acc-item">
-        <h3><button class="acc-btn" type="button" aria-expanded="true" aria-controls="acc-pay" id="acc-pay-b"><span class="t"><span class="k">07</span><span data-i18n="po.pay">How payment works</span></span><span class="plus" aria-hidden="true">+</span></button></h3>
-        <div class="acc-panel" id="acc-pay" role="region" aria-labelledby="acc-pay-b">
-          <div class="pay-split">
-            <div><b>50%</b><strong data-i18n="po.up">Upfront</strong><span data-i18n="po.upd">Paid before the month starts. Work begins once it is received.</span></div>
-            <div><b>50%</b><strong data-i18n="po.mid">Mid-month</strong><span data-i18n="po.midd">The second half is paid by day {pay_day} of the month.</span></div>
-          </div>
-          <ul class="bullets">
-            <li data-i18n="po.pay1">Prices are in {currency} and cover one month of the chosen package.</li>
-            <li data-i18n="po.pay2">Ad budget is not included and is paid by the client directly to the platform.</li>
-            <li data-i18n="po.pay3">An invoice is shared before each payment is due.</li>
-            <li data-i18n="po.pay4">If a payment is late, new work may pause until it is received.</li>
-            <li data-i18n="po.pay5">Accepted payment methods: {payment_methods}.</li>
-            <li data-i18n="po.pay6">Add-ons are paid together with the next payment.</li>
-          </ul>
-        </div>
+    <div class="acc reveal" id="acc">
+      <div class="acc-item" id="p1">
+        <h3><button class="acc-btn" type="button" aria-expanded="true" aria-controls="p1-panel" id="p1-btn"><span class="t"><span class="k">01</span><span data-i18n="po.h1">Scope and services</span></span><span class="plus" aria-hidden="true">+</span></button></h3>
+        <div class="acc-panel" id="p1-panel" role="region" aria-labelledby="p1-btn"><p data-i18n="po.b1">These policies apply to all Pixel Panda services, packages, projects and branding work unless a written agreement states otherwise. The exact deliverables, quantities, platforms, schedule and fees are those confirmed in the selected package or written quotation.</p></div>
       </div>
-      <div class="acc-item">
-        <h3><button class="acc-btn" type="button" aria-expanded="false" aria-controls="acc-ref" id="acc-ref-b"><span class="t"><span class="k">08</span><span data-i18n="po.ref">Clear and fair refunds</span></span><span class="plus" aria-hidden="true">+</span></button></h3>
-        <div class="acc-panel" id="acc-ref" role="region" aria-labelledby="acc-ref-b" hidden>
-          <p class="small-print" style="margin-bottom:14px" data-i18n="po.refsub">Refunds are tied to work that has not started yet.</p>
-          <div class="refund-cols">
-            <div><h4 data-i18n="po.can">Can be refunded</h4>
-              <ul class="bullets">
-                <li data-i18n="po.can1">Paid work that has not started at the time of cancellation.</li>
-                <li data-i18n="po.can2">A photo shoot cancelled at least {shoot_cancel} before the shoot date.</li>
-                <li data-i18n="po.can3">Any payment made for a month that has not started yet.</li>
-              </ul></div>
-            <div><h4 data-i18n="po.cannot">Cannot be refunded</h4>
-              <ul class="bullets no">
-                <li data-i18n="po.no1">Posts, stories and ads already delivered or in progress.</li>
-                <li data-i18n="po.no2">Photo shoots already done, including the edited photos.</li>
-                <li data-i18n="po.no3">Ad budget already paid to the platforms.</li>
-                <li data-i18n="po.no4">Add-ons that have already been delivered.</li>
-              </ul></div>
-          </div>
-          <p class="small-print" data-i18n="po.refnote">Refund requests are sent in writing and processed within {refund_days} working days.</p>
-        </div>
+      <div class="acc-item" id="p2">
+        <h3><button class="acc-btn" type="button" aria-expanded="false" aria-controls="p2-panel" id="p2-btn"><span class="t"><span class="k">02</span><span data-i18n="po.h2">Packages and service period</span></span><span class="plus" aria-hidden="true">+</span></button></h3>
+        <div class="acc-panel" id="p2-panel" role="region" aria-labelledby="p2-btn" hidden><p data-i18n="po.b2">Each social media package is valid for one month, starting on the agreed start date. Deliverables not completed because the client delayed providing materials, feedback, approvals or access may not be carried forward beyond the package period unless Pixel Panda agrees in writing. Any extension or additional work may require an additional fee.</p></div>
       </div>
-      <div class="acc-item">
-        <h3><button class="acc-btn" type="button" aria-expanded="false" aria-controls="acc-terms" id="acc-terms-b"><span class="t"><span class="k">09</span><span data-i18n="po.terms">Terms</span></span><span class="plus" aria-hidden="true">+</span></button></h3>
-        <div class="acc-panel" id="acc-terms" role="region" aria-labelledby="acc-terms-b" hidden>
-          <div class="terms">
-            <div><h4 data-i18n="po.t1">Revisions</h4><p data-i18n="po.t1d">Up to {revisions} rounds of revisions are included for every design.</p></div>
-            <div><h4 data-i18n="po.t2">Delivery time</h4><p data-i18n="po.t2d">Monthly plan shared {plan_days} days before the month. Edited photos within {photo_days} working days of the shoot.</p></div>
-            <div><h4 data-i18n="po.t3">Contract length</h4><p data-i18n="po.t3d">Minimum {min_months} months, then renews monthly. {notice_days} days notice to stop.</p></div>
-            <div><h4 data-i18n="po.t4">Ad budget</h4><p data-i18n="po.t4d">Paid separately by the client, directly to the platform. Not included in any package.</p></div>
-            <div><h4 data-i18n="po.t5">Approvals</h4><p data-i18n="po.t5d">Content is published only after you approve it.</p></div>
-            <div><h4 data-i18n="po.t6">Unused content</h4><p data-i18n="po.t6d">Monthly quantities do not roll over to the next month.</p></div>
-          </div>
-        </div>
+      <div class="acc-item" id="p3">
+        <h3><button class="acc-btn" type="button" aria-expanded="false" aria-controls="p3-panel" id="p3-btn"><span class="t"><span class="k">03</span><span data-i18n="po.h3">Free samples and moodboards</span></span><span class="plus" aria-hidden="true">+</span></button></h3>
+        <div class="acc-panel" id="p3-panel" role="region" aria-labelledby="p3-btn" hidden><p data-i18n="po.b3">Before selecting a package, Pixel Panda will provide three complimentary sample designs. If the client likes the samples and decides to proceed, the client may select a package, and work will begin once the package and scope are confirmed. One moodboard is included free of charge for the first time in each package. If the client upgrades the package, one additional moodboard may be provided; if the client downgrades the package, no additional moodboard is included.</p></div>
+      </div>
+      <div class="acc-item" id="p4">
+        <h3><button class="acc-btn" type="button" aria-expanded="false" aria-controls="p4-panel" id="p4-btn"><span class="t"><span class="k">04</span><span data-i18n="po.h4">Payment terms</span></span><span class="plus" aria-hidden="true">+</span></button></h3>
+        <div class="acc-panel" id="p4-panel" role="region" aria-labelledby="p4-btn" hidden><p data-i18n="po.b4">Unless otherwise stated in the quotation, payment may be made in full before work begins, or in two instalments: 50% before work begins and 50% when the completed content is shared for final handover. The final instalment is due immediately upon delivery of the completed content. Final, unwatermarked files and handover of deliverables may be withheld until all outstanding amounts are paid. Additional work, third-party expenses and approved out-of-scope requests are charged separately.</p></div>
+      </div>
+      <div class="acc-item" id="p5">
+        <h3><button class="acc-btn" type="button" aria-expanded="false" aria-controls="p5-panel" id="p5-btn"><span class="t"><span class="k">05</span><span data-i18n="po.h5">Revisions and approvals</span></span><span class="plus" aria-hidden="true">+</span></button></h3>
+        <div class="acc-panel" id="p5-panel" role="region" aria-labelledby="p5-btn" hidden><p data-i18n="po.b5">Each post or story includes up to two rounds of revisions, unless the package states otherwise. A revision round means one consolidated set of feedback from the client. Requests that change the original brief, approved direction, format or deliverable may be treated as new work and charged separately. Once a design or content item is approved, it cannot be redesigned unless there is an error attributable to Pixel Panda or both parties agree to a paid change. The client is responsible for checking spelling, prices, dates, product details and other supplied information before approving content.</p></div>
+      </div>
+      <div class="acc-item" id="p6">
+        <h3><button class="acc-btn" type="button" aria-expanded="false" aria-controls="p6-panel" id="p6-btn"><span class="t"><span class="k">06</span><span data-i18n="po.h6">Client materials and responsibilities</span></span><span class="plus" aria-hidden="true">+</span></button></h3>
+        <div class="acc-panel" id="p6-panel" role="region" aria-labelledby="p6-btn" hidden><p data-i18n="po.b6">The client must provide accurate brand assets, logos, guidelines, product information, photographs, offers, contact details and any required permissions in a timely manner. If brand guidelines are not provided, Pixel Panda may propose a suitable visual direction for the client's approval. The client confirms that it has the rights and permissions needed to use all materials it supplies. Delays in supplying materials, feedback, approvals or account access may affect the schedule and do not automatically extend the package period.</p></div>
+      </div>
+      <div class="acc-item" id="p7">
+        <h3><button class="acc-btn" type="button" aria-expanded="false" aria-controls="p7-panel" id="p7-btn"><span class="t"><span class="k">07</span><span data-i18n="po.h7">Content review and publishing</span></span><span class="plus" aria-hidden="true">+</span></button></h3>
+        <div class="acc-panel" id="p7-panel" role="region" aria-labelledby="p7-btn" hidden><p data-i18n="po.b7">Pixel Panda will share the agreed content, such as designs, captions, content calendars and photographs, with the client for review before publishing, where publishing is included in the package. The client must approve content in writing before it is published. If the client does not respond within the agreed review period, the schedule may be delayed. Pixel Panda will not publish unapproved content unless the client has expressly authorized a different approval process in writing.</p></div>
+      </div>
+      <div class="acc-item" id="p8">
+        <h3><button class="acc-btn" type="button" aria-expanded="false" aria-controls="p8-panel" id="p8-btn"><span class="t"><span class="k">08</span><span data-i18n="po.h8">Social media ads</span></span><span class="plus" aria-hidden="true">+</span></button></h3>
+        <div class="acc-panel" id="p8-panel" role="region" aria-labelledby="p8-btn" hidden><p data-i18n="po.b8">Unless expressly included in a written agreement, Pixel Panda does not create, fund or manage paid advertising campaigns. The client is responsible for placing and paying for boosts or ads directly through the relevant platform and for its advertising budget. Platform fees and ad spend are not included in Pixel Panda's service fees. Once a post has been boosted or an ad has been submitted, edits may be restricted by the platform; the client may need to stop the promotion and create a new one. Platform rules, approvals, delivery and results are outside Pixel Panda's control.</p></div>
+      </div>
+      <div class="acc-item" id="p9">
+        <h3><button class="acc-btn" type="button" aria-expanded="false" aria-controls="p9-panel" id="p9-btn"><span class="t"><span class="k">09</span><span data-i18n="po.h9">Community management</span></span><span class="plus" aria-hidden="true">+</span></button></h3>
+        <div class="acc-panel" id="p9-panel" role="region" aria-labelledby="p9-btn" hidden><p data-i18n="po.b9">Unless community management is specifically included in the selected package, Pixel Panda does not reply to customers, comments, direct messages or enquiries on the client's social media accounts. The client remains responsible for customer service, order handling, complaints and sales enquiries.</p></div>
+      </div>
+      <div class="acc-item" id="p10">
+        <h3><button class="acc-btn" type="button" aria-expanded="false" aria-controls="p10-panel" id="p10-btn"><span class="t"><span class="k">10</span><span data-i18n="po.h10">Photography and deliverables</span></span><span class="plus" aria-hidden="true">+</span></button></h3>
+        <div class="acc-panel" id="p10-panel" role="region" aria-labelledby="p10-btn" hidden><p data-i18n="po.b10">Pixel Panda will provide the client with the photographs taken for the project, up to the quantity included in the selected package or quotation. Deliverables will be supplied in the formats stated in the package. Raw files, project files, editable source files and photographs beyond the package quantity are not included unless expressly agreed in writing. Any reshoot requested because of a change in client preference or brief may incur an additional fee; errors attributable to Pixel Panda will be reviewed and corrected appropriately.</p></div>
+      </div>
+      <div class="acc-item" id="p11">
+        <h3><button class="acc-btn" type="button" aria-expanded="false" aria-controls="p11-panel" id="p11-btn"><span class="t"><span class="k">11</span><span data-i18n="po.h11">Branding and logo design</span></span><span class="plus" aria-hidden="true">+</span></button></h3>
+        <div class="acc-panel" id="p11-panel" role="region" aria-labelledby="p11-btn" hidden><p data-i18n="po.b11">For branding projects, Pixel Panda will provide the number of logo concepts specified in the selected package or quotation. If the client rejects all included concepts and requests another logo concept, an additional fee of 10 KWD applies per additional concept, with the client's approval before the additional work begins. No refund is available once the branding designs have been completed and shared with the client, subject to applicable law. The client receives the agreed final deliverables after full payment; unused concepts and working files remain excluded unless agreed otherwise. The client is also entitled to five complimentary designs for their social media account as part of the branding offer.</p></div>
+      </div>
+      <div class="acc-item" id="p12">
+        <h3><button class="acc-btn" type="button" aria-expanded="false" aria-controls="p12-panel" id="p12-btn"><span class="t"><span class="k">12</span><span data-i18n="po.h12">Cancellation and refunds</span></span><span class="plus" aria-hidden="true">+</span></button></h3>
+        <div class="acc-panel" id="p12-panel" role="region" aria-labelledby="p12-btn" hidden><p data-i18n="po.b12">If the client cancels before work begins, the client may receive a full refund of amounts paid, less any non-refundable third-party costs already approved by the client. Once work has begun, any refund will reflect the work completed, costs incurred and deliverables already supplied, subject to applicable law and the written agreement. Completed designs that have been shared with the client are not automatically refundable. Pixel Panda may decline or discontinue a project involving unlawful, misleading, abusive, discriminatory or otherwise harmful content. If Pixel Panda declines a project before work begins, payments received for that project will be refunded; if work has begun, the parties will settle for work completed and costs incurred.</p></div>
+      </div>
+      <div class="acc-item" id="p13">
+        <h3><button class="acc-btn" type="button" aria-expanded="false" aria-controls="p13-panel" id="p13-btn"><span class="t"><span class="k">13</span><span data-i18n="po.h13">Intellectual property and portfolio use</span></span><span class="plus" aria-hidden="true">+</span></button></h3>
+        <div class="acc-panel" id="p13-panel" role="region" aria-labelledby="p13-btn" hidden><p data-i18n="po.b13">After full payment, the client may use the final approved deliverables for the purposes agreed in the package or quotation. Pixel Panda retains ownership of preliminary concepts, rejected designs, templates, methods and working/source files unless otherwise agreed in writing. Pixel Panda may display publicly released work in its portfolio and marketing materials unless the client requests confidentiality in writing before publication. The client must not use or distribute unpaid or rejected concepts without written permission.</p></div>
+      </div>
+      <div class="acc-item" id="p14">
+        <h3><button class="acc-btn" type="button" aria-expanded="false" aria-controls="p14-panel" id="p14-btn"><span class="t"><span class="k">14</span><span data-i18n="po.h14">Communication and response times</span></span><span class="plus" aria-hidden="true">+</span></button></h3>
+        <div class="acc-panel" id="p14-panel" role="region" aria-labelledby="p14-btn" hidden><p data-i18n="po.b14">Pixel Panda will contact the client's designated representative to discuss the client's requirements, ideas and expectations and to coordinate the project. The client should appoint one authorized contact person to provide consolidated feedback and approvals. Both parties will use the communication channel agreed at the start of the project. Response times and working hours will be communicated by Pixel Panda; immediate or round-the-clock responses are not guaranteed. Requests made outside the agreed scope or after project completion may require a new quotation.</p></div>
+      </div>
+      <div class="acc-item" id="p15">
+        <h3><button class="acc-btn" type="button" aria-expanded="false" aria-controls="p15-panel" id="p15-btn"><span class="t"><span class="k">15</span><span data-i18n="po.h15">Confidentiality, privacy and account access</span></span><span class="plus" aria-hidden="true">+</span></button></h3>
+        <div class="acc-panel" id="p15-panel" role="region" aria-labelledby="p15-btn" hidden><p data-i18n="po.b15">Both parties should keep confidential business information, login details, customer data and unpublished materials secure and use them only for the project. The client should provide access through appropriate platform permissions where possible and must not share passwords in public channels. Pixel Panda will use client information only as needed to perform the agreed services and will not knowingly disclose it to unauthorized parties, except where required by law or necessary to deliver the service through approved providers.</p></div>
+      </div>
+      <div class="acc-item" id="p16">
+        <h3><button class="acc-btn" type="button" aria-expanded="false" aria-controls="p16-panel" id="p16-btn"><span class="t"><span class="k">16</span><span data-i18n="po.h16">Results and platform limitations</span></span><span class="plus" aria-hidden="true">+</span></button></h3>
+        <div class="acc-panel" id="p16-panel" role="region" aria-labelledby="p16-btn" hidden><p data-i18n="po.b16">Pixel Panda will perform the agreed services with reasonable professional care but does not guarantee specific reach, engagement, sales, followers, ad approvals or business results. Social platforms may change their features, policies, availability and algorithms at any time. Pixel Panda is not responsible for platform outages, rejected ads, account restrictions or changes outside its reasonable control.</p></div>
+      </div>
+      <div class="acc-item" id="p17">
+        <h3><button class="acc-btn" type="button" aria-expanded="false" aria-controls="p17-panel" id="p17-btn"><span class="t"><span class="k">17</span><span data-i18n="po.h17">Acceptance of policies</span></span><span class="plus" aria-hidden="true">+</span></button></h3>
+        <div class="acc-panel" id="p17-panel" role="region" aria-labelledby="p17-btn" hidden><p data-i18n="po.b17">By confirming a package, approving a quotation or authorizing Pixel Panda to begin work, the client confirms that they have read and accepted these policies. Any exception must be agreed in writing by both parties. These policies should be read alongside the package details and quotation. If any term conflicts with applicable law, the applicable law will prevail.</p></div>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- ============ 10 PORTFOLIO (filled from js/config.js) ============ -->
-<section class="section" id="work" aria-labelledby="work-title">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div>
-        <p class="label"><b>10</b> <span data-i18n="wk.label">Our work</span></p>
-        <h2 id="work-title" data-i18n="wk.title">Portfolio</h2>
-        <p class="sub" data-i18n="wk.sub">A selection of our work will be added here.</p>
-      </div>
-      <span class="tag" data-i18n="wk.tag" id="workTag">To be added</span>
-    </div>
-    <div class="folio reveal" id="folio"></div>
-  </div>
-</section>
-
-<!-- ============ CONTACT ============ -->
-<section class="section dark" id="contact" aria-labelledby="contact-title">
-  <div class="wrap contact-grid">
-    <div class="reveal">
-      <p class="label" data-i18n="ct.label">Contact</p>
-      <h2 id="contact-title" data-i18n="ct.title">Let's make your feed look good.</h2>
-      <p class="big" data-i18n="ct.body">Call, message or email Mohammed directly. We usually reply the same day.</p>
-      <div class="quick">
-        <a class="btn btn-yellow" data-link="tel"><svg aria-hidden="true"><use href="#i-phone"/></svg><span data-i18n="ct.call">Call now</span></a>
-        <a class="btn btn-wa" data-link="wa" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="ct.wa">WhatsApp</span></a>
-        <a class="btn btn-ghost" data-link="mail"><svg aria-hidden="true"><use href="#i-mail"/></svg><span data-i18n="ct.email">Email</span></a>
-      </div>
-      <ul class="details">
-        <li><span class="di"><svg aria-hidden="true"><use href="#i-phone"/></svg></span><span class="k" data-i18n="ct.phone">Phone</span><a data-link="tel" data-show="phone" dir="ltr"></a></li>
-        <li><span class="di"><svg aria-hidden="true"><use href="#i-mail"/></svg></span><span class="k" data-i18n="ct.emailK">Email</span><a data-link="mail" data-show="email" dir="ltr"></a></li>
-        <li><span class="di"><svg aria-hidden="true"><use href="#i-insta"/></svg></span><span class="k" data-i18n="ct.insta">Instagram</span><a data-link="insta" data-show="instagram" target="_blank" rel="noopener" dir="ltr"></a></li>
-        <li><span class="di"><svg aria-hidden="true"><use href="#i-globe"/></svg></span><span class="k" data-i18n="ct.web">Website</span><a data-link="web" data-show="website" target="_blank" rel="noopener" dir="ltr"></a></li>
-        <li><span class="di"><svg aria-hidden="true"><use href="#i-pin"/></svg></span><span class="k" data-i18n="ct.loc">Location</span><span class="v" data-show="location"></span></li>
-      </ul>
-    </div>
-
-    <div class="form-card reveal">
-      <h3 data-i18n="ct.formTitle">Send us a message</h3>
-      <p class="hint" data-i18n="ct.formHint">Tell us about your brand and what you need. We will get back to you soon.</p>
-      <form id="contactForm" novalidate>
-        <div class="row2">
-          <div class="field"><label for="f-name" data-i18n="ct.name">Your name</label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
-          <div class="field"><label for="f-brand" data-i18n="ct.brand">Brand name</label><input id="f-brand" name="brand" type="text" autocomplete="organization"></div>
-        </div>
-        <div class="row2">
-          <div class="field"><label for="f-phone" data-i18n="ct.yphone">Phone / WhatsApp</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" dir="ltr"></div>
-          <div class="field"><label for="f-email" data-i18n="ct.yemail">Email</label><input id="f-email" name="email" type="email" autocomplete="email" dir="ltr"></div>
-        </div>
-        <div class="field">
-          <label for="f-interest" data-i18n="ct.interest">I'm interested in</label>
-          <select id="f-interest" name="interest">
-            <option value="free" data-i18n="ct.o.free">3 free designs (welcome offer)</option>
-            <option value="cub" data-i18n="ct.o.cub">The Cub</option>
-            <option value="grove" data-i18n="ct.o.grove">The Bamboo Grove</option>
-            <option value="empire" data-i18n="ct.o.empire">The Panda Empire</option>
-            <option value="custom" data-i18n="ct.o.custom">Build Your Bamboo (custom plan)</option>
-            <option value="other" data-i18n="ct.o.other">Something else</option>
-          </select>
-        </div>
-        <div class="field"><label for="f-msg" data-i18n="ct.msg">Message</label><textarea id="f-msg" name="message" required></textarea></div>
-        <button class="btn btn-teal" type="submit"><span data-i18n="ct.send">Send message</span> <span class="arrow" aria-hidden="true">→</span></button>
-        <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
-      </form>
-    </div>
-  </div>
-  <div class="pixels corner-steps" data-depth="-9" style="--cols:3" aria-hidden="true">
-    <i></i><i></i><i class="y"></i>
-    <i></i><i class="q"></i><i class="c"></i>
-    <i class="q"></i><i class="d"></i><i class="q"></i>
   </div>
 </section>
 </main>
 
 <footer class="site-footer">
   <div class="wrap">
-    <a class="brand" href="#top" aria-label="Pixel Panda, back to top"><img src="assets/logo/pixel-panda-logo-white.png" alt="" width="297" height="198"><span data-i18n="brand">PIXEL PANDA</span></a>
-    <p><span data-i18n="ft.copy">Social media management</span> · © <span id="year">2026</span> Pixel Panda</p>
-    <a href="#top" data-i18n="ft.top">Back to top ↑</a>
+    <a class="brand" href="index.html" aria-label="Pixel Panda, home" data-i18n-attr="aria-label:homeLabel"><img src="assets/logo/pixel-panda-logo-white.png" alt="" width="297" height="198"><span data-i18n="brand">PIXEL PANDA</span></a>
+    <ul class="foot-links">
+      <li><a href="index.html" data-i18n="nav.time">Panda Time</a></li>
+      <li><a href="packages.html" data-i18n="nav.pkgs">PP Packages</a></li>
+      <li><a href="branding.html" data-i18n="nav.branding">PP Branding</a></li>
+      <li><a href="contact.html" data-i18n="nav.contact">Contact us</a></li>
+      <li><a href="index.html#policies" data-i18n="ft.terms">Terms &amp; Conditions</a></li>
+    </ul>
+    <p>© <span id="year">2026</span> Pixel Panda</p>
   </div>
 </footer>
 
@@ -518,9 +319,9 @@
 
 <a class="wa-float" data-link="wa" target="_blank" rel="noopener" aria-label="Message us on WhatsApp" data-i18n-attr="aria-label:ct.waLabel"><svg aria-hidden="true"><use href="#i-wa"/></svg></a>
 
-<script src="js/config.js?v=2"></script>
-<script src="js/i18n-ar.js?v=2"></script>
-<script src="js/main.js?v=2"></script>
-<script src="js/motion.js?v=2"></script>
+<script src="js/config.js?v=3"></script>
+<script src="js/i18n-ar.js?v=3"></script>
+<script src="js/main.js?v=3"></script>
+<script src="js/motion.js?v=3"></script>
 </body>
 </html>

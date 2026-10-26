@@ -1,56 +1,56 @@
 PIXEL PANDA WEBSITE - QUICK GUIDE FOR MOHAMMED
 ==============================================
 
-1) OPEN IT
-   Double-click "index.html". It opens in your web browser. No internet
-   or installation needed (with internet, the brand fonts Montserrat and
-   Tajawal load from Google Fonts; without it a similar system font is used).
-   The "عربي / English" button at the top switches language. The site
-   remembers the choice. You can also link straight to Arabic with
-   index.html?lang=ar
+LIVE SITE:  https://mhamwi760-art.github.io/pixel-panda-website/
+ARABIC:     https://mhamwi760-art.github.io/pixel-panda-website/?lang=ar
+
+1) THE 4 PAGES
+   index.html     Panda Time   - About us, Services, Policies (Terms & Conditions)
+   packages.html  PP Packages  - social media packages, Build Your Bamboo,
+                                 Add-ons, Free designs, How we work, Portfolio
+   branding.html  PP Branding  - branding packages, How we work, Portfolio
+   contact.html   Contact us   - WhatsApp, Instagram and the request form
+   The menu and footer are repeated on every page: if you change them,
+   change all 4 pages.
 
 2) CHANGE YOUR DETAILS AND PRICES  ->  js/config.js
-   Open js/config.js in any text editor (Notepad, TextEdit, VS Code).
-   Everything you need is there:
-     - phoneDisplay  : phone as people see it, e.g. "+966 5X XXX XXXX"
-     - phoneLink     : same number for click-to-call, e.g. "+9665XXXXXXXX"
-     - whatsapp      : digits only, no + or spaces, e.g. "9665XXXXXXXX"
-     - email, instagram, website, location
-     - price_cub, price_grove, price_empire, price_custom (monthly prices)
-     - addon_... prices for the six add-ons
-     - currency, payment methods, payment day, refund/terms numbers
-     - portfolio images
+   - whatsapp / whatsappDisplay : your WhatsApp number
+   - instagram                  : your Instagram handle, e.g. "@pixelpanda"
+   - formEmail                  : where requests from the form are sent
+   - price_... and addon_...    : all prices (English and Arabic)
+   - portfolio / portfolio_branding : gallery images (see 4)
    Anything still in [square brackets] shows in red on the site so you
-   can spot what is missing. Save the file and refresh the browser.
+   can spot what is missing.
 
-3) CONTACT FORM
-   By default the form opens the visitor's email app with their message
-   already written to your email address.
-   To receive messages directly instead (free):
-     a. Sign up at https://formspree.io and create a new form.
-     b. Copy the form address (like https://formspree.io/f/abcdwxyz).
-     c. Paste it into formEndpoint in js/config.js. Done.
+3) REQUEST FORM (emails come to formEmail)
+   The form uses the free service FormSubmit (formsubmit.co).
+   FIRST TIME ONLY: send one test request from the Contact page. FormSubmit
+   then emails "Activate form" to [your email] (check Junk).
+   Click Activate. From then on every request arrives in that inbox.
+   Clients must tick "I accept the Terms & Conditions" before sending.
+   Clients get no email, and your email address is never shown to them.
 
-4) PORTFOLIO
-   Put your photos in a folder called assets/portfolio/ and write the
-   file names in the "portfolio" list in js/config.js, e.g.
-   image: "assets/portfolio/shoot-01.jpg". The "To be added" label
-   disappears once at least one image is added.
+4) PORTFOLIO GALLERIES
+   Put your photos in a folder called assets/portfolio/ and add one line
+   per image to "portfolio" (PP Packages) or "portfolio_branding"
+   (PP Branding) in js/config.js, e.g. image: "assets/portfolio/shoot-01.jpg".
+   Add as many as you like: the left/right arrows scroll through them.
 
-5) MOTION
-   The gentle movement (mouse on computers, tilting on phones) is in
-   js/motion.js. Each moving item in index.html has data-depth="NUMBER";
-   a smaller number moves less. Delete the motion.js line at the bottom
-   of index.html to switch it off.
+5) DARK MODE AND LANGUAGE
+   The moon/sun button switches light and dark mode. The site starts in
+   the visitor's phone/computer setting and remembers their choice.
+   The "عربي / English" button switches language on every page.
 
 6) TEXT
-   English text is in index.html. Arabic text is in js/i18n-ar.js.
+   English text is in each page (.html). Arabic text is in js/i18n-ar.js.
 
-7) PUT IT ONLINE (free, about 2 minutes)
-   a. Go to https://app.netlify.com/drop
-   b. Drag the whole "website" folder onto the page.
-   c. You get a live link right away. Create a free account to keep it
-      and to connect your own domain later.
-   To update: make changes, then drag the folder again.
+7) PUT CHANGES ONLINE
+   The site is hosted on GitHub Pages from github.com/mhamwi760-art/pixel-panda-website
+   After editing, ask Claude to "push my changes", or run in this folder:
+       git add -A
+       git commit -m "Update site"
+       git push
+   The live site updates about a minute later. If you changed a css or js
+   file, raise the ?v=3 number on its line in all 4 pages first.
 
 Logos used are the original brand files in assets/logo/ (never edit them).

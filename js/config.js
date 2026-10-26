@@ -1,8 +1,8 @@
 /* =====================================================================
    PIXEL PANDA — EDIT YOUR DETAILS HERE
    ---------------------------------------------------------------------
-   This is the ONLY file you need to change for contact details, prices,
-   policy numbers and portfolio images.
+   This is the ONLY file you need to change for contact details, prices
+   and portfolio images.
 
    - Anything still in [square brackets] is shown on the site in red,
      so you can see what is not filled in yet. Remove the brackets when
@@ -14,33 +14,33 @@
 window.PP_CONFIG = {
 
   /* ---------- CONTACT ---------- */
-  // Phone as people should SEE it:
-  phoneDisplay: "[Phone number]",
-  // Phone for the click-to-call link: international format, digits only
-  // with a leading +, e.g. "+9665XXXXXXXX".
-  phoneLink: "",
-  // WhatsApp number: international format, digits only, NO + and NO
-  // spaces, e.g. "9665XXXXXXXX".
-  whatsapp: "",
-  email: "[Email address]",
+  // WhatsApp number: international format, digits only, NO + and NO spaces.
+  whatsapp: "96598828403",
+  // WhatsApp number as people should SEE it:
+  whatsappDisplay: "+965 9882 8403",
   instagram: "[@instagram handle]",       // e.g. "@pixelpanda"
-  website: "[Website]",                    // e.g. "www.pixelpanda.com"
-  location: { en: "[City, Country]", ar: "[المدينة، الدولة]" },
 
-  /* ---------- CONTACT FORM ----------
-     Leave formEndpoint empty ("") and the form opens the visitor's
-     email app with the message already written, addressed to "email".
-     To receive messages without an email app, create a free form at
-     https://formspree.io, copy its address (looks like
-     https://formspree.io/f/abcdwxyz) and paste it here. Nothing else
-     needs to change. */
-  formEndpoint: "",
+  /* ---------- REQUEST FORM ----------
+     Every request from the Contact page is emailed to formEmail, through
+     the free service FormSubmit (formsubmit.co). The visitor never sees
+     this address and gets no email.
+     FIRST TIME ONLY: after the first request, FormSubmit sends an
+     "Activate form" email to this address. Open it and click Activate
+     (check Junk too). From then on every request arrives in the inbox.
+     Optional: the activation email also gives you a random code. Put it
+     in formEmail instead of the address to keep the address out of the
+     website code. */
+  formEmail: "",
 
-  /* ---------- PRICES (per month) ---------- */
-  price_cub:    { en: "[Price]", ar: "[السعر]" },
-  price_grove:  { en: "[Price]", ar: "[السعر]" },
-  price_empire: { en: "[Price]", ar: "[السعر]" },
-  price_custom: { en: "[Price on request]", ar: "[السعر عند الطلب]" },
+  /* ---------- SOCIAL MEDIA PACKAGES (per month) ---------- */
+  price_cub:    { en: "80 KWD",  ar: "80 د.ك" },
+  price_grove:  { en: "120 KWD", ar: "120 د.ك" },
+  price_empire: { en: "150 KWD", ar: "150 د.ك" },
+  price_custom: { en: "Price on request", ar: "السعر حسب طلبك" },
+
+  /* ---------- BRANDING PACKAGES (one-time) ---------- */
+  price_paw:       { en: "80 KWD",  ar: "80 د.ك" },
+  price_signature: { en: "130 KWD", ar: "130 د.ك" },
 
   /* ---------- ADD-ON PRICES ---------- */
   addon_post:   { en: "[Price]", ar: "[السعر]" },
@@ -50,28 +50,26 @@ window.PP_CONFIG = {
   addon_photos: { en: "[Price]", ar: "[السعر]" },
   addon_rush:   { en: "[Price]", ar: "[السعر]" },
 
-  /* ---------- PAYMENT, REFUNDS AND TERMS (draft values) ---------- */
-  currency:        { en: "[currency]", ar: "[العملة]" },
-  payment_methods: { en: "[to be confirmed]", ar: "[يتم تأكيدها لاحقًا]" },
-  pay_day:      "[15]",
-  shoot_cancel: { en: "[48 hours]", ar: "[48 ساعة]" },
-  refund_days:  "[X]",
-  revisions:    "[2]",
-  plan_days:    "[X]",
-  photo_days:   "[X]",
-  min_months:   "[3]",
-  notice_days:  "[X]",
-
-  /* ---------- PORTFOLIO ----------
+  /* ---------- PORTFOLIO GALLERIES ----------
      Put your images in the folder assets/portfolio/ and write the file
      name in "image", e.g. image: "assets/portfolio/shoot-01.jpg".
      Leave image empty ("") to show the dashed placeholder box.
-     When at least one image is added the "To be added" label disappears. */
+     Add as many lines as you like: the arrows scroll through them all.
+     "portfolio" shows on PP Packages, "portfolio_branding" on PP Branding. */
   portfolio: [
     { image: "", alt: "", label: { en: "Product photography", ar: "تصوير المنتجات" } },
     { image: "", alt: "", label: { en: "Model photography",   ar: "تصوير العارضين" } },
     { image: "", alt: "", label: { en: "Posts",               ar: "منشورات" } },
     { image: "", alt: "", label: { en: "Stories",             ar: "قصص" } },
+    { image: "", alt: "", label: { en: "Highlights",          ar: "هايلايت" } },
+    { image: "", alt: "", label: { en: "Reels",               ar: "ريلز" } },
     { image: "", alt: "", label: { en: "Ads",                 ar: "إعلانات" } }
+  ],
+  portfolio_branding: [
+    { image: "", alt: "", label: { en: "Logo design",  ar: "تصميم شعار" } },
+    { image: "", alt: "", label: { en: "Colours",      ar: "الألوان" } },
+    { image: "", alt: "", label: { en: "Typography",   ar: "الخطوط" } },
+    { image: "", alt: "", label: { en: "Mockups",      ar: "نماذج العرض" } },
+    { image: "", alt: "", label: { en: "Moodboard",    ar: "لوحة الإلهام" } }
   ]
 };
