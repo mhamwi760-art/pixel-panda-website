@@ -287,7 +287,8 @@
     if (phone.replace(/\D/g, "").length < 7) { mark(fe.phone, true); setStatus(t("js.phone"), "err"); fe.phone.focus(); return; }
     if (!terms.checked) { setStatus(t("js.terms"), "err"); terms.focus(); return; }
     if (fe._honey && fe._honey.value) { form.reset(); setStatus(t("js.sent"), "ok"); return; }   // spam bot
-    var endpoint = C.formEndpoint || (C.formEmail ? "https://formsubmit.co/ajax/" + C.formEmail : "");
+    var w3f = !C.formEndpoint && C.web3formsKey;   // backup service, used when its key is filled in
+    var endpoint = C.formEndpoint || (w3f ? "https://api.web3forms.com/submit" : (C.formEmail ? "https://formsubmit.co/ajax/" + C.formEmail : ""));
     if (!endpoint || !window.fetch) { setStatus(t("js.failed"), "err"); return; }
     var interest = sel ? plain(tEN(sel.options[sel.selectedIndex].getAttribute("data-i18n"))) : "";
     var data = {
@@ -303,6 +304,7 @@
       "_captcha": "false"
     };
     if (plan && sel && sel.value === "custom") data["Build Your Bamboo"] = planEN();
+    if (w3f) { data.access_key = C.web3formsKey; data.subject = data._subject; data.from_name = "Pixel Panda website"; delete data._subject; delete data._template; delete data._captcha; }
     var btn = $("sendBtn"); if (btn) btn.disabled = true;
     setStatus(t("js.sending"));
     fetch(endpoint, { method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" }, body: JSON.stringify(data) })

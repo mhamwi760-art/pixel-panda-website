@@ -63,6 +63,8 @@
   function listen() { window.addEventListener("deviceorientation", onTilt, { passive: true }); }
 
   var btn = document.getElementById("motionBtn");
+  /* iPhone/iPad need a permission tap for tilt; on phones the button got in the way, so skip it there */
+  if (typeof DeviceOrientationEvent.requestPermission === "function" && window.innerWidth <= 900) return;
   if (typeof DeviceOrientationEvent.requestPermission === "function") {
     if (!btn) return;
     btn.hidden = false;

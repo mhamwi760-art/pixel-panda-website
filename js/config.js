@@ -31,6 +31,10 @@ window.PP_CONFIG = {
      in formEmail instead of the address to keep the address out of the
      website code. */
   formEmail: "",
+  /* BACKUP: if FormSubmit's activation email never arrives, get a free
+     key at https://web3forms.com (enter [your email], the key
+     is emailed to you) and paste it here. The form then uses Web3Forms. */
+  web3formsKey: "",
 
   /* ---------- SOCIAL MEDIA PACKAGES (per month) ---------- */
   price_cub:    { en: "80 KWD",  ar: "80 د.ك" },
