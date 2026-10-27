@@ -108,7 +108,7 @@
   function renderContact() {
     var wa = (C.whatsapp || "").replace(/\D/g, "");
     var insta = isPh(C.instagram) ? "" : "https://instagram.com/" + C.instagram.replace(/^@/, "");
-    var waText = encodeURIComponent(lang === "ar" ? "مرحبًا محمد، أود معرفة المزيد عن خدمات بيكسل باندا." : "Hi Mohammed, I'd like to know more about Pixel Panda.");
+    var waText = encodeURIComponent(lang === "ar" ? "مرحبًا، أود معرفة المزيد عن خدمات بيكسل باندا." : "Hi, I'd like to know more about Pixel Panda.");
     var links = { wa: wa ? "https://wa.me/" + wa + "?text=" + waText : "", insta: insta };
     document.querySelectorAll("[data-link]").forEach(function (a) {
       var href = links[a.getAttribute("data-link")];
