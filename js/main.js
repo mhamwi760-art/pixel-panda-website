@@ -298,28 +298,76 @@
     }
     box.innerHTML = html; setTimeout(function () { box.innerHTML = ""; }, 1300);
   }
+  /* ----- the morph: the bamboo stalk itself stretches into the glass card (and back) ----- */
+  var morph = $("bgMorph"), busy = false;
+  var GROW = "cubic-bezier(.3,1.12,.4,1)";            // smooth, with a tiny settle at the end
+  function rel(r) { var g = game.getBoundingClientRect(); return { l: r.left - g.left, t: r.top - g.top, w: r.width, h: r.height }; }
+  function stalkBox() {                                // where the stalk is drawn inside the bamboo picture (viewBox 140 x 320)
+    var s = $("bgFloat").querySelector("svg").getBoundingClientRect(), k = s.width / 140;
+    var b = rel(s);
+    return { l: b.l + 56 * k, t: b.t + 22 * k, w: 28 * k, h: 286 * k, r: 12 * k };
+  }
+  function box(b, radius) { return { left: b.l + "px", top: b.t + "px", width: b.w + "px", height: b.h + "px", borderRadius: radius + "px" }; }
+  function morphRun(from, to, toGlass, done) {
+    var D = 820;
+    morph.hidden = false;
+    var a = box(from, from.r || 30), z = box(to, to.r || 30);
+    for (var p in a) morph.style[p] = a[p];
+    var anim = morph.animate([a, z], { duration: D, easing: toGlass ? GROW : "cubic-bezier(.5,0,.3,1)", fill: "forwards" });
+    var bam = morph.querySelector(".m-bamboo"), gl = morph.querySelector(".m-glass"), nodes = morph.querySelectorAll(".m-bamboo b");
+    var fade = toGlass ? [[1, 0], [0, 1]] : [[0, 1], [1, 0]];
+    bam.animate([{ opacity: fade[0][0] }, { opacity: fade[0][0], offset: .3 }, { opacity: fade[0][1] }], { duration: D, fill: "forwards" });
+    gl.animate([{ opacity: fade[1][0] }, { opacity: fade[1][0], offset: .3 }, { opacity: fade[1][1] }], { duration: D, fill: "forwards" });
+    nodes.forEach(function (n) { n.animate(toGlass ? [{ opacity: 1 }, { opacity: 0, offset: .3 }, { opacity: 0 }] : [{ opacity: 0 }, { opacity: 0, offset: .7 }, { opacity: 1 }], { duration: D, fill: "forwards" }); });
+    anim.onfinish = function () { done(); morph.getAnimations({ subtree: true }).forEach(function (x) { x.cancel(); }); morph.hidden = true; busy = false; };
+  }
   function openGame(animate, at) {
-    var from = $("bgFloat").getBoundingClientRect();
-    stage.classList.add("playing"); card.hidden = false;
-    showStep(at || 0, 0);
-    if (!animate || reduceMotion || !card.animate) { if (animate) focusQ(); return; }
-    var to = card.getBoundingClientRect();
-    var ins = [from.top - to.top, to.right - from.right, to.bottom - from.bottom, from.left - to.left].map(function (n) { return Math.max(0, Math.round(n)) + "px"; });
-    card.animate([{ clipPath: "inset(" + ins.join(" ") + " round 64px)" }, { clipPath: "inset(0px 0px 0px 0px round 30px)" }], { duration: 720, easing: EASE });
-    card.querySelector(".bg-flash").animate([{ opacity: 1 }, { opacity: 1, offset: .4 }, { opacity: 0 }], { duration: 780, easing: "ease-out" });
-    [].forEach.call(card.children, function (el) {
-      if (!el.classList.contains("bg-flash")) el.animate([{ opacity: 0, transform: "translateY(14px)" }, { opacity: 1, transform: "none" }], { duration: 420, delay: 400, easing: EASE, fill: "backwards" });
-    });
-    setTimeout(function () { focusQ(); if (card.getBoundingClientRect().top < 70) card.scrollIntoView({ behavior: "smooth", block: "start" }); }, 720);
+    var canAnimate = animate && !reduceMotion && card.animate && morph;
+    if (!canAnimate) {
+      stage.classList.add("playing"); card.hidden = false; showStep(at || 0, 0);
+      if (animate) focusQ();
+      return;
+    }
+    if (busy) return; busy = true;
+    var from = stalkBox(), oldH = stage.offsetHeight;
+    /* 1. a little squash, while the button and shadow fade away */
+    var intro = [$("bgFloat").querySelector("svg").animate([{ transform: "none" }, { transform: "scale(1.08, .92)" }], { duration: 160, easing: "ease-out", fill: "forwards" })];
+    [].forEach.call($("bgBamboo").querySelectorAll(".bg-start, .bg-tap, .bg-ground"), function (el) { intro.push(el.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 160, fill: "forwards" })); });
+    setTimeout(function () {
+      /* 2. lay out the card where it will end up (invisible), then stretch the stalk into it */
+      intro.forEach(function (x) { x.cancel(); });
+      stage.classList.add("playing"); card.hidden = false; card.style.opacity = "0"; showStep(at || 0, 0);
+      var newH = stage.offsetHeight, to = rel(card.getBoundingClientRect()); to.r = 30;
+      stage.animate([{ height: oldH + "px" }, { height: newH + "px" }], { duration: 820, easing: GROW });
+      morphRun(from, to, true, function () {
+        card.style.opacity = "";
+        [].forEach.call(card.children, function (el) {
+          el.animate([{ opacity: 0, transform: "translateY(10px)" }, { opacity: 1, transform: "none" }], { duration: 360, easing: EASE, fill: "backwards", delay: el.classList.contains("bg-top") || el.classList.contains("bg-progress") ? 0 : 80 });
+        });
+        focusQ();
+        if (card.getBoundingClientRect().top < 70) card.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    }, 160);
   }
   function closeGame() {
     function done() {
-      card.hidden = true; stage.classList.remove("playing"); $("bgStart").focus({ preventScroll: true });
-      if (!reduceMotion && card.animate) $("bgBamboo").animate([{ opacity: 0, transform: "scale(.6)" }, { opacity: 1, transform: "none" }], { duration: 480, easing: EASE });
+      card.hidden = true; card.style.opacity = ""; stage.classList.remove("playing"); $("bgBamboo").style.opacity = "";
+      $("bgStart").focus({ preventScroll: true });
     }
-    if (reduceMotion || !card.animate) { done(); return; }
-    var w = card.offsetWidth, h = card.offsetHeight, x = Math.max(0, (w - 128) / 2) + "px", y = Math.max(0, (h - 300) / 2) + "px";
-    card.animate([{ clipPath: "inset(0px 0px 0px 0px round 30px)", opacity: 1 }, { clipPath: "inset(" + y + " " + x + " round 64px)", opacity: 0 }], { duration: 420, easing: "ease-in" }).onfinish = done;
+    if (reduceMotion || !card.animate || !morph) { done(); return; }
+    if (busy) return; busy = true;
+    /* the card's content fades, then the glass shrinks back into the bamboo stalk */
+    var from = rel(card.getBoundingClientRect()), oldH = stage.offsetHeight; from.r = 30;
+    card.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 160, fill: "forwards" }).onfinish = function () {
+      card.getAnimations().forEach(function (x) { x.cancel(); });
+      card.hidden = true; stage.classList.remove("playing"); $("bgBamboo").style.opacity = "0";
+      var to = stalkBox(), newH = stage.offsetHeight;
+      stage.animate([{ height: oldH + "px" }, { height: newH + "px" }], { duration: 820, easing: "cubic-bezier(.5,0,.3,1)" });
+      morphRun(from, to, false, function () {
+        done();
+        $("bgBamboo").animate([{ opacity: 0 }, { opacity: 1 }], { duration: 260, easing: "ease-out" });
+      });
+    };
   }
   if (game && card) {
     PLAN_KEYS.forEach(function (k) {

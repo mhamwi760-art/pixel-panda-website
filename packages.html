@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=6">
+<link rel="stylesheet" href="css/styles.css?v=7">
 <script>
   (function (d) {
     d.classList.remove('no-js');
@@ -223,6 +223,8 @@
          glass card that asks one question at a time. Behaviour: js/main.js ("Build Your Bamboo"). -->
     <section class="bamboo-game reveal" id="custom" aria-labelledby="custom-title">
       <div class="bg-blobs" aria-hidden="true"><span class="b1"></span><span class="b2"></span><span class="b3"></span><i class="p1"></i><i class="p2"></i><i class="p3"></i></div>
+      <!-- the bamboo stalk that stretches into the glass card when Start is pressed -->
+      <div class="bg-morph" id="bgMorph" aria-hidden="true" hidden><i class="m-bamboo"><b></b><b></b></i><i class="m-glass"></i></div>
       <div class="bg-intro">
         <span class="num">04 / <span data-i18n="pk.custom">Custom plan</span></span>
         <h3 id="custom-title"><span data-i18n="pk.p4">Build Your Bamboo</span><span class="ar-name" lang="ar">بامبو على مقاسك</span></h3>
@@ -263,7 +265,6 @@
 
         <!-- 2. the glass question card -->
         <div class="glass" id="bgCard" role="group" aria-labelledby="custom-title" hidden>
-          <span class="bg-flash" aria-hidden="true"></span>
           <div class="bg-top">
             <span class="bg-count" id="bgCount" aria-live="polite"></span>
             <button class="bg-close" type="button" id="bgClose" aria-label="Close" data-i18n-attr="aria-label:bg.close">×</button>
@@ -464,9 +465,9 @@
 
 <a class="wa-float" data-link="wa" target="_blank" rel="noopener" aria-label="Message us on WhatsApp" data-i18n-attr="aria-label:ct.waLabel"><svg aria-hidden="true"><use href="#i-wa"/></svg></a>
 
-<script src="js/config.js?v=6"></script>
-<script src="js/i18n-ar.js?v=6"></script>
-<script src="js/main.js?v=6"></script>
-<script src="js/motion.js?v=6"></script>
+<script src="js/config.js?v=7"></script>
+<script src="js/i18n-ar.js?v=7"></script>
+<script src="js/main.js?v=7"></script>
+<script src="js/motion.js?v=7"></script>
 </body>
 </html>

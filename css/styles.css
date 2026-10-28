@@ -450,6 +450,17 @@ html[dir="rtl"] .bg-start svg { transform: scaleX(-1); }
 @keyframes bgPulse { 0%, 100% { box-shadow: 0 12px 30px rgba(255,200,87,.35), 0 0 0 0 rgba(255,200,87,.45); } 50% { box-shadow: 0 12px 30px rgba(255,200,87,.35), 0 0 0 12px rgba(255,200,87,0); } }
 .bg-tap { font-size: 13px; color: var(--on-brand-2); }
 
+/* the stalk that stretches into the card (sized and moved by js/main.js) */
+.bg-morph { position: absolute; z-index: 3; pointer-events: none; overflow: hidden; border-radius: 14px; box-shadow: 0 24px 50px rgba(0,30,30,.3); }
+.bg-morph[hidden] { display: none; }
+.bg-morph i { position: absolute; inset: 0; border-radius: inherit; }
+.bg-morph .m-bamboo { background: linear-gradient(90deg, #2FA996, #6BDCC9 45%, #278F7F); }
+.bg-morph .m-bamboo b { position: absolute; left: 0; right: 0; height: 4.2%; background: #1F8C7C; }
+.bg-morph .m-bamboo b:first-child { top: 28%; }
+.bg-morph .m-bamboo b + b { top: 62.2%; }
+.bg-morph .m-glass { opacity: 0; background: linear-gradient(145deg, rgba(255,255,255,.80), rgba(255,255,255,.52)); border: 1px solid rgba(255,255,255,.75); box-shadow: inset 0 1.5px 0 rgba(255,255,255,.95); }
+[data-theme="dark"] .bg-morph .m-glass { background: linear-gradient(145deg, rgba(40,80,80,.9), rgba(8,26,26,.85)); border-color: rgba(255,255,255,.2); box-shadow: inset 0 1px 0 rgba(255,255,255,.28); }
+
 /* the iOS-style glass card */
 .glass {
   position: relative; width: min(100%, 520px); border-radius: 30px; padding: 24px 26px 22px; color: var(--ink);
@@ -468,7 +479,6 @@ html[dir="rtl"] .bg-start svg { transform: scaleX(-1); }
 [data-theme="dark"] .glass::before { background: radial-gradient(120% 60% at 18% 0%, rgba(255,255,255,.14), transparent 55%); }
 .glass[hidden] { display: none; }
 .glass > * { position: relative; }
-.bg-flash { position: absolute !important; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; background: linear-gradient(160deg, #6BDCC9, #2FA996); }
 .bg-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
 .bg-count { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--acc); }
 html[lang="ar"] .bg-count { letter-spacing: 0; font-size: 13px; }
