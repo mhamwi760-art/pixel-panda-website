@@ -33,6 +33,8 @@
     "plan.ads": "Ad designs",
     "plan.photos": "Photography images",
     "plan.rush": "Rush delivery",
+    "pk.upto": "up to",
+    "pk.none": "Not included",
     "bg.count": "Question %n of %t",
     "bg.countDone": "Your plan",
     "wk.ph": "[Portfolio image]"
@@ -42,7 +44,8 @@
 
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   function isPh(v) { return !v || /^\s*\[/.test(v); }
-  function val(key) { var v = C[key]; if (v && typeof v === "object") v = v[lang] || v.en; return v == null ? "" : String(v); }
+  function raw(key) { return key.split(".").reduce(function (o, k) { return o == null ? o : o[k]; }, C); }   // "pk_cub.posts" style keys
+  function val(key) { var v = raw(key); if (v && typeof v === "object") v = v[lang] || v.en; return v == null ? "" : String(v); }
   function show(v) { return isPh(v) ? '<span class="ph">' + esc(v || "[—]") + "</span>" : esc(v); }
   function fill(text) { return text.replace(/\{(\w+)\}/g, function (_, k) { return show(val(k)); }); }
   function t(key) { return lang === "ar" ? (AR[key] || EN[key] || EN_JS[key] || key) : (EN[key] || EN_JS[key] || key); }
@@ -60,6 +63,20 @@
       if (!(p[1] in EN)) EN[p[1]] = el.getAttribute(p[0]) || EN[p[1]];
     });
   });
+  /* wording changed in the dashboard replaces the original English / Arabic */
+  var TX = C.text || {};
+  Object.keys(TX).forEach(function (k) { if (TX[k] && TX[k].en) EN[k] = TX[k].en; if (TX[k] && TX[k].ar) AR[k] = TX[k].ar; });
+
+  /* package numbers from the settings (0 or empty = not included) */
+  function renderNums() {
+    document.querySelectorAll("[data-num]").forEach(function (el) {
+      var v = val(el.getAttribute("data-num")), none = !v || v === "0" || v === "—" || v === "-";
+      el.classList.toggle("dash", none);
+      if (none) { el.textContent = "—"; el.setAttribute("aria-label", t("pk.none")); return; }
+      el.removeAttribute("aria-label");
+      el.innerHTML = el.hasAttribute("data-upto") ? '<span>' + esc(t("pk.upto")) + "</span> " + esc(v) : esc(v);
+    });
+  }
 
   function applyLang(l) {
     lang = l === "ar" ? "ar" : "en";
@@ -69,7 +86,7 @@
       el.getAttribute("data-i18n-attr").split(";").forEach(function (pair) { var p = pair.split(":"); el.setAttribute(p[0], t(p[1])); });
     });
     document.querySelectorAll("[data-cfg]").forEach(function (el) { el.innerHTML = show(val(el.getAttribute("data-cfg"))); });
-    renderContact(); renderFolios(); renderPlan(); themeLabel(); accAllLabel(); refreshGame();
+    renderNums(); renderContact(); renderFolios(); renderPlan(); themeLabel(); accAllLabel(); refreshGame();
     var btn = $("langBtn");
     if (btn) {
       btn.innerHTML = lang === "ar" ? '<span lang="en">English</span>' : '<span lang="ar">عربي</span>';
@@ -95,7 +112,8 @@
     }
     root.setAttribute("data-theme", th);
     if (remember) { try { localStorage.setItem("pp-theme", th); } catch (e) {} }
-    var meta = document.querySelector('meta[name="theme-color"]'); if (meta) meta.setAttribute("content", th === "dark" ? "#08494B" : "#006D6F");
+    var meta = document.querySelector('meta[name="theme-color"]'), bar = getComputedStyle(root).getPropertyValue("--brand-bg").trim();
+    if (meta) meta.setAttribute("content", bar || (th === "dark" ? "#08494B" : "#006D6F"));
     themeLabel();
   }
   if (themeBtn) themeBtn.addEventListener("click", function () { setTheme(root.getAttribute("data-theme") === "dark" ? "light" : "dark", true); });

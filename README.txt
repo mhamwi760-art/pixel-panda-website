@@ -13,7 +13,15 @@ ARABIC:     https://mhamwi760-art.github.io/pixel-panda-website/?lang=ar
    The menu and footer are repeated on every page: if you change them,
    change all 4 pages.
 
-2) CHANGE YOUR DETAILS AND PRICES  ->  js/config.js
+1b) DASHBOARD (the easy way to make small changes)
+   Open https://mhamwi760-art.github.io/pixel-panda-website/admin.html
+   (not linked from the site, hidden from Google). Log in once with your
+   GitHub key (the page explains how to create it). Then change package
+   numbers, prices, contact details, any text (English and Arabic),
+   portfolio pictures, page pictures and brand colours, and press
+   "Save & publish". The live site updates about a minute later.
+
+2) CHANGE YOUR DETAILS AND PRICES BY HAND  ->  js/config.js
    - whatsapp / whatsappDisplay : your WhatsApp number
    - instagram                  : your Instagram handle, e.g. "@pixelpanda"
    - formEmail                  : where requests from the form are sent
@@ -51,6 +59,6 @@ ARABIC:     https://mhamwi760-art.github.io/pixel-panda-website/?lang=ar
        git commit -m "Update site"
        git push
    The live site updates about a minute later. If you changed a css or js
-   file, raise the ?v=8 number on its line in all 4 pages first.
+   file, raise the ?v=9 number on its line in all 4 pages first.
 
 Logos used are the original brand files in assets/logo/ (never edit them).

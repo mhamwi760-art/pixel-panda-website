@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Pixel Panda | Dashboard</title>
+<link rel="icon" type="image/png" sizes="512x512" href="assets/share/icon-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<!-- Pixel Panda dashboard: edits js/config.js, css/theme.css and images, then publishes them to GitHub.
+     Not linked from the website. Nothing can be changed without a GitHub key that only the owner has. -->
+<style>
+  :root { --teal: #006D6F; --teal-d: #00585A; --turq: #3DBCA8; --yellow: #FFC857; --coral: #FF6F61; --ink: #111414; --ink2: #4A5556; --line: #DCE6E5; --mist: #EEF4F3; --bg: #F5F8F8; --card: #fff; --bad: #B4302A; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Montserrat", "Segoe UI", Arial, sans-serif; color: var(--ink); background: var(--bg); font-size: 15px; line-height: 1.5; }
+  [dir="rtl"], .ar { font-family: "Tajawal", "Segoe UI", Tahoma, sans-serif; }
+  h1, h2, h3 { margin: 0; line-height: 1.2; }
+  a { color: var(--teal); }
+  button, input, select, textarea { font: inherit; color: inherit; }
+  [hidden] { display: none !important; }
+  .top { position: sticky; top: 0; z-index: 20; background: var(--teal); color: #fff; }
+  .top .in { max-width: 1100px; margin: 0 auto; padding: 12px 18px; display: flex; align-items: center; gap: 14px; }
+  .top img { width: 38px; }
+  .top h1 { font-size: 16px; letter-spacing: .14em; flex: 1; }
+  .top h1 small { display: block; font-size: 11px; letter-spacing: .1em; font-weight: 600; opacity: .75; }
+  .top a, .top button { color: #fff; background: rgba(255,255,255,.12); border: 1.5px solid rgba(255,255,255,.35); border-radius: 999px; padding: 7px 14px; font-weight: 700; font-size: 13px; text-decoration: none; cursor: pointer; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 22px 18px 120px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 20px; margin-bottom: 16px; }
+  .card h2 { font-size: 19px; margin-bottom: 4px; }
+  .card > p.hint, .hint { color: var(--ink2); font-size: 13.5px; margin: 0 0 14px; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 0; border-radius: 999px; padding: 11px 20px; font-weight: 700; cursor: pointer; text-decoration: none; min-height: 44px; }
+  .btn.teal { background: var(--teal); color: #fff; } .btn.teal:hover { background: var(--teal-d); }
+  .btn.yellow { background: var(--yellow); color: var(--ink); }
+  .btn.ghost { background: transparent; border: 1.5px solid var(--line); color: var(--ink); }
+  .btn.small { min-height: 34px; padding: 6px 12px; font-size: 13px; }
+  .btn:disabled { opacity: .55; cursor: default; }
+  label.f { display: block; font-size: 12.5px; font-weight: 700; color: var(--ink2); margin-bottom: 5px; }
+  input[type="text"], input[type="number"], input[type="password"], input[type="email"], textarea, select {
+    width: 100%; padding: 10px 12px; border: 1.5px solid #C5D3D2; border-radius: 10px; background: #fff; font-size: 15px;
+  }
+  textarea { resize: vertical; min-height: 44px; line-height: 1.45; }
+  input:focus, textarea:focus, select:focus { outline: none; border-color: var(--teal); box-shadow: 0 0 0 3px rgba(61,188,168,.3); }
+  .changed { border-color: #E3A92B !important; background: #FFFBEF !important; }
+  .grid { display: grid; gap: 12px; }
+  .g2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } .g3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } .g6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  @media (max-width: 760px) { .g3, .g6 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 480px) { .g2 { grid-template-columns: 1fr; } }
+  .pk { border: 1px solid var(--line); border-radius: 14px; padding: 14px; margin-bottom: 12px; background: var(--mist); }
+  .pk h3 { font-size: 16px; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .pk h3 i { width: 12px; height: 12px; display: inline-block; }
+  /* login */
+  .login { max-width: 560px; margin: 40px auto; }
+  .login ol { padding-inline-start: 20px; margin: 10px 0 18px; } .login li { margin-bottom: 6px; }
+  .status { margin-top: 12px; font-weight: 600; font-size: 14px; min-height: 1.4em; }
+  .status.err { color: var(--bad); } .status.ok { color: var(--teal); }
+  /* tabs */
+  .tabs { display: flex; gap: 6px; overflow-x: auto; margin-bottom: 18px; padding-bottom: 2px; scrollbar-width: none; }
+  .tabs button { flex: none; padding: 10px 16px; border-radius: 999px; border: 1.5px solid var(--line); background: #fff; font-weight: 700; font-size: 14px; cursor: pointer; }
+  .tabs button[aria-selected="true"] { background: var(--teal); border-color: var(--teal); color: #fff; }
+  .tabs button .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #E3A92B; margin-inline-start: 6px; vertical-align: middle; }
+  /* text editor */
+  .tx-tools { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+  .tx-tools input { flex: 1 1 240px; } .tx-tools select { flex: 0 1 200px; width: auto; }
+  .tx { border: 1px solid var(--line); border-radius: 12px; padding: 12px; margin-bottom: 10px; background: #fff; }
+  .tx.is-changed { border-color: #E3A92B; background: #FFFCF3; }
+  .tx-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 8px; font-size: 12px; color: var(--ink2); }
+  .tx-head b { color: var(--teal); }
+  .tx .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  @media (max-width: 700px) { .tx .pair { grid-template-columns: 1fr; } }
+  .more-row { text-align: center; margin-top: 10px; }
+  /* images */
+  .imgs { display: grid; gap: 10px; }
+  .im { display: grid; grid-template-columns: 96px 1fr auto; gap: 12px; align-items: center; border: 1px solid var(--line); border-radius: 12px; padding: 10px; background: #fff; }
+  .im.is-changed { border-color: #E3A92B; background: #FFFCF3; }
+  .thumb { width: 96px; height: 96px; border-radius: 10px; background: var(--mist) center / cover no-repeat; border: 1.5px dashed #9DB5B4; display: grid; place-items: center; color: var(--ink2); font-size: 11px; text-align: center; overflow: hidden; }
+  .thumb.has { border-style: solid; border-color: var(--line); }
+  .thumb.contain { background-size: contain; }
+  .im .acts { display: flex; flex-direction: column; gap: 6px; }
+  .im .acts .row { display: flex; gap: 6px; }
+  @media (max-width: 600px) { .im { grid-template-columns: 72px 1fr; } .thumb { width: 72px; height: 72px; } .im .acts { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; } }
+  /* colours */
+  .cols { display: grid; gap: 10px; }
+  .col { display: grid; grid-template-columns: 56px 1fr 120px; gap: 12px; align-items: center; border: 1px solid var(--line); border-radius: 12px; padding: 10px; background: #fff; }
+  .col input[type="color"] { width: 56px; height: 44px; border: 0; padding: 0; background: none; cursor: pointer; }
+  .col small { display: block; color: var(--ink2); font-size: 12.5px; }
+  .preview { border-radius: 14px; overflow: hidden; border: 1px solid var(--line); margin-top: 14px; }
+  .preview .bar { padding: 12px 14px; color: #fff; font-weight: 700; display: flex; justify-content: space-between; align-items: center; }
+  .preview .body { padding: 16px 14px; background: #fff; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+  .preview .pill { padding: 8px 16px; border-radius: 999px; font-weight: 700; font-size: 13px; }
+  .preview .sq { width: 26px; height: 26px; }
+  /* save bar */
+  .savebar { position: fixed; inset-inline: 0; bottom: 0; z-index: 30; background: #fff; border-top: 1px solid var(--line); box-shadow: 0 -8px 24px rgba(0,40,40,.08); }
+  .savebar .in { max-width: 1100px; margin: 0 auto; padding: 12px 18px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .savebar .msg { flex: 1 1 220px; font-weight: 600; font-size: 14px; }
+  .savebar .msg.has { color: #9A6A00; }
+  .savebar .msg.ok { color: var(--teal); }
+  .savebar .msg.err { color: var(--bad); }
+  .loading { text-align: center; padding: 60px 0; color: var(--ink2); font-weight: 600; }
+  @media (max-width: 600px) {
+    .savebar .in { padding: 10px 14px; gap: 8px; }
+    .savebar .msg { flex-basis: 100%; font-size: 12.5px; }
+    .savebar .btn { flex: 1; min-height: 40px; }
+    .top .in { padding: 10px 14px; gap: 8px; }
+    .top a, .top button { padding: 6px 10px; font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+<header class="top"><div class="in">
+  <img src="assets/logo/pixel-panda-logo-white.png" alt="">
+  <h1>PIXEL PANDA<small>DASHBOARD</small></h1>
+  <a href="./" target="_blank" rel="noopener">View site ↗</a>
+  <button type="button" id="logout" hidden>Log out</button>
+</div></header>
+
+<!-- ============ LOGIN ============ -->
+<main class="wrap" id="loginView">
+  <div class="card login">
+    <h2>Log in to edit your website</h2>
+    <p class="hint">The dashboard saves your changes straight to your GitHub, and the live site updates about a minute later. To log in, paste your GitHub key. You only do this once per device.</p>
+    <details>
+      <summary><b>How to create your key (one time, about 2 minutes)</b></summary>
+      <ol>
+        <li>Open <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">github.com → Settings → Fine-grained tokens → Generate new token</a> (signed in as <b>mhamwi760-art</b>).</li>
+        <li><b>Token name:</b> Pixel Panda dashboard. <b>Expiration:</b> pick a date (for example 1 year).</li>
+        <li><b>Repository access:</b> choose <b>Only select repositories</b> and select <b>pixel-panda-website</b>.</li>
+        <li><b>Permissions → Repository permissions → Contents:</b> choose <b>Read and write</b>.</li>
+        <li>Press <b>Generate token</b>, copy it (it starts with <code>github_pat_</code>) and paste it below.</li>
+      </ol>
+      <p class="hint">Keep the key private, like a password. It can only change this one website. If you ever lose a device, delete the key on that same GitHub page.</p>
+    </details>
+    <label class="f" for="token" style="margin-top:14px">GitHub key</label>
+    <input type="password" id="token" autocomplete="off" spellcheck="false" placeholder="github_pat_…">
+    <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap">
+      <button class="btn teal" type="button" id="loginBtn">Log in</button>
+    </div>
+    <p class="status" id="loginStatus" role="status"></p>
+  </div>
+</main>
+
+<!-- ============ DASHBOARD ============ -->
+<main class="wrap" id="appView" hidden>
+  <div class="loading" id="loading">Loading your website…</div>
+  <div id="app" hidden>
+    <nav class="tabs" role="tablist" aria-label="Sections">
+      <button type="button" role="tab" data-tab="packages" aria-selected="true">Packages &amp; prices</button>
+      <button type="button" role="tab" data-tab="contact" aria-selected="false">Contact</button>
+      <button type="button" role="tab" data-tab="text" aria-selected="false">Text</button>
+      <button type="button" role="tab" data-tab="images" aria-selected="false">Images</button>
+      <button type="button" role="tab" data-tab="colors" aria-selected="false">Colours</button>
+    </nav>
+
+    <section data-panel="packages">
+      <div class="card">
+        <h2>Social media packages</h2>
+        <p class="hint">Numbers shown on each package card and in the comparison table. Put <b>0</b> for "not included" (shows —). Prices are in KWD; the Arabic "د.ك" is added for you.</p>
+        <div id="socialPk"></div>
+      </div>
+      <div class="card">
+        <h2>Build Your Bamboo</h2>
+        <p class="hint">The price line shown for the custom plan in the comparison table.</p>
+        <div class="grid g2">
+          <div><label class="f" for="pc-en">Price text (English)</label><input type="text" id="pc-en"></div>
+          <div><label class="f" for="pc-ar">Price text (Arabic)</label><input type="text" id="pc-ar" dir="rtl"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Branding packages</h2>
+        <p class="hint">One-time prices in KWD and how many logo concepts each package includes.</p>
+        <div id="brandPk"></div>
+      </div>
+      <div class="card">
+        <h2>Add-on prices</h2>
+        <p class="hint">Leave empty while a price is not decided yet (the site shows "[Price]").</p>
+        <div class="grid g3" id="addons"></div>
+      </div>
+    </section>
+
+    <section data-panel="contact" hidden>
+      <div class="card">
+        <h2>Contact details</h2>
+        <p class="hint">Used for the WhatsApp buttons, the floating WhatsApp bubble and the Contact page.</p>
+        <div class="grid g2">
+          <div><label class="f" for="c-wa">WhatsApp number (digits only, with country code)</label><input type="text" id="c-wa" inputmode="numeric" placeholder="96598828403"></div>
+          <div><label class="f" for="c-wad">WhatsApp number as people see it</label><input type="text" id="c-wad" placeholder="+965 9882 8403"></div>
+          <div><label class="f" for="c-ig">Instagram handle</label><input type="text" id="c-ig" placeholder="@pixelpanda"></div>
+          <div><label class="f" for="c-mail">Email that receives requests (never shown to clients)</label><input type="email" id="c-mail"></div>
+          <div><label class="f" for="c-w3f">Web3Forms key (backup form service, optional)</label><input type="text" id="c-w3f" spellcheck="false"></div>
+        </div>
+      </div>
+    </section>
+
+    <section data-panel="text" hidden>
+      <div class="card">
+        <h2>Text on the website</h2>
+        <p class="hint">Every sentence on the site, in English and Arabic. Change what you need; changed lines are highlighted. Words between <code>&lt;em&gt;</code> and <code>&lt;/em&gt;</code> show in yellow on the site, keep those tags around the words you want highlighted.</p>
+        <div class="tx-tools">
+          <input type="text" id="txSearch" placeholder="Search text, e.g. free designs">
+          <select id="txPage" aria-label="Page">
+            <option value="">All pages</option>
+            <option value="Panda Time">Panda Time</option>
+            <option value="PP Packages">PP Packages</option>
+            <option value="PP Branding">PP Branding</option>
+            <option value="Contact">Contact</option>
+            <option value="Menu &amp; footer">Menu &amp; footer</option>
+            <option value="changed">Only changed lines</option>
+          </select>
+        </div>
+        <div id="txList"></div>
+        <div class="more-row"><button class="btn ghost small" type="button" id="txMore" hidden>Show more</button></div>
+      </div>
+    </section>
+
+    <section data-panel="images" hidden>
+      <div class="card">
+        <h2>Portfolio: PP Packages</h2>
+        <p class="hint">The gallery with arrows on PP Packages. Photos are resized automatically for the web. Use ↑ ↓ to change the order.</p>
+        <div class="imgs" id="folio1"></div>
+        <button class="btn ghost small" type="button" data-add="portfolio" style="margin-top:10px">+ Add a gallery item</button>
+      </div>
+      <div class="card">
+        <h2>Portfolio: PP Branding</h2>
+        <p class="hint">The gallery with arrows on PP Branding.</p>
+        <div class="imgs" id="folio2"></div>
+        <button class="btn ghost small" type="button" data-add="portfolio_branding" style="margin-top:10px">+ Add a gallery item</button>
+      </div>
+      <div class="card">
+        <h2>Pictures on the pages</h2>
+        <p class="hint">Replace a picture with your own. PNG with a transparent background looks best for the phone pictures. The logo is not editable here, to protect the brand files.</p>
+        <div class="imgs" id="sitePics"></div>
+      </div>
+    </section>
+
+    <section data-panel="colors" hidden>
+      <div class="card">
+        <h2>Brand colours</h2>
+        <p class="hint">Changes the colours across the whole site, in light and dark mode. Use <b>Reset</b> to go back to the original Pixel Panda colours.</p>
+        <div class="cols" id="cols"></div>
+        <div class="preview" id="preview" aria-hidden="true">
+          <div class="bar" id="pvBar"><span>PIXEL PANDA</span><span class="pill" id="pvBtn">Contact us</span></div>
+          <div class="body"><span class="pill" id="pvTeal" style="color:#fff">Choose this package</span><i class="sq" id="pvQ"></i><i class="sq" id="pvY"></i><i class="sq" id="pvC"></i><i class="sq" id="pvP"></i></div>
+        </div>
+        <button class="btn ghost small" type="button" id="colReset" style="margin-top:12px">Reset to original colours</button>
+      </div>
+    </section>
+  </div>
+</main>
+
+<div class="savebar" id="saveBar" hidden><div class="in">
+  <span class="msg" id="saveMsg" role="status" aria-live="polite">No changes yet.</span>
+  <button class="btn ghost" type="button" id="discard" disabled>Discard</button>
+  <button class="btn yellow" type="button" id="save" disabled>Save &amp; publish</button>
+</div></div>
+
+<script src="js/admin.js"></script>
+</body>
+</html>

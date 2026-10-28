@@ -1,79 +1,77 @@
 /* =====================================================================
-   PIXEL PANDA — EDIT YOUR DETAILS HERE
+   PIXEL PANDA — SITE SETTINGS
    ---------------------------------------------------------------------
-   This is the ONLY file you need to change for contact details, prices
-   and portfolio images.
+   The easiest way to change these is the dashboard: open admin.html on
+   the live site (…/pixel-panda-website/admin.html), make your changes and
+   press "Save & publish".
 
-   - Anything still in [square brackets] is shown on the site in red,
-     so you can see what is not filled in yet. Remove the brackets when
-     you put in the real value.
-   - Where there is { en: "...", ar: "..." } write the English and the
-     Arabic version.
-   - Save the file, then refresh the page in your browser.
+   Editing by hand is still fine. The settings between the two START/END
+   markers are JSON, so keep the "double quotes" and commas exactly as they
+   are, and do not add comments inside that part.
+
+   - whatsapp: international format, digits only, no + and no spaces.
+   - formEmail: every request from the Contact page is emailed here through
+     FormSubmit (formsubmit.co). The first request triggers an "Activate
+     form" email to this address: click Activate once (check Junk too).
+   - web3formsKey: backup form service. Get a free key at web3forms.com
+     and paste it here if FormSubmit's activation email never arrives.
+   - Anything in [square brackets] shows on the site in red, so you can see
+     what is not filled in yet.
+   - pk_... : the numbers in each package card. 0 means "not included" (—).
+   - text: wording changed from the dashboard. Each line replaces the
+     original English and/or Arabic text with the same name.
+   - colors: your brand colours. The dashboard also writes css/theme.css
+     from these, so change them in the dashboard.
    ===================================================================== */
-window.PP_CONFIG = {
+window.PP_CONFIG =
+/* PP-SETTINGS-START */
+{
+  "whatsapp": "96598828403",
+  "whatsappDisplay": "+965 9882 8403",
+  "instagram": "[@instagram handle]",
+  "formEmail": "",
+  "web3formsKey": "",
 
-  /* ---------- CONTACT ---------- */
-  // WhatsApp number: international format, digits only, NO + and NO spaces.
-  whatsapp: "96598828403",
-  // WhatsApp number as people should SEE it:
-  whatsappDisplay: "+965 9882 8403",
-  instagram: "[@instagram handle]",       // e.g. "@pixelpanda"
+  "price_cub": { "en": "80 KWD", "ar": "80 د.ك" },
+  "price_grove": { "en": "120 KWD", "ar": "120 د.ك" },
+  "price_empire": { "en": "150 KWD", "ar": "150 د.ك" },
+  "price_custom": { "en": "Price on request", "ar": "السعر حسب طلبك" },
+  "price_paw": { "en": "80 KWD", "ar": "80 د.ك" },
+  "price_signature": { "en": "130 KWD", "ar": "130 د.ك" },
 
-  /* ---------- REQUEST FORM ----------
-     Every request from the Contact page is emailed to formEmail, through
-     the free service FormSubmit (formsubmit.co). The visitor never sees
-     this address and gets no email.
-     FIRST TIME ONLY: after the first request, FormSubmit sends an
-     "Activate form" email to this address. Open it and click Activate
-     (check Junk too). From then on every request arrives in the inbox.
-     Optional: the activation email also gives you a random code. Put it
-     in formEmail instead of the address to keep the address out of the
-     website code. */
-  formEmail: "",
-  /* BACKUP: if FormSubmit's activation email never arrives, get a free
-     key at https://web3forms.com (enter [your email], the key
-     is emailed to you) and paste it here. The form then uses Web3Forms. */
-  web3formsKey: "",
+  "pk_cub": { "posts": 10, "stories": 15, "highlights": 0, "reels": 2, "ads": 1, "photos": 5 },
+  "pk_grove": { "posts": 20, "stories": 25, "highlights": 5, "reels": 3, "ads": 2, "photos": 10 },
+  "pk_empire": { "posts": 30, "stories": 35, "highlights": 10, "reels": 5, "ads": 5, "photos": 20 },
+  "br_paw": { "logos": 5 },
+  "br_signature": { "logos": 5 },
 
-  /* ---------- SOCIAL MEDIA PACKAGES (per month) ---------- */
-  price_cub:    { en: "80 KWD",  ar: "80 د.ك" },
-  price_grove:  { en: "120 KWD", ar: "120 د.ك" },
-  price_empire: { en: "150 KWD", ar: "150 د.ك" },
-  price_custom: { en: "Price on request", ar: "السعر حسب طلبك" },
+  "addon_post": { "en": "[Price]", "ar": "[السعر]" },
+  "addon_story": { "en": "[Price]", "ar": "[السعر]" },
+  "addon_ad": { "en": "[Price]", "ar": "[السعر]" },
+  "addon_shoot": { "en": "[Price]", "ar": "[السعر]" },
+  "addon_photos": { "en": "[Price]", "ar": "[السعر]" },
+  "addon_rush": { "en": "[Price]", "ar": "[السعر]" },
 
-  /* ---------- BRANDING PACKAGES (one-time) ---------- */
-  price_paw:       { en: "80 KWD",  ar: "80 د.ك" },
-  price_signature: { en: "130 KWD", ar: "130 د.ك" },
-
-  /* ---------- ADD-ON PRICES ---------- */
-  addon_post:   { en: "[Price]", ar: "[السعر]" },
-  addon_story:  { en: "[Price]", ar: "[السعر]" },
-  addon_ad:     { en: "[Price]", ar: "[السعر]" },
-  addon_shoot:  { en: "[Price]", ar: "[السعر]" },
-  addon_photos: { en: "[Price]", ar: "[السعر]" },
-  addon_rush:   { en: "[Price]", ar: "[السعر]" },
-
-  /* ---------- PORTFOLIO GALLERIES ----------
-     Put your images in the folder assets/portfolio/ and write the file
-     name in "image", e.g. image: "assets/portfolio/shoot-01.jpg".
-     Leave image empty ("") to show the dashed placeholder box.
-     Add as many lines as you like: the arrows scroll through them all.
-     "portfolio" shows on PP Packages, "portfolio_branding" on PP Branding. */
-  portfolio: [
-    { image: "", alt: "", label: { en: "Product photography", ar: "تصوير المنتجات" } },
-    { image: "", alt: "", label: { en: "Model photography",   ar: "تصوير العارضين" } },
-    { image: "", alt: "", label: { en: "Posts",               ar: "منشورات" } },
-    { image: "", alt: "", label: { en: "Stories",             ar: "قصص" } },
-    { image: "", alt: "", label: { en: "Highlights",          ar: "هايلايت" } },
-    { image: "", alt: "", label: { en: "Reels",               ar: "ريلز" } },
-    { image: "", alt: "", label: { en: "Ads",                 ar: "إعلانات" } }
+  "portfolio": [
+    { "image": "", "alt": "", "label": { "en": "Product photography", "ar": "تصوير المنتجات" } },
+    { "image": "", "alt": "", "label": { "en": "Model photography", "ar": "تصوير العارضين" } },
+    { "image": "", "alt": "", "label": { "en": "Posts", "ar": "منشورات" } },
+    { "image": "", "alt": "", "label": { "en": "Stories", "ar": "قصص" } },
+    { "image": "", "alt": "", "label": { "en": "Highlights", "ar": "هايلايت" } },
+    { "image": "", "alt": "", "label": { "en": "Reels", "ar": "ريلز" } },
+    { "image": "", "alt": "", "label": { "en": "Ads", "ar": "إعلانات" } }
   ],
-  portfolio_branding: [
-    { image: "", alt: "", label: { en: "Logo design",  ar: "تصميم شعار" } },
-    { image: "", alt: "", label: { en: "Colours",      ar: "الألوان" } },
-    { image: "", alt: "", label: { en: "Typography",   ar: "الخطوط" } },
-    { image: "", alt: "", label: { en: "Mockups",      ar: "نماذج العرض" } },
-    { image: "", alt: "", label: { en: "Moodboard",    ar: "لوحة الإلهام" } }
-  ]
-};
+  "portfolio_branding": [
+    { "image": "", "alt": "", "label": { "en": "Logo design", "ar": "تصميم شعار" } },
+    { "image": "", "alt": "", "label": { "en": "Colours", "ar": "الألوان" } },
+    { "image": "", "alt": "", "label": { "en": "Typography", "ar": "الخطوط" } },
+    { "image": "", "alt": "", "label": { "en": "Mockups", "ar": "نماذج العرض" } },
+    { "image": "", "alt": "", "label": { "en": "Moodboard", "ar": "لوحة الإلهام" } }
+  ],
+
+  "text": {},
+
+  "colors": { "teal": "#006D6F", "turq": "#3DBCA8", "yellow": "#FFC857", "coral": "#FF6F61", "pink": "#FF4D8D" }
+}
+/* PP-SETTINGS-END */
+;
