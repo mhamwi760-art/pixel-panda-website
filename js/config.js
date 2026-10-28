@@ -56,7 +56,7 @@ window.PP_CONFIG =
     "ar": "130 د.ك"
   },
   "pk_cub": {
-    "posts": 11,
+    "posts": 100,
     "stories": 15,
     "highlights": 0,
     "reels": 2,
