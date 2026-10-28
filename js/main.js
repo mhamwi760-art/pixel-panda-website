@@ -33,6 +33,8 @@
     "plan.ads": "Ad designs",
     "plan.photos": "Photography images",
     "plan.rush": "Rush delivery",
+    "bg.count": "Question %n of %t",
+    "bg.countDone": "Your plan",
     "wk.ph": "[Portfolio image]"
   };
   var PLAN_KEYS = ["posts", "stories", "highlights", "reels", "ads", "photos"];
@@ -67,7 +69,7 @@
       el.getAttribute("data-i18n-attr").split(";").forEach(function (pair) { var p = pair.split(":"); el.setAttribute(p[0], t(p[1])); });
     });
     document.querySelectorAll("[data-cfg]").forEach(function (el) { el.innerHTML = show(val(el.getAttribute("data-cfg"))); });
-    renderContact(); renderFolios(); renderPlan(); themeLabel(); accAllLabel();
+    renderContact(); renderFolios(); renderPlan(); themeLabel(); accAllLabel(); refreshGame();
     var btn = $("langBtn");
     if (btn) {
       btn.innerHTML = lang === "ar" ? '<span lang="en">English</span>' : '<span lang="ar">عربي</span>';
@@ -224,43 +226,132 @@
   }
   openFromHash(location.hash);
 
-  /* ---------- Build Your Bamboo (sliders) ---------- */
-  var sliders = document.querySelectorAll('.builder input[type="range"]');
-  var rush = $("b-rush"), sendLink = $("builderSend");
-  function updateSlider(r) {
-    var min = +r.min || 0, max = +r.max || 100, v = +r.value;
-    r.style.setProperty("--p", ((v - min) / (max - min) * 100) + "%");
-    var out = $("o-" + r.getAttribute("data-key")); if (out && document.activeElement !== out) out.value = v;
-  }
-  /* number box next to each slider: typed values stay between the slider's min and max */
-  function typedNumber(r, out, done) {
-    var min = +r.min || 0, max = +r.max || 100, s = out.value.replace(/\D/g, "");
-    if (s === "") { if (done) out.value = r.value; return; }    // still typing, or left empty
-    var v = Math.min(max, +s);
-    if (done) v = Math.max(min, v);
-    if (String(v) !== out.value) out.value = v;
-    if (v >= min) { r.value = v; updateSlider(r); builderLink(); }
-  }
+  /* ---------- Build Your Bamboo: floating bamboo → glass question card ---------- */
+  var game = $("custom"), card = $("bgCard"), stage = $("bgStage"), sendLink = $("builderSend");
+  var STEPS = PLAN_KEYS.concat(["rush", "summary"]);            // 6 number questions, rush, then the summary
+  var DEFAULTS = { posts: 10, stories: 15, highlights: 3, reels: 2, ads: 1, photos: 5 };
+  var EASE = "cubic-bezier(.2,.8,.2,1)";
+  var bState = { rush: false, rushSet: false }, step = 0;
   function builderLink() {
     if (!sendLink) return;
     var q = ["plan=custom"];
-    sliders.forEach(function (r) { q.push(r.getAttribute("data-key") + "=" + r.value); });
-    if (rush && rush.checked) q.push("rush=1");
+    PLAN_KEYS.forEach(function (k) { q.push(k + "=" + bState[k]); });
+    if (bState.rush) q.push("rush=1");
     sendLink.href = "contact.html?" + q.join("&");
   }
-  sliders.forEach(function (r) {
-    var start = qp(r.getAttribute("data-key"));               // coming back from the contact page
-    if (start && +start >= +r.min && +start <= +r.max) r.value = start;
-    updateSlider(r);
-    r.addEventListener("input", function () { updateSlider(r); builderLink(); });
-    var out = $("o-" + r.getAttribute("data-key")); if (!out) return;
-    out.addEventListener("input", function () { typedNumber(r, out, false); });
-    out.addEventListener("change", function () { typedNumber(r, out, true); });
-    out.addEventListener("blur", function () { typedNumber(r, out, true); });
-    out.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); out.blur(); } });
-  });
-  if (rush) { if (qp("rush") === "1") rush.checked = true; rush.addEventListener("change", builderLink); }
-  builderLink();
+  function setVal(k, v, bump) {
+    var r = $("b-" + k), out = $("o-" + k); if (!r) return;
+    var min = +r.min || 1, max = +r.max || 100;
+    v = Math.max(min, Math.min(max, Math.round(+v) || min));
+    bState[k] = v; r.value = v;
+    r.style.setProperty("--p", ((v - min) / (max - min) * 100) + "%");
+    if (out && document.activeElement !== out) out.value = v;
+    if (bump && out && !reduceMotion) { out.classList.remove("bump"); void out.offsetWidth; out.classList.add("bump"); }
+    r.parentNode.querySelectorAll(".bg-chips button").forEach(function (c) { c.classList.toggle("on", +c.getAttribute("data-v") === v); });
+    builderLink();
+  }
+  /* the big number box: typed values stay between 1 and 100 */
+  function typedNumber(k, out, done) {
+    var r = $("b-" + k), min = +r.min || 1, max = +r.max || 100, s = out.value.replace(/\D/g, "");
+    if (s === "") { if (done) out.value = bState[k]; return; }    // still typing, or left empty
+    var v = Math.min(max, +s);
+    if (done) v = Math.max(min, v);
+    if (String(v) !== out.value) out.value = v;
+    if (v >= min) setVal(k, v);
+    if (done) out.value = bState[k];
+  }
+  function focusQ() { var q = $("q-" + STEPS[step]); if (q) q.focus({ preventScroll: true }); }
+  function showStep(i, dir) {
+    if (!card) return;
+    step = Math.max(0, Math.min(STEPS.length - 1, i));
+    var name = STEPS[step], total = STEPS.length - 1;
+    card.querySelectorAll(".bg-step").forEach(function (s) {
+      var on = s.getAttribute("data-step") === name;
+      s.hidden = !on; s.classList.remove("anim");
+      if (on && dir && !reduceMotion) { s.style.setProperty("--dir", dir); void s.offsetWidth; s.classList.add("anim"); }
+    });
+    card.querySelectorAll(".bg-progress i").forEach(function (seg, n) { seg.className = n < step ? "on" : (n === step ? "now" : ""); });
+    $("bgCount").textContent = step < total ? t("bg.count").replace("%n", step + 1).replace("%t", total) : t("bg.countDone");
+    $("bgBack").classList.toggle("off", step === 0);
+    $("bgNav").hidden = name === "summary";
+    $("bgHelp").hidden = step >= PLAN_KEYS.length;
+    card.querySelectorAll(".bg-choice").forEach(function (c) {
+      c.setAttribute("aria-checked", bState.rushSet && (c.getAttribute("data-rush") === "1") === bState.rush ? "true" : "false");
+      c.classList.toggle("on", c.getAttribute("aria-checked") === "true");
+    });
+    if (name === "summary") { renderSummary(); if (dir) celebrate(); }
+  }
+  function go(i, dir) { showStep(i, dir); focusQ(); }
+  function renderSummary() {
+    var list = $("bgSum"); if (!list) return;
+    list.innerHTML = STEPS.slice(0, -1).map(function (k, n) {
+      var v = k === "rush" ? esc(t(bState.rush ? "js.yes" : "js.no")) : bState[k];
+      return '<li><button type="button" data-go="' + n + '"><span>' + esc(t("plan." + k)) + "</span><b>" + v + "</b></button></li>";
+    }).join("");
+  }
+  function celebrate() {
+    var box = $("bgConfetti"); if (!box || reduceMotion) return;
+    var colors = ["#FFC857", "#3DBCA8", "#FF6F61", "#FF4D8D", "#006D6F"], html = "";
+    for (var n = 0; n < 18; n++) {
+      var a = Math.random() * Math.PI * 2, d = 90 + Math.random() * 120;
+      html += '<i style="background:' + colors[n % 5] + ";--x:" + Math.round(Math.cos(a) * d) + "px;--y:" + Math.round(Math.sin(a) * d - 40) + "px;--r:" + Math.round(Math.random() * 360) + 'deg"></i>';
+    }
+    box.innerHTML = html; setTimeout(function () { box.innerHTML = ""; }, 1300);
+  }
+  function openGame(animate, at) {
+    var from = $("bgFloat").getBoundingClientRect();
+    stage.classList.add("playing"); card.hidden = false;
+    showStep(at || 0, 0);
+    if (!animate || reduceMotion || !card.animate) { if (animate) focusQ(); return; }
+    var to = card.getBoundingClientRect();
+    var ins = [from.top - to.top, to.right - from.right, to.bottom - from.bottom, from.left - to.left].map(function (n) { return Math.max(0, Math.round(n)) + "px"; });
+    card.animate([{ clipPath: "inset(" + ins.join(" ") + " round 64px)" }, { clipPath: "inset(0px 0px 0px 0px round 30px)" }], { duration: 720, easing: EASE });
+    card.querySelector(".bg-flash").animate([{ opacity: 1 }, { opacity: 1, offset: .4 }, { opacity: 0 }], { duration: 780, easing: "ease-out" });
+    [].forEach.call(card.children, function (el) {
+      if (!el.classList.contains("bg-flash")) el.animate([{ opacity: 0, transform: "translateY(14px)" }, { opacity: 1, transform: "none" }], { duration: 420, delay: 400, easing: EASE, fill: "backwards" });
+    });
+    setTimeout(function () { focusQ(); if (card.getBoundingClientRect().top < 70) card.scrollIntoView({ behavior: "smooth", block: "start" }); }, 720);
+  }
+  function closeGame() {
+    function done() {
+      card.hidden = true; stage.classList.remove("playing"); $("bgStart").focus({ preventScroll: true });
+      if (!reduceMotion && card.animate) $("bgBamboo").animate([{ opacity: 0, transform: "scale(.6)" }, { opacity: 1, transform: "none" }], { duration: 480, easing: EASE });
+    }
+    if (reduceMotion || !card.animate) { done(); return; }
+    var w = card.offsetWidth, h = card.offsetHeight, x = Math.max(0, (w - 128) / 2) + "px", y = Math.max(0, (h - 300) / 2) + "px";
+    card.animate([{ clipPath: "inset(0px 0px 0px 0px round 30px)", opacity: 1 }, { clipPath: "inset(" + y + " " + x + " round 64px)", opacity: 0 }], { duration: 420, easing: "ease-in" }).onfinish = done;
+  }
+  if (game && card) {
+    PLAN_KEYS.forEach(function (k) {
+      var start = qp(k), r = $("b-" + k), out = $("o-" + k);           // values come back from the contact page's "Change" link
+      setVal(k, start && +start >= 1 && +start <= 100 ? start : DEFAULTS[k]);
+      r.addEventListener("input", function () { setVal(k, r.value); });
+      out.addEventListener("input", function () { typedNumber(k, out, false); });
+      out.addEventListener("change", function () { typedNumber(k, out, true); });
+      out.addEventListener("blur", function () { typedNumber(k, out, true); });
+      out.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); typedNumber(k, out, true); go(step + 1, 1); } });
+      r.parentNode.querySelectorAll(".bg-pm").forEach(function (b) { b.addEventListener("click", function () { setVal(k, bState[k] + (+b.getAttribute("data-delta")), true); }); });
+      r.parentNode.querySelectorAll(".bg-chips button").forEach(function (b) { b.addEventListener("click", function () { setVal(k, b.getAttribute("data-v"), true); }); });
+    });
+    bState.rush = qp("rush") === "1"; bState.rushSet = PLAN_KEYS.some(function (k) { return qp(k) !== null; });
+    builderLink();
+    card.querySelectorAll(".bg-choice").forEach(function (c) {
+      c.addEventListener("click", function () {
+        bState.rush = c.getAttribute("data-rush") === "1"; bState.rushSet = true; builderLink(); showStep(step, 0);
+        setTimeout(function () { go(STEPS.indexOf("summary"), 1); }, reduceMotion ? 0 : 260);
+      });
+    });
+    $("bgStart").addEventListener("click", function () { openGame(true, 0); });
+    $("bgClose").addEventListener("click", closeGame);
+    $("bgNext").addEventListener("click", function () { go(step + 1, 1); });
+    $("bgBack").addEventListener("click", function () { go(step - 1, -1); });
+    $("bgRestart").addEventListener("click", function () {
+      PLAN_KEYS.forEach(function (k) { setVal(k, DEFAULTS[k]); }); bState.rush = false; bState.rushSet = false; builderLink(); go(0, -1);
+    });
+    $("bgSum").addEventListener("click", function (e) { var b = e.target.closest("[data-go]"); if (b) go(+b.getAttribute("data-go"), -1); });
+    if (bState.rushSet) openGame(false, STEPS.indexOf("summary"));      // coming back to change the plan: open on the summary
+  }
+  function refreshGame() { if (card && !card.hidden) showStep(step, 0); }
 
   /* ---------- contact form ---------- */
   var form = $("contactForm"), status = $("formStatus"), sel = $("f-interest");

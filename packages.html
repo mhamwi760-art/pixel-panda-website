@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=5">
+<link rel="stylesheet" href="css/styles.css?v=6">
 <script>
   (function (d) {
     d.classList.remove('no-js');
@@ -219,28 +219,118 @@
       </article>
     </div>
 
-    <!-- Package 04: Build Your Bamboo (sliders, no price) -->
-    <article class="pkg pkg-4 builder reveal" id="custom" aria-labelledby="custom-title">
-      <div class="pkg-top">
+    <!-- Package 04: Build Your Bamboo (no price). A floating bamboo; "Start" morphs it into a
+         glass card that asks one question at a time. Behaviour: js/main.js ("Build Your Bamboo"). -->
+    <section class="bamboo-game reveal" id="custom" aria-labelledby="custom-title">
+      <div class="bg-blobs" aria-hidden="true"><span class="b1"></span><span class="b2"></span><span class="b3"></span><i class="p1"></i><i class="p2"></i><i class="p3"></i></div>
+      <div class="bg-intro">
         <span class="num">04 / <span data-i18n="pk.custom">Custom plan</span></span>
         <h3 id="custom-title"><span data-i18n="pk.p4">Build Your Bamboo</span><span class="ar-name" lang="ar">بامبو على مقاسك</span></h3>
-        <p data-i18n="pk.p4d">Slide to choose exactly what you need. No price here: we check your selection and send you a quote.</p>
+        <p data-i18n="pk.p4d">Answer 7 quick questions and grow a plan that fits you exactly. No price here: we check your choices and send you a quote.</p>
+        <ul class="bg-facts">
+          <li data-i18n="bg.f1">7 quick questions</li>
+          <li data-i18n="bg.f2">About 1 minute</li>
+          <li data-i18n="bg.f3">Free quote</li>
+        </ul>
       </div>
-      <div class="builder-body">
-        <div class="sliders">
-          <div class="slider"><div class="sl-head"><label for="b-posts" id="l-posts"><span data-i18n="pk.posts">Instagram post designs</span></label><input type="number" class="num" id="o-posts" aria-labelledby="l-posts" min="1" max="100" step="1" inputmode="numeric" value="10"></div><input type="range" id="b-posts" data-key="posts" min="1" max="100" value="10"><div class="scale" aria-hidden="true"><span>1</span><span>100</span></div></div>
-          <div class="slider"><div class="sl-head"><label for="b-stories" id="l-stories"><span data-i18n="pk.stories">Instagram story designs</span></label><input type="number" class="num" id="o-stories" aria-labelledby="l-stories" min="1" max="100" step="1" inputmode="numeric" value="15"></div><input type="range" id="b-stories" data-key="stories" min="1" max="100" value="15"><div class="scale" aria-hidden="true"><span>1</span><span>100</span></div></div>
-          <div class="slider"><div class="sl-head"><label for="b-highlights" id="l-highlights"><span data-i18n="pk.highlights">Instagram highlights</span></label><input type="number" class="num" id="o-highlights" aria-labelledby="l-highlights" min="1" max="100" step="1" inputmode="numeric" value="3"></div><input type="range" id="b-highlights" data-key="highlights" min="1" max="100" value="3"><div class="scale" aria-hidden="true"><span>1</span><span>100</span></div></div>
-          <div class="slider"><div class="sl-head"><label for="b-reels" id="l-reels"><span data-i18n="pk.reels">Reels</span></label><input type="number" class="num" id="o-reels" aria-labelledby="l-reels" min="1" max="100" step="1" inputmode="numeric" value="2"></div><input type="range" id="b-reels" data-key="reels" min="1" max="100" value="2"><div class="scale" aria-hidden="true"><span>1</span><span>100</span></div></div>
-          <div class="slider"><div class="sl-head"><label for="b-ads" id="l-ads"><span data-i18n="pk.ads">Ad designs</span></label><input type="number" class="num" id="o-ads" aria-labelledby="l-ads" min="1" max="100" step="1" inputmode="numeric" value="1"></div><input type="range" id="b-ads" data-key="ads" min="1" max="100" value="1"><div class="scale" aria-hidden="true"><span>1</span><span>100</span></div></div>
-          <div class="slider"><div class="sl-head"><label for="b-photos" id="l-photos"><span data-i18n="pk.photos">Photography images</span></label><input type="number" class="num" id="o-photos" aria-labelledby="l-photos" min="1" max="100" step="1" inputmode="numeric" value="5"></div><input type="range" id="b-photos" data-key="photos" min="1" max="100" value="5"><div class="scale" aria-hidden="true"><span>1</span><span>100</span></div></div>
+
+      <div class="bg-stage" id="bgStage">
+        <!-- 1. the floating bamboo -->
+        <div class="bg-bamboo" id="bgBamboo">
+          <div class="bamboo-float" id="bgFloat" aria-hidden="true">
+            <svg viewBox="0 0 140 320">
+              <defs>
+                <linearGradient id="bgStalk" x1="0" x2="1"><stop offset="0" stop-color="#2FA996"/><stop offset=".45" stop-color="#6BDCC9"/><stop offset="1" stop-color="#278F7F"/></linearGradient>
+                <linearGradient id="bgLeaf" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8BE6D6"/><stop offset="1" stop-color="#2FA996"/></linearGradient>
+              </defs>
+              <path class="leaf l3" d="M72 26 C 72 10, 82 0, 96 0 C 90 12, 82 20, 73 28 Z" fill="url(#bgLeaf)"/>
+              <rect x="56" y="22" width="28" height="84" rx="12" fill="url(#bgStalk)"/>
+              <rect x="56" y="114" width="28" height="90" rx="12" fill="url(#bgStalk)"/>
+              <rect x="56" y="212" width="28" height="96" rx="12" fill="url(#bgStalk)"/>
+              <rect x="51" y="102" width="38" height="12" rx="6" fill="#1F8C7C"/>
+              <rect x="51" y="200" width="38" height="12" rx="6" fill="#1F8C7C"/>
+              <path class="leaf l1" d="M86 108 C 108 92, 126 94, 138 78 C 126 108, 108 116, 86 114 Z" fill="url(#bgLeaf)"/>
+              <path class="leaf l2" d="M54 206 C 32 190, 14 192, 2 176 C 14 206, 32 214, 54 212 Z" fill="url(#bgLeaf)"/>
+              <rect x="104" y="44" width="10" height="10" fill="#FFC857"/>
+              <rect x="20" y="138" width="8" height="8" fill="#FF6F61"/>
+              <rect x="110" y="236" width="8" height="8" fill="#FFC857"/>
+            </svg>
+          </div>
+          <div class="bg-ground" aria-hidden="true"></div>
+          <button class="btn btn-yellow bg-start" type="button" id="bgStart"><span data-i18n="bg.start">Start</span> <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l10.5-6.5z"/></svg></button>
+          <span class="bg-tap" data-i18n="bg.tap">Tap start and grow your bamboo</span>
         </div>
-        <div class="builder-foot">
-          <label class="check"><input type="checkbox" id="b-rush"><span><span data-i18n="pk.rush">Rush delivery</span><small data-i18n="pk.rushd">Tick this if you need it faster than usual.</small></span></label>
-          <a class="btn btn-ink" id="builderSend" href="contact.html?plan=custom"><span data-i18n="pk.quote">Request your quote</span> <span class="arrow" aria-hidden="true">→</span></a>
+
+        <!-- 2. the glass question card -->
+        <div class="glass" id="bgCard" role="group" aria-labelledby="custom-title" hidden>
+          <span class="bg-flash" aria-hidden="true"></span>
+          <div class="bg-top">
+            <span class="bg-count" id="bgCount" aria-live="polite"></span>
+            <button class="bg-close" type="button" id="bgClose" aria-label="Close" data-i18n-attr="aria-label:bg.close">×</button>
+          </div>
+          <div class="bg-progress" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+
+          <div class="bg-step" data-step="posts" hidden>
+            <h4 class="bg-q" id="q-posts" tabindex="-1" data-i18n="bg.q.posts">How many Instagram post designs do you need each month?</h4>
+            <div class="bg-num"><button class="bg-pm" type="button" data-delta="-1" aria-label="Less" data-i18n-attr="aria-label:bg.less">−</button><input class="bg-big" type="number" id="o-posts" min="1" max="100" step="1" inputmode="numeric" value="10" aria-labelledby="q-posts"><button class="bg-pm" type="button" data-delta="1" aria-label="More" data-i18n-attr="aria-label:bg.more">+</button></div>
+            <input type="range" id="b-posts" data-key="posts" min="1" max="100" value="10" aria-labelledby="q-posts"><div class="scale" aria-hidden="true"><span>1</span><span>100</span></div>
+            <div class="bg-chips"><button type="button" data-v="5">5</button><button type="button" data-v="10">10</button><button type="button" data-v="20">20</button><button type="button" data-v="30">30</button><button type="button" data-v="50">50</button></div>
+          </div>
+          <div class="bg-step" data-step="stories" hidden>
+            <h4 class="bg-q" id="q-stories" tabindex="-1" data-i18n="bg.q.stories">How many Instagram story designs?</h4>
+            <div class="bg-num"><button class="bg-pm" type="button" data-delta="-1" aria-label="Less" data-i18n-attr="aria-label:bg.less">−</button><input class="bg-big" type="number" id="o-stories" min="1" max="100" step="1" inputmode="numeric" value="15" aria-labelledby="q-stories"><button class="bg-pm" type="button" data-delta="1" aria-label="More" data-i18n-attr="aria-label:bg.more">+</button></div>
+            <input type="range" id="b-stories" data-key="stories" min="1" max="100" value="15" aria-labelledby="q-stories"><div class="scale" aria-hidden="true"><span>1</span><span>100</span></div>
+            <div class="bg-chips"><button type="button" data-v="10">10</button><button type="button" data-v="15">15</button><button type="button" data-v="25">25</button><button type="button" data-v="35">35</button><button type="button" data-v="50">50</button></div>
+          </div>
+          <div class="bg-step" data-step="highlights" hidden>
+            <h4 class="bg-q" id="q-highlights" tabindex="-1" data-i18n="bg.q.highlights">How many Instagram highlights?</h4>
+            <div class="bg-num"><button class="bg-pm" type="button" data-delta="-1" aria-label="Less" data-i18n-attr="aria-label:bg.less">−</button><input class="bg-big" type="number" id="o-highlights" min="1" max="100" step="1" inputmode="numeric" value="3" aria-labelledby="q-highlights"><button class="bg-pm" type="button" data-delta="1" aria-label="More" data-i18n-attr="aria-label:bg.more">+</button></div>
+            <input type="range" id="b-highlights" data-key="highlights" min="1" max="100" value="3" aria-labelledby="q-highlights"><div class="scale" aria-hidden="true"><span>1</span><span>100</span></div>
+            <div class="bg-chips"><button type="button" data-v="1">1</button><button type="button" data-v="3">3</button><button type="button" data-v="5">5</button><button type="button" data-v="10">10</button></div>
+          </div>
+          <div class="bg-step" data-step="reels" hidden>
+            <h4 class="bg-q" id="q-reels" tabindex="-1"><span data-i18n="bg.q.reels">How many reels?</span><small data-i18n="pk.reelsAny">Any type of reel</small></h4>
+            <div class="bg-num"><button class="bg-pm" type="button" data-delta="-1" aria-label="Less" data-i18n-attr="aria-label:bg.less">−</button><input class="bg-big" type="number" id="o-reels" min="1" max="100" step="1" inputmode="numeric" value="2" aria-labelledby="q-reels"><button class="bg-pm" type="button" data-delta="1" aria-label="More" data-i18n-attr="aria-label:bg.more">+</button></div>
+            <input type="range" id="b-reels" data-key="reels" min="1" max="100" value="2" aria-labelledby="q-reels"><div class="scale" aria-hidden="true"><span>1</span><span>100</span></div>
+            <div class="bg-chips"><button type="button" data-v="1">1</button><button type="button" data-v="2">2</button><button type="button" data-v="3">3</button><button type="button" data-v="5">5</button><button type="button" data-v="10">10</button></div>
+          </div>
+          <div class="bg-step" data-step="ads" hidden>
+            <h4 class="bg-q" id="q-ads" tabindex="-1" data-i18n="bg.q.ads">How many ad designs?</h4>
+            <div class="bg-num"><button class="bg-pm" type="button" data-delta="-1" aria-label="Less" data-i18n-attr="aria-label:bg.less">−</button><input class="bg-big" type="number" id="o-ads" min="1" max="100" step="1" inputmode="numeric" value="1" aria-labelledby="q-ads"><button class="bg-pm" type="button" data-delta="1" aria-label="More" data-i18n-attr="aria-label:bg.more">+</button></div>
+            <input type="range" id="b-ads" data-key="ads" min="1" max="100" value="1" aria-labelledby="q-ads"><div class="scale" aria-hidden="true"><span>1</span><span>100</span></div>
+            <div class="bg-chips"><button type="button" data-v="1">1</button><button type="button" data-v="2">2</button><button type="button" data-v="5">5</button><button type="button" data-v="10">10</button></div>
+          </div>
+          <div class="bg-step" data-step="photos" hidden>
+            <h4 class="bg-q" id="q-photos" tabindex="-1" data-i18n="bg.q.photos">How many photography images?</h4>
+            <div class="bg-num"><button class="bg-pm" type="button" data-delta="-1" aria-label="Less" data-i18n-attr="aria-label:bg.less">−</button><input class="bg-big" type="number" id="o-photos" min="1" max="100" step="1" inputmode="numeric" value="5" aria-labelledby="q-photos"><button class="bg-pm" type="button" data-delta="1" aria-label="More" data-i18n-attr="aria-label:bg.more">+</button></div>
+            <input type="range" id="b-photos" data-key="photos" min="1" max="100" value="5" aria-labelledby="q-photos"><div class="scale" aria-hidden="true"><span>1</span><span>100</span></div>
+            <div class="bg-chips"><button type="button" data-v="5">5</button><button type="button" data-v="10">10</button><button type="button" data-v="20">20</button><button type="button" data-v="30">30</button></div>
+          </div>
+          <div class="bg-step" data-step="rush" hidden>
+            <h4 class="bg-q" id="q-rush" tabindex="-1" data-i18n="bg.q.rush">Do you need rush delivery?</h4>
+            <div class="bg-choices" role="radiogroup" aria-labelledby="q-rush">
+              <button class="bg-choice" type="button" role="radio" aria-checked="false" data-rush="1"><span class="ic"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M13 3L5 14h6l-1 7 8-11h-6z"/></svg></span><span><span data-i18n="bg.rushYes">Yes, I need it fast</span><small data-i18n="bg.rushYesd">Faster than our usual timing</small></span></button>
+              <button class="bg-choice" type="button" role="radio" aria-checked="false" data-rush="0"><span class="ic"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></span><span><span data-i18n="bg.rushNo">No, normal timing is fine</span><small data-i18n="bg.rushNod">Our usual delivery schedule</small></span></button>
+            </div>
+          </div>
+          <div class="bg-step" data-step="summary" hidden>
+            <h4 class="bg-q" id="q-summary" tabindex="-1"><span data-i18n="bg.sumTitle">Your bamboo is ready!</span><small data-i18n="bg.sumSub">Check your choices. Tap any line to change it.</small></h4>
+            <ul class="bg-sum" id="bgSum"></ul>
+            <div class="bg-actions">
+              <button class="link-btn" type="button" id="bgRestart" data-i18n="bg.restart">Start over</button>
+              <a class="btn btn-yellow" id="builderSend" href="contact.html?plan=custom"><span data-i18n="pk.quote">Request your quote</span> <span class="arrow" aria-hidden="true">→</span></a>
+            </div>
+          </div>
+
+          <p class="bg-help" id="bgHelp" data-i18n="bg.help">Slide, tap − / + or type a number from 1 to 100.</p>
+          <div class="bg-nav" id="bgNav">
+            <button class="bg-back" type="button" id="bgBack"><span class="arrow" aria-hidden="true">←</span> <span data-i18n="bg.back">Back</span></button>
+            <button class="btn btn-teal bg-next" type="button" id="bgNext"><span data-i18n="bg.next">Next</span> <span class="arrow" aria-hidden="true">→</span></button>
+          </div>
+          <div class="bg-confetti" id="bgConfetti" aria-hidden="true"></div>
         </div>
       </div>
-    </article>
+    </section>
     <p class="note" data-i18n="pk.note">Prices are for 1 month. Ad budget is not included and is paid by the client directly to the platform.</p>
 
     <details class="compare">
@@ -374,9 +464,9 @@
 
 <a class="wa-float" data-link="wa" target="_blank" rel="noopener" aria-label="Message us on WhatsApp" data-i18n-attr="aria-label:ct.waLabel"><svg aria-hidden="true"><use href="#i-wa"/></svg></a>
 
-<script src="js/config.js?v=5"></script>
-<script src="js/i18n-ar.js?v=5"></script>
-<script src="js/main.js?v=5"></script>
-<script src="js/motion.js?v=5"></script>
+<script src="js/config.js?v=6"></script>
+<script src="js/i18n-ar.js?v=6"></script>
+<script src="js/main.js?v=6"></script>
+<script src="js/motion.js?v=6"></script>
 </body>
 </html>
