@@ -230,7 +230,16 @@
   function updateSlider(r) {
     var min = +r.min || 0, max = +r.max || 100, v = +r.value;
     r.style.setProperty("--p", ((v - min) / (max - min) * 100) + "%");
-    var out = $("o-" + r.getAttribute("data-key")); if (out) out.textContent = v;
+    var out = $("o-" + r.getAttribute("data-key")); if (out && document.activeElement !== out) out.value = v;
+  }
+  /* number box next to each slider: typed values stay between the slider's min and max */
+  function typedNumber(r, out, done) {
+    var min = +r.min || 0, max = +r.max || 100, s = out.value.replace(/\D/g, "");
+    if (s === "") { if (done) out.value = r.value; return; }    // still typing, or left empty
+    var v = Math.min(max, +s);
+    if (done) v = Math.max(min, v);
+    if (String(v) !== out.value) out.value = v;
+    if (v >= min) { r.value = v; updateSlider(r); builderLink(); }
   }
   function builderLink() {
     if (!sendLink) return;
@@ -244,6 +253,11 @@
     if (start && +start >= +r.min && +start <= +r.max) r.value = start;
     updateSlider(r);
     r.addEventListener("input", function () { updateSlider(r); builderLink(); });
+    var out = $("o-" + r.getAttribute("data-key")); if (!out) return;
+    out.addEventListener("input", function () { typedNumber(r, out, false); });
+    out.addEventListener("change", function () { typedNumber(r, out, true); });
+    out.addEventListener("blur", function () { typedNumber(r, out, true); });
+    out.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); out.blur(); } });
   });
   if (rush) { if (qp("rush") === "1") rush.checked = true; rush.addEventListener("change", builderLink); }
   builderLink();
