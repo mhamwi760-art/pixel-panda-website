@@ -378,6 +378,7 @@ html[lang="ar"] .pkg-price small { letter-spacing: 0; font-size: 13px; }
 .note::before { content: ""; width: 10px; height: 10px; flex: none; background: var(--teal); }
 @media (max-width: 1000px) { .packages { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 680px) { .packages, .packages.two { grid-template-columns: 1fr; } }
+.pkg-dots { display: none; }
 
 /* ---------- range sliders (Build Your Bamboo) ---------- */
 input[type="range"] {
@@ -795,29 +796,46 @@ html[dir="rtl"] .form-card::before { box-shadow: -28px 0 0 var(--coral); }
   .hero-ctas, .quick { flex-direction: column; }
   .hero-ctas .btn, .quick .btn, .offer-grid .btn, .pkg-price .btn { width: 100%; }
   .pill { display: block; text-align: center; }
-  /* package cards: compact on phones (quantities become a 2-column grid of small tiles) */
-  .packages { gap: 14px; }
-  .pkg-top { min-height: 0; padding: 16px 16px 14px; }
-  .pkg-top .num { font-size: 11px; }
-  .pkg-top h3 { font-size: 20px; margin-top: 6px; }
-  .pkg-top .ar-name { font-size: 15px; margin-top: 2px; }
-  .pkg-top p { font-size: 13px; margin-top: 6px; }
-  .pkg-top::after { width: 12px; height: 12px; }
-  .pkg-list { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 14px 16px 10px; }
-  .pkg-list li { flex-direction: column-reverse; align-items: flex-start; justify-content: flex-end; gap: 1px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 10px; font-size: 12px; line-height: 1.3; }
+  /* package cards on phones: a swipeable row of compact cards (dots below are added by js/main.js) */
+  .packages, .packages.two {
+    display: grid; grid-auto-flow: column; grid-template-columns: none; grid-auto-columns: 86%; gap: 12px; align-items: stretch; justify-content: start;
+    overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: none;
+    margin-inline: calc(var(--gutter) * -1); padding: 4px var(--gutter) 6px; scroll-padding-inline: var(--gutter);
+  }
+  .packages::-webkit-scrollbar { display: none; }
+  .packages .pkg { scroll-snap-align: start; }
+  .pkg.featured { border-width: 1.5px; }
+  .pkg-top { min-height: 0; padding: 12px 14px 11px; }
+  .pkg-top .num { font-size: 10.5px; }
+  .pkg-top h3 { font-size: 18px; margin-top: 3px; }
+  .pkg-top .ar-name { font-size: 13.5px; margin-top: 0; }
+  .pkg-top p { font-size: 12px; line-height: 1.4; margin-top: 4px; }
+  .pkg-top::after { width: 10px; height: 10px; }
+  .pkg-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; padding: 10px 12px 8px; }
+  .pkg-list li { flex-direction: column-reverse; align-items: flex-start; justify-content: flex-end; gap: 0; padding: 6px 7px; border: 1px solid var(--line); border-radius: 9px; font-size: 10.5px; line-height: 1.25; }
   .pkg-list li:last-child { border-bottom: 1px solid var(--line); }
-  .pkg-list li small { font-size: 10.5px; }
-  .pkg-list b { font-size: 18px; line-height: 1.2; text-align: start; }
-  .pkg-list b span { font-size: 11px; margin-inline-start: 0; margin-inline-end: 3px; }
-  .pkg-incl { margin: 0 16px 14px; padding: 10px 12px; gap: 5px; }
-  .pkg-incl li { font-size: 13px; gap: 8px; }
-  .pkg-incl li::before { width: 16px; height: 16px; margin-top: 1px; background-size: 12px; }
-  .pkg-incl li small { font-size: 11.5px; }
-  .pkg-price { padding: 12px 16px 16px; display: grid; grid-template-columns: 1fr auto; align-items: end; column-gap: 10px; }
-  .pkg-price small { grid-column: 1 / -1; font-size: 10.5px; }
-  .pkg-price .amount { font-size: 24px; margin: 2px 0 0; }
-  .pkg-price .per { font-size: 12px; text-align: end; padding-bottom: 4px; }
-  .pkg-price .btn { grid-column: 1 / -1; margin-top: 12px; min-height: 44px; padding: 10px 18px; }
+  .pkg-list li small { display: none; }
+  .pkg-list b { font-size: 16px; line-height: 1.25; text-align: start; }
+  .pkg-list b span { font-size: 10px; margin-inline-start: 0; margin-inline-end: 2px; }
+  .pkg-incl { margin: 0 12px 10px; padding: 0; background: none; display: flex; flex-wrap: wrap; gap: 5px; }
+  .pkg-incl li { font-size: 11px; font-weight: 600; gap: 5px; align-items: center; padding: 4px 8px 4px 5px; border-radius: 999px; background: var(--mist); }
+  html[dir="rtl"] .pkg-incl li { padding: 4px 5px 4px 8px; }
+  .pkg-incl li::before { width: 13px; height: 13px; margin-top: 0; border-radius: 50%; background-size: 9px; }
+  .pkg-incl li small { display: inline; font-size: 10px; font-weight: 500; }
+  .pkg-incl li small::before { content: " · "; }
+  .pkg-incl li span { display: inline; }
+  .pkg-price { padding: 10px 12px 12px; display: grid; grid-template-columns: 1fr auto; align-items: center; column-gap: 10px; }
+  .pkg-price small { display: none; }
+  .pkg-price .amount { font-size: 21px; margin: 0; line-height: 1.15; white-space: nowrap; }
+  .pkg-price .per { grid-column: 1; grid-row: 2; font-size: 10.5px; line-height: 1.3; }
+  .pkg-price .btn { grid-column: 2; grid-row: 1 / span 2; width: auto; margin-top: 0; min-height: 40px; padding: 8px 13px; font-size: 13px; white-space: nowrap; }
+  .pkg-incl li { font-size: 10.5px; padding: 3px 7px 3px 4px; }
+  html[dir="rtl"] .pkg-incl li { padding: 3px 4px 3px 7px; }
+  .sec-head > div { flex: 1 1 100%; }
+  .pkg-dots { display: flex; justify-content: center; gap: 6px; margin-top: 12px; }
+  .pkg-dots i { width: 7px; height: 7px; border-radius: 4px; background: var(--line); transition: width .25s ease, background-color .25s ease; }
+  .pkg-dots i.on { width: 20px; background: var(--teal); }
+  [data-theme="dark"] .pkg-dots i.on { background: var(--turq); }
   .compare { margin-top: 32px; }
   /* policies */
   .acc-btn { font-size: 16px; padding: 16px 0; gap: 12px; }

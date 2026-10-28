@@ -160,6 +160,19 @@
   });
   window.addEventListener("resize", function () { document.querySelectorAll("[data-folio]").forEach(folioState); });
 
+  /* ---------- package cards: dots under the swipeable row on phones (hidden on computers by CSS) ---------- */
+  document.querySelectorAll(".packages").forEach(function (row) {
+    var cards = row.querySelectorAll(".pkg"); if (cards.length < 2) return;
+    var dots = document.createElement("div"); dots.className = "pkg-dots"; dots.setAttribute("aria-hidden", "true");
+    dots.innerHTML = new Array(cards.length + 1).join("<i></i>");
+    row.parentNode.insertBefore(dots, row.nextSibling);
+    function update() {
+      var w = cards[0].getBoundingClientRect().width + 12, n = w > 12 ? Math.round(Math.abs(row.scrollLeft) / w) : 0;
+      [].forEach.call(dots.children, function (d, i) { d.classList.toggle("on", i === Math.min(n, cards.length - 1)); });
+    }
+    row.addEventListener("scroll", update, { passive: true }); window.addEventListener("resize", update); update();
+  });
+
   /* ---------- menu (burger on phones, dropdowns on computers) ---------- */
   var burger = $("burger"), menu = $("menu");
   function closeSubs(except) {
