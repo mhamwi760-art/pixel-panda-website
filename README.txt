@@ -25,7 +25,8 @@ ARABIC:     https://thepandapaw.com/?lang=ar
    - whatsapp / whatsappDisplay : your WhatsApp number
    - instagram                  : your Instagram handle, e.g. "@thepandapaw"
    - formEmail                  : where requests from the form are sent
-   - price_... and addon_...    : all prices (English and Arabic)
+   - price_...                  : package prices (English and Arabic)
+   (Add-ons have no fixed price: clients request them in the form.)
    - portfolio / portfolio_branding : gallery images (see 4)
    Anything still in [square brackets] shows in red on the site so you
    can spot what is missing.

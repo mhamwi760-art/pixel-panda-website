@@ -34,6 +34,9 @@
     "plan.photos": "Photography images",
     "plan.rush": "Rush delivery",
     "pk.upto": "up to",
+    "ad.none": "Pick the add-ons you need.",
+    "ad.count1": "1 add-on selected",
+    "ad.count": "%n add-ons selected",
     "pk.none": "Not included",
     "bg.count": "Question %n of %t",
     "bg.countDone": "Your plan",
@@ -86,7 +89,7 @@
       el.getAttribute("data-i18n-attr").split(";").forEach(function (pair) { var p = pair.split(":"); el.setAttribute(p[0], t(p[1])); });
     });
     document.querySelectorAll("[data-cfg]").forEach(function (el) { el.innerHTML = show(val(el.getAttribute("data-cfg"))); });
-    renderNums(); renderContact(); renderFolios(); renderPlan(); themeLabel(); accAllLabel(); refreshGame();
+    renderNums(); renderContact(); renderFolios(); renderPlan(); themeLabel(); accAllLabel(); refreshGame(); addonState();
     var btn = $("langBtn");
     if (btn) {
       btn.innerHTML = lang === "ar" ? '<span lang="en">English</span>' : '<span lang="ar">عربي</span>';
@@ -177,6 +180,23 @@
     box.addEventListener("scroll", function () { folioState(box); }, { passive: true });
   });
   window.addEventListener("resize", function () { document.querySelectorAll("[data-folio]").forEach(folioState); });
+
+  /* ---------- add-ons: pick extras on Paw Packages, then request them on the contact page ---------- */
+  var picks = document.querySelectorAll(".addon-pick"), addonBar = document.querySelector(".addon-bar");
+  function addonState() {
+    var on = [];
+    picks.forEach(function (b) { var sel = b.getAttribute("aria-pressed") === "true"; b.closest(".addon").classList.toggle("on", sel); if (sel) on.push(b.getAttribute("data-addon")); });
+    var cnt = $("addonCount"), send = $("addonSend");
+    if (cnt) cnt.textContent = !on.length ? t("ad.none") : on.length === 1 ? t("ad.count1") : t("ad.count").replace("%n", on.length);
+    if (send) send.href = "contact.html" + (on.length ? "?addons=" + on.join(",") : "");
+    if (addonBar) addonBar.classList.toggle("empty", !on.length);
+  }
+  var wantAddons = (qp("addons") || "").split(",");
+  picks.forEach(function (b) {
+    if (wantAddons.indexOf(b.getAttribute("data-addon")) >= 0) b.setAttribute("aria-pressed", "true");
+    b.addEventListener("click", function () { b.setAttribute("aria-pressed", b.getAttribute("aria-pressed") === "true" ? "false" : "true"); addonState(); });
+  });
+  document.querySelectorAll('input[name="addons"]').forEach(function (c) { if (wantAddons.indexOf(c.value) >= 0) c.checked = true; });
 
   /* ---------- package cards: dots under the swipeable row on phones (hidden on computers by CSS) ---------- */
   document.querySelectorAll(".packages").forEach(function (row) {
@@ -439,6 +459,7 @@
   if (form) {
     var want = qp("plan");
     if (want && sel && sel.querySelector('option[value="' + want.replace(/[^a-z]/g, "") + '"]')) sel.value = want;
+    else if (qp("addons") && sel) sel.value = "addons";   // came from the add-ons bar only
     if (want === "custom" && qp("posts")) {
       plan = {};
       PLAN_KEYS.forEach(function (k) { var n = parseInt(qp(k), 10); plan[k] = isNaN(n) ? 1 : Math.max(1, Math.min(100, n)); });
@@ -488,6 +509,9 @@
       "_captcha": "false"
     };
     if (plan && sel && sel.value === "custom") data["Build Your Bamboo"] = planEN();
+    var addonNames = [].filter.call(form.querySelectorAll('input[name="addons"]'), function (c) { return c.checked; })
+      .map(function (c) { return plain(tEN(c.nextElementSibling.getAttribute("data-i18n"))); });
+    data["Add-ons"] = addonNames.length ? addonNames.join(", ") : "-";
     if (w3f) { data.access_key = C.web3formsKey; data.subject = data._subject; data.from_name = "The Panda Paw website"; delete data._subject; delete data._template; delete data._captcha; }
     var btn = $("sendBtn"); if (btn) btn.disabled = true;
     setStatus(t("js.sending"));

@@ -211,10 +211,6 @@
         h("div", { class: "grid g3" }, [pkNum(p[0], "logos", "Logo concepts"), priceField("One-time price (KWD)", p[3])])
       ]));
     });
-    var ad = $("addons"); ad.innerHTML = "";
-    [["addon_post", "Extra post design"], ["addon_story", "Extra story design"], ["addon_ad", "Extra ad design"], ["addon_shoot", "Extra photo shoot"], ["addon_photos", "10 extra edited photos"], ["addon_rush", "Rush delivery"]].forEach(function (a) {
-      ad.appendChild(priceField(a[1] + " (KWD)", a[0]));
-    });
     bindText($("pc-en"), function () { return (S.cfg.price_custom || {}).en || ""; }, function (v) { S.cfg.price_custom = S.cfg.price_custom || {}; S.cfg.price_custom.en = v; }, function () { return (S.orig.price_custom || {}).en || ""; });
     bindText($("pc-ar"), function () { return (S.cfg.price_custom || {}).ar || ""; }, function (v) { S.cfg.price_custom = S.cfg.price_custom || {}; S.cfg.price_custom.ar = v; }, function () { return (S.orig.price_custom || {}).ar || ""; });
   }

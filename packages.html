@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=10">
+<link rel="stylesheet" href="css/styles.css?v=13">
 <link rel="stylesheet" href="css/theme.css?v=1">
 <script>
   (function (d) {
@@ -366,16 +366,20 @@
       <div>
         <p class="label"><b>02</b> <span data-i18n="ad.label">Add-ons</span></p>
         <h2 id="addons-title" data-i18n="ad.title">Need a little extra?</h2>
-        <p class="sub" data-i18n="ad.sub">Add more to any package, whenever you need it.</p>
+        <p class="sub" data-i18n="ad.sub">Add more to any package. Prices depend on your business, so pick what you need and we'll include it in your quote.</p>
       </div>
     </div>
     <div class="addons">
-      <div class="addon reveal"><span class="ico"><svg aria-hidden="true"><use href="#i-pen"/></svg></span><div><h3 data-i18n="ad.a1">Extra post design</h3><p data-i18n="ad.a1d">One more post, designed in your brand style.</p><div class="price" data-cfg="addon_post"></div></div></div>
-      <div class="addon reveal"><span class="ico q"><svg aria-hidden="true"><use href="#i-story"/></svg></span><div><h3 data-i18n="ad.a2">Extra story design</h3><p data-i18n="ad.a2d">One more story for your audience.</p><div class="price" data-cfg="addon_story"></div></div></div>
-      <div class="addon reveal"><span class="ico y"><svg aria-hidden="true"><use href="#i-ad"/></svg></span><div><h3 data-i18n="ad.a3">Extra ad design</h3><p data-i18n="ad.a3d">One more ad design for your campaign.</p><div class="price" data-cfg="addon_ad"></div></div></div>
-      <div class="addon reveal"><span class="ico c"><svg aria-hidden="true"><use href="#i-cam"/></svg></span><div><h3 data-i18n="ad.a4">Extra photo shoot</h3><p data-i18n="ad.a4d">An additional product or model shoot.</p><div class="price" data-cfg="addon_shoot"></div></div></div>
-      <div class="addon reveal"><span class="ico p"><svg aria-hidden="true"><use href="#i-photos"/></svg></span><div><h3 data-i18n="ad.a5">Extra edited photos</h3><p data-i18n="ad.a5d">A pack of 10 more edited photos.</p><div class="price" data-cfg="addon_photos"></div></div></div>
-      <div class="addon reveal"><span class="ico"><svg aria-hidden="true"><use href="#i-bolt"/></svg></span><div><h3 data-i18n="ad.a6">Rush delivery</h3><p data-i18n="ad.a6d">Faster turnaround when you need it soon.</p><div class="price" data-cfg="addon_rush"></div></div></div>
+      <div class="addon reveal"><span class="ico"><svg aria-hidden="true"><use href="#i-pen"/></svg></span><div><h3 data-i18n="ad.a1">Extra post design</h3><p data-i18n="ad.a1d">One more post, designed in your brand style.</p><button class="addon-pick" type="button" data-addon="post" aria-pressed="false"><span class="ap-add" data-i18n="ad.add">+ Add to my request</span><span class="ap-on" data-i18n="ad.added">✓ Added</span></button></div></div>
+      <div class="addon reveal"><span class="ico q"><svg aria-hidden="true"><use href="#i-story"/></svg></span><div><h3 data-i18n="ad.a2">Extra story design</h3><p data-i18n="ad.a2d">One more story for your audience.</p><button class="addon-pick" type="button" data-addon="story" aria-pressed="false"><span class="ap-add" data-i18n="ad.add">+ Add to my request</span><span class="ap-on" data-i18n="ad.added">✓ Added</span></button></div></div>
+      <div class="addon reveal"><span class="ico y"><svg aria-hidden="true"><use href="#i-ad"/></svg></span><div><h3 data-i18n="ad.a3">Extra ad design</h3><p data-i18n="ad.a3d">One more ad design for your campaign.</p><button class="addon-pick" type="button" data-addon="ad" aria-pressed="false"><span class="ap-add" data-i18n="ad.add">+ Add to my request</span><span class="ap-on" data-i18n="ad.added">✓ Added</span></button></div></div>
+      <div class="addon reveal"><span class="ico c"><svg aria-hidden="true"><use href="#i-cam"/></svg></span><div><h3 data-i18n="ad.a4">Extra photo shoot</h3><p data-i18n="ad.a4d">An additional product or model shoot.</p><button class="addon-pick" type="button" data-addon="shoot" aria-pressed="false"><span class="ap-add" data-i18n="ad.add">+ Add to my request</span><span class="ap-on" data-i18n="ad.added">✓ Added</span></button></div></div>
+      <div class="addon reveal"><span class="ico p"><svg aria-hidden="true"><use href="#i-photos"/></svg></span><div><h3 data-i18n="ad.a5">Extra edited photos</h3><p data-i18n="ad.a5d">A pack of 10 more edited photos.</p><button class="addon-pick" type="button" data-addon="photos" aria-pressed="false"><span class="ap-add" data-i18n="ad.add">+ Add to my request</span><span class="ap-on" data-i18n="ad.added">✓ Added</span></button></div></div>
+      <div class="addon reveal"><span class="ico"><svg aria-hidden="true"><use href="#i-bolt"/></svg></span><div><h3 data-i18n="ad.a6">Rush delivery</h3><p data-i18n="ad.a6d">Faster turnaround when you need it soon.</p><button class="addon-pick" type="button" data-addon="rush" aria-pressed="false"><span class="ap-add" data-i18n="ad.add">+ Add to my request</span><span class="ap-on" data-i18n="ad.added">✓ Added</span></button></div></div>
+    </div>
+    <div class="addon-bar reveal">
+      <p id="addonCount" aria-live="polite">Pick the add-ons you need.</p>
+      <a class="btn btn-teal" id="addonSend" href="contact.html"><span data-i18n="ad.send">Request add-ons</span> <span class="arrow" aria-hidden="true">→</span></a>
     </div>
   </div>
 </section>
@@ -466,9 +470,9 @@
 
 <a class="wa-float" data-link="wa" target="_blank" rel="noopener" aria-label="Message us on WhatsApp" data-i18n-attr="aria-label:ct.waLabel"><svg aria-hidden="true"><use href="#i-wa"/></svg></a>
 
-<script src="js/config.js?v=10"></script>
-<script src="js/i18n-ar.js?v=10"></script>
-<script src="js/main.js?v=10"></script>
-<script src="js/motion.js?v=10"></script>
+<script src="js/config.js?v=11"></script>
+<script src="js/i18n-ar.js?v=12"></script>
+<script src="js/main.js?v=12"></script>
+<script src="js/motion.js?v=11"></script>
 </body>
 </html>
