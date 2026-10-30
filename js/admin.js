@@ -1,4 +1,4 @@
-/* Pixel Panda dashboard (admin.html).
+/* The Panda Paw dashboard (admin.html).
    Loads the site's settings (js/config.js), all page text and the Arabic text from GitHub, lets the
    owner change numbers, prices, contact details, text, images and colours, then publishes everything
    as ONE commit. GitHub Pages rebuilds the live site about a minute later.
@@ -8,7 +8,7 @@
   var REPO = "mhamwi760-art/pixel-panda-website", BRANCH = "main";
   var API = "https://api.github.com/repos/" + REPO;
   var START = "/* PP-SETTINGS-START */", END = "/* PP-SETTINGS-END */";
-  var PAGES = [["index.html", "Panda Time"], ["packages.html", "PP Packages"], ["branding.html", "PP Branding"], ["contact.html", "Contact"]];
+  var PAGES = [["index.html", "Panda Time"], ["packages.html", "Paw Packages"], ["branding.html", "Paw Branding"], ["contact.html", "Contact"]];
   var DEFAULT_COLORS = { teal: "#006D6F", turq: "#3DBCA8", yellow: "#FFC857", coral: "#FF6F61", pink: "#FF4D8D" };
   var COLOR_INFO = [
     ["teal", "Main teal", "Header, page tops, buttons, links"],
@@ -22,10 +22,10 @@
     ["assets/mockups/phone-story.png", "Panda Time: phone (story)"],
     ["assets/mockups/phone-feed.png", "About us: phone (feed)"],
     ["assets/mockups/post-stories.png", "About us: post card"],
-    ["assets/mockups/content-plan.png", "PP Packages: content calendar"],
-    ["assets/mockups/free-design-1.png", "PP Packages: free design 1"],
-    ["assets/mockups/free-design-3.png", "PP Packages: free design 2 (middle)"],
-    ["assets/mockups/free-design-2.png", "PP Packages: free design 3"],
+    ["assets/mockups/content-plan.png", "Paw Packages: content calendar"],
+    ["assets/mockups/free-design-1.png", "Paw Packages: free design 1"],
+    ["assets/mockups/free-design-3.png", "Paw Packages: free design 2 (middle)"],
+    ["assets/mockups/free-design-2.png", "Paw Packages: free design 3"],
     ["assets/share/og-image.png", "Link preview picture (WhatsApp, iMessage…)"]
   ];
   var KEY_STORE = "pp-admin-token";

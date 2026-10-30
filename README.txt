@@ -1,4 +1,4 @@
-PIXEL PANDA WEBSITE - QUICK GUIDE FOR MOHAMMED
+THE PANDA PAW WEBSITE - QUICK GUIDE FOR MOHAMMED
 ==============================================
 
 LIVE SITE:  https://mhamwi760-art.github.io/pixel-panda-website/
@@ -6,9 +6,9 @@ ARABIC:     https://mhamwi760-art.github.io/pixel-panda-website/?lang=ar
 
 1) THE 4 PAGES
    index.html     Panda Time   - About us, Services, Policies (Terms & Conditions)
-   packages.html  PP Packages  - social media packages, Build Your Bamboo,
+   packages.html  Paw Packages  - social media packages, Build Your Bamboo,
                                  Add-ons, Free designs, How we work, Portfolio
-   branding.html  PP Branding  - branding packages, How we work, Portfolio
+   branding.html  Paw Branding  - branding packages, How we work, Portfolio
    contact.html   Contact us   - WhatsApp, Instagram and the request form
    The menu and footer are repeated on every page: if you change them,
    change all 4 pages.
@@ -23,7 +23,7 @@ ARABIC:     https://mhamwi760-art.github.io/pixel-panda-website/?lang=ar
 
 2) CHANGE YOUR DETAILS AND PRICES BY HAND  ->  js/config.js
    - whatsapp / whatsappDisplay : your WhatsApp number
-   - instagram                  : your Instagram handle, e.g. "@pixelpanda"
+   - instagram                  : your Instagram handle, e.g. "@thepandapaw"
    - formEmail                  : where requests from the form are sent
    - price_... and addon_...    : all prices (English and Arabic)
    - portfolio / portfolio_branding : gallery images (see 4)
@@ -40,8 +40,8 @@ ARABIC:     https://mhamwi760-art.github.io/pixel-panda-website/?lang=ar
 
 4) PORTFOLIO GALLERIES
    Put your photos in a folder called assets/portfolio/ and add one line
-   per image to "portfolio" (PP Packages) or "portfolio_branding"
-   (PP Branding) in js/config.js, e.g. image: "assets/portfolio/shoot-01.jpg".
+   per image to "portfolio" (Paw Packages) or "portfolio_branding"
+   (Paw Branding) in js/config.js, e.g. image: "assets/portfolio/shoot-01.jpg".
    Add as many as you like: the left/right arrows scroll through them.
 
 5) DARK MODE AND LANGUAGE

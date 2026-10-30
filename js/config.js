@@ -1,5 +1,5 @@
 /* =====================================================================
-   PIXEL PANDA — SITE SETTINGS
+   THE PANDA PAW — SITE SETTINGS
    ---------------------------------------------------------------------
    The easiest way to change these is the dashboard: open admin.html on
    the live site (…/pixel-panda-website/admin.html), make your changes and

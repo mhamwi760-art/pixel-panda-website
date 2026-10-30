@@ -1,4 +1,4 @@
-/* Pixel Panda — subtle motion.
+/* The Panda Paw — subtle motion.
    Desktop: elements with data-depth drift with the mouse; package cards tilt under the pointer.
    Phones/tablets: the same elements follow the device tilt. iPhone/iPad asks permission
    via the small "Enable motion" button (Apple requires a tap).

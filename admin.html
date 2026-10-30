@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Pixel Panda | Dashboard</title>
+<title>The Panda Paw | Dashboard</title>
 <link rel="icon" type="image/png" sizes="512x512" href="assets/share/icon-512.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
-<!-- Pixel Panda dashboard: edits js/config.js, css/theme.css and images, then publishes them to GitHub.
+<!-- The Panda Paw dashboard: edits js/config.js, css/theme.css and images, then publishes them to GitHub.
      Not linked from the website. Nothing can be changed without a GitHub key that only the owner has. -->
 <style>
   :root { --teal: #006D6F; --teal-d: #00585A; --turq: #3DBCA8; --yellow: #FFC857; --coral: #FF6F61; --ink: #111414; --ink2: #4A5556; --line: #DCE6E5; --mist: #EEF4F3; --bg: #F5F8F8; --card: #fff; --bad: #B4302A; }
@@ -110,7 +110,7 @@
 <body>
 <header class="top"><div class="in">
   <img src="assets/logo/pixel-panda-logo-white.png" alt="">
-  <h1>PIXEL PANDA<small>DASHBOARD</small></h1>
+  <h1>THE PANDA PAW<small>DASHBOARD</small></h1>
   <a href="./" target="_blank" rel="noopener">View site ↗</a>
   <button type="button" id="logout" hidden>Log out</button>
 </div></header>
@@ -124,7 +124,7 @@
       <summary><b>How to create your key (one time, about 2 minutes)</b></summary>
       <ol>
         <li>Open <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">github.com → Settings → Fine-grained tokens → Generate new token</a> (signed in as <b>mhamwi760-art</b>).</li>
-        <li><b>Token name:</b> Pixel Panda dashboard. <b>Expiration:</b> pick a date (for example 1 year).</li>
+        <li><b>Token name:</b> The Panda Paw dashboard. <b>Expiration:</b> pick a date (for example 1 year).</li>
         <li><b>Repository access:</b> choose <b>Only select repositories</b> and select <b>pixel-panda-website</b>.</li>
         <li><b>Permissions → Repository permissions → Contents:</b> choose <b>Read and write</b>.</li>
         <li>Press <b>Generate token</b>, copy it (it starts with <code>github_pat_</code>) and paste it below.</li>
@@ -185,7 +185,7 @@
         <div class="grid g2">
           <div><label class="f" for="c-wa">WhatsApp number (digits only, with country code)</label><input type="text" id="c-wa" inputmode="numeric" placeholder="96598828403"></div>
           <div><label class="f" for="c-wad">WhatsApp number as people see it</label><input type="text" id="c-wad" placeholder="+965 9882 8403"></div>
-          <div><label class="f" for="c-ig">Instagram handle</label><input type="text" id="c-ig" placeholder="@pixelpanda"></div>
+          <div><label class="f" for="c-ig">Instagram handle</label><input type="text" id="c-ig" placeholder="@thepandapaw"></div>
           <div><label class="f" for="c-mail">Email that receives requests (never shown to clients)</label><input type="email" id="c-mail"></div>
           <div><label class="f" for="c-w3f">Web3Forms key (backup form service, optional)</label><input type="text" id="c-w3f" spellcheck="false"></div>
         </div>
@@ -201,8 +201,8 @@
           <select id="txPage" aria-label="Page">
             <option value="">All pages</option>
             <option value="Panda Time">Panda Time</option>
-            <option value="PP Packages">PP Packages</option>
-            <option value="PP Branding">PP Branding</option>
+            <option value="Paw Packages">Paw Packages</option>
+            <option value="Paw Branding">Paw Branding</option>
             <option value="Contact">Contact</option>
             <option value="Menu &amp; footer">Menu &amp; footer</option>
             <option value="changed">Only changed lines</option>
@@ -215,14 +215,14 @@
 
     <section data-panel="images" hidden>
       <div class="card">
-        <h2>Portfolio: PP Packages</h2>
-        <p class="hint">The gallery with arrows on PP Packages. Photos are resized automatically for the web. Use ↑ ↓ to change the order.</p>
+        <h2>Portfolio: Paw Packages</h2>
+        <p class="hint">The gallery with arrows on Paw Packages. Photos are resized automatically for the web. Use ↑ ↓ to change the order.</p>
         <div class="imgs" id="folio1"></div>
         <button class="btn ghost small" type="button" data-add="portfolio" style="margin-top:10px">+ Add a gallery item</button>
       </div>
       <div class="card">
-        <h2>Portfolio: PP Branding</h2>
-        <p class="hint">The gallery with arrows on PP Branding.</p>
+        <h2>Portfolio: Paw Branding</h2>
+        <p class="hint">The gallery with arrows on Paw Branding.</p>
         <div class="imgs" id="folio2"></div>
         <button class="btn ghost small" type="button" data-add="portfolio_branding" style="margin-top:10px">+ Add a gallery item</button>
       </div>
@@ -236,10 +236,10 @@
     <section data-panel="colors" hidden>
       <div class="card">
         <h2>Brand colours</h2>
-        <p class="hint">Changes the colours across the whole site, in light and dark mode. Use <b>Reset</b> to go back to the original Pixel Panda colours.</p>
+        <p class="hint">Changes the colours across the whole site, in light and dark mode. Use <b>Reset</b> to go back to the original The Panda Paw colours.</p>
         <div class="cols" id="cols"></div>
         <div class="preview" id="preview" aria-hidden="true">
-          <div class="bar" id="pvBar"><span>PIXEL PANDA</span><span class="pill" id="pvBtn">Contact us</span></div>
+          <div class="bar" id="pvBar"><span>THE PANDA PAW</span><span class="pill" id="pvBtn">Contact us</span></div>
           <div class="body"><span class="pill" id="pvTeal" style="color:#fff">Choose this package</span><i class="sq" id="pvQ"></i><i class="sq" id="pvY"></i><i class="sq" id="pvC"></i><i class="sq" id="pvP"></i></div>
         </div>
         <button class="btn ghost small" type="button" id="colReset" style="margin-top:12px">Reset to original colours</button>

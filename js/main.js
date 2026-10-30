@@ -1,4 +1,4 @@
-/* Pixel Panda — site behaviour (all 4 pages). You should not need to edit
+/* The Panda Paw — site behaviour (all 4 pages). You should not need to edit
    this file; contact details and prices are in js/config.js. */
 (function () {
   "use strict";
@@ -128,7 +128,7 @@
   function renderContact() {
     var wa = (C.whatsapp || "").replace(/\D/g, "");
     var insta = isPh(C.instagram) ? "" : "https://instagram.com/" + C.instagram.replace(/^@/, "");
-    var waText = encodeURIComponent(lang === "ar" ? "مرحبًا، أود معرفة المزيد عن خدمات بيكسل باندا." : "Hi, I'd like to know more about Pixel Panda.");
+    var waText = encodeURIComponent(lang === "ar" ? "مرحبًا، أود معرفة المزيد عن خدمات ذا باندا باو." : "Hi, I'd like to know more about The Panda Paw.");
     var links = { wa: wa ? "https://wa.me/" + wa + "?text=" + waText : "", insta: insta };
     document.querySelectorAll("[data-link]").forEach(function (a) {
       var href = links[a.getAttribute("data-link")];
@@ -483,12 +483,12 @@
       "Message": fe.message.value.trim() || "-",
       "Accepted Terms & Conditions": "Yes",
       "Website language": lang === "ar" ? "Arabic" : "English",
-      "_subject": "New Pixel Panda request: " + (fe.brand.value.trim() || name) + " (" + interest + ")",
+      "_subject": "New website request: " + (fe.brand.value.trim() || name) + " (" + interest + ")",
       "_template": "table",
       "_captcha": "false"
     };
     if (plan && sel && sel.value === "custom") data["Build Your Bamboo"] = planEN();
-    if (w3f) { data.access_key = C.web3formsKey; data.subject = data._subject; data.from_name = "Pixel Panda website"; delete data._subject; delete data._template; delete data._captcha; }
+    if (w3f) { data.access_key = C.web3formsKey; data.subject = data._subject; data.from_name = "The Panda Paw website"; delete data._subject; delete data._template; delete data._captcha; }
     var btn = $("sendBtn"); if (btn) btn.disabled = true;
     setStatus(t("js.sending"));
     fetch(endpoint, { method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" }, body: JSON.stringify(data) })
