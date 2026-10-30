@@ -2,7 +2,7 @@
    THE PANDA PAW — SITE SETTINGS
    ---------------------------------------------------------------------
    The easiest way to change these is the dashboard: open admin.html on
-   the live site (…/pixel-panda-website/admin.html), make your changes and
+   the live site (thepandapaw.com/admin.html), make your changes and
    press "Save & publish".
 
    Editing by hand is still fine. The settings between the two START/END

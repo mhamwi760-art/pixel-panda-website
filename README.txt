@@ -1,8 +1,8 @@
 THE PANDA PAW WEBSITE - QUICK GUIDE FOR MOHAMMED
 ==============================================
 
-LIVE SITE:  https://mhamwi760-art.github.io/pixel-panda-website/
-ARABIC:     https://mhamwi760-art.github.io/pixel-panda-website/?lang=ar
+LIVE SITE:  https://thepandapaw.com/
+ARABIC:     https://thepandapaw.com/?lang=ar
 
 1) THE 4 PAGES
    index.html     Panda Time   - About us, Services, Policies (Terms & Conditions)
@@ -14,7 +14,7 @@ ARABIC:     https://mhamwi760-art.github.io/pixel-panda-website/?lang=ar
    change all 4 pages.
 
 1b) DASHBOARD (the easy way to make small changes)
-   Open https://mhamwi760-art.github.io/pixel-panda-website/admin.html
+   Open https://thepandapaw.com/admin.html
    (not linked from the site, hidden from Google). Log in once with your
    GitHub key (the page explains how to create it). Then change package
    numbers, prices, contact details, any text (English and Arabic),
