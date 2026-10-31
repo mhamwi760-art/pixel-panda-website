@@ -368,6 +368,7 @@ html[lang="ar"] .pkg-price small { letter-spacing: 0; font-size: 13px; }
 .pkg.featured { border: 2px solid var(--teal); }
 [data-theme="dark"] .pkg.featured { border-color: var(--turq); }
 .pkg-1 { --pk: var(--turq); --pk-ink: var(--ink); --pk-px: var(--teal); }
+[data-theme="dark"] .pkg-1 { --pk: color-mix(in srgb, var(--turq) 38%, #0B1414); --pk-ink: var(--white); --pk-px: var(--turq); }
 .pkg-2 { --pk: var(--teal); --pk-ink: var(--white); --pk-px: var(--yellow); }
 .pkg-3 { --pk: var(--pk3); --pk-ink: var(--white); --pk-px: var(--coral); }
 .pkg-4 { --pk: var(--yellow); --pk-ink: var(--ink); --pk-px: var(--pink); }
