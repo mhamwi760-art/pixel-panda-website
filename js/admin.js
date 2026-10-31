@@ -137,7 +137,7 @@
   /* ---------- change tracking ---------- */
   var AREA = {
     packages: function (k) { return /^(pk_|br_|price_|addon_)/.test(k); },
-    contact: function (k) { return /^(whatsapp|whatsappDisplay|instagram|formEmail|web3formsKey)$/.test(k); },
+    contact: function (k) { return /^(instagram|formEmail|web3formsKey)$/.test(k); },
     text: function (k) { return k === "text"; },
     images: function (k) { return /^portfolio/.test(k); },
     colors: function (k) { return k === "colors"; }
@@ -227,8 +227,6 @@
         function (v) { S.cfg[key] = v === "" && emptyAs ? emptyAs : v; },
         function () { var v = S.orig[key] || ""; return emptyAs && v === emptyAs ? "" : v; }, clean);
     }
-    plain("whatsapp", $("c-wa"), function (v) { return v.replace(/\D/g, ""); });
-    plain("whatsappDisplay", $("c-wad"));
     plain("instagram", $("c-ig"), null, "[@instagram handle]");
     plain("formEmail", $("c-mail"), function (v) { return v.trim(); });
     plain("web3formsKey", $("c-w3f"), function (v) { return v.trim(); });

@@ -9,7 +9,8 @@
    markers are JSON, so keep the "double quotes" and commas exactly as they
    are, and do not add comments inside that part.
 
-   - whatsapp: international format, digits only, no + and no spaces.
+   - instagram: your Instagram username. The site opens DMs with it
+     (ig.me/m/...) and links to your profile.
    - formEmail: every request from the Contact page is emailed here through
      FormSubmit (formsubmit.co). The first request triggers an "Activate
      form" email to this address: click Activate once (check Junk too).
@@ -26,9 +27,7 @@
 window.PP_CONFIG =
 /* PP-SETTINGS-START */
 {
-  "whatsapp": "96598828403",
-  "whatsappDisplay": "+965 9882 8403",
-  "instagram": "[@instagram handle]",
+  "instagram": "@thepandapaw.official",
   "formEmail": "",
   "web3formsKey": "",
   "price_cub": {

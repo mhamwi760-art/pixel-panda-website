@@ -12,13 +12,17 @@
   function $(id) { return document.getElementById(id); }
   var EN = {};      // filled from the English text in the page
   var EN_JS = {
-    "js.required": "Please add your name and your phone / WhatsApp number.",
-    "js.phone": "Please check your phone / WhatsApp number.",
+    "js.required": "Please add your name and phone number.",
+    "js.phone": "Please check your phone number.",
     "js.terms": "Please accept the Terms & Conditions to send your request.",
     "js.sending": "Sending…",
-    "js.sent": "Thank you! Your request is in. We will contact you on WhatsApp soon.",
-    "js.failed": "That didn't go through. Please try again or message us on WhatsApp.",
-    "js.activate": "The form is almost ready: the request email still needs to be activated. Please message us on WhatsApp for now.",
+    "js.sent": "Thank you! Your request is in. We will contact you soon.",
+    "js.dmOpened": "Instagram is opening in a new tab. Your request is copied: paste it in the chat and send.",
+    "js.dmIntro": "Hi The Panda Paw! Here is my request from your website:",
+    "js.copied": "Copied!",
+    "dm.name": "Name", "dm.brand": "Brand", "dm.phone": "Phone", "dm.insta": "Instagram", "dm.interest": "Interested in", "dm.plan": "Build Your Bamboo", "dm.addons": "Add-ons", "dm.msg": "Message",
+    "js.failed": "That didn't go through. Please try again or message us on Instagram.",
+    "js.activate": "The form is almost ready: the request email still needs to be activated. Please message us on Instagram for now.",
     "js.langBtn": "اقرأ الموقع بالعربية",
     "js.toDark": "Switch to dark mode",
     "js.toLight": "Switch to light mode",
@@ -128,17 +132,20 @@
   setTheme(root.getAttribute("data-theme") || "light", false);
 
   /* ---------- contact links ---------- */
+  /* Instagram handle from the settings; accepts "@name", "name" or a full instagram.com link */
+  function igHandle() {
+    if (isPh(C.instagram)) return "";
+    return String(C.instagram).trim().replace(/^@/, "").replace(/^https?:\/\/(www\.)?instagram\.com\//i, "").replace(/[\/?#].*$/, "");
+  }
   function renderContact() {
-    var wa = (C.whatsapp || "").replace(/\D/g, "");
-    var insta = isPh(C.instagram) ? "" : "https://instagram.com/" + C.instagram.replace(/^@/, "");
-    var waText = encodeURIComponent(lang === "ar" ? "مرحبًا، أود معرفة المزيد عن خدمات ذا باندا باو." : "Hi, I'd like to know more about The Panda Paw.");
-    var links = { wa: wa ? "https://wa.me/" + wa + "?text=" + waText : "", insta: insta };
+    var h = igHandle();
+    var links = { dm: h ? "https://ig.me/m/" + h : "", insta: h ? "https://www.instagram.com/" + h + "/" : "" };
     document.querySelectorAll("[data-link]").forEach(function (a) {
       var href = links[a.getAttribute("data-link")];
       if (href) { a.href = href; a.removeAttribute("title"); }
       else { a.removeAttribute("href"); a.setAttribute("title", "Placeholder: add this in js/config.js"); }
     });
-    var shown = { whatsapp: C.whatsappDisplay || C.whatsapp, instagram: C.instagram };
+    var shown = { instagram: h ? "@" + h : C.instagram };
     document.querySelectorAll("[data-show]").forEach(function (el) { el.innerHTML = show(shown[el.getAttribute("data-show")]); });
   }
 
@@ -482,6 +489,15 @@
     var edit = $("planEdit");
     if (edit) edit.href = "packages.html?" + PLAN_KEYS.map(function (k) { return k + "=" + plan[k]; }).join("&") + (plan.rush ? "&rush=1" : "") + "#custom";
   }
+  function planText() {
+    if (!plan) return "";
+    return PLAN_KEYS.map(function (k) { return t("plan." + k) + ": " + plan[k]; }).join(", ") + ", " + t("plan.rush") + ": " + t(plan.rush ? "js.yes" : "js.no");
+  }
+  function copyText(text) {                    // called straight from the tap, so phones allow it
+    function fallback() { var ta = document.createElement("textarea"); ta.value = text; ta.setAttribute("readonly", ""); ta.style.position = "fixed"; ta.style.opacity = "0"; document.body.appendChild(ta); ta.select(); try { document.execCommand("copy"); } catch (e) {} ta.remove(); }
+    try { if (navigator.clipboard && window.isSecureContext) { navigator.clipboard.writeText(text).catch(fallback); return; } } catch (e) {}
+    fallback();
+  }
   function setStatus(msg, cls) { if (!status) return; status.textContent = msg; status.className = "form-status " + (cls || ""); }
   function mark(el, bad) { var f = el && el.closest(".field, .check"); if (f) f.classList.toggle("bad", bad); }
   if (form) form.addEventListener("submit", function (e) {
@@ -492,14 +508,35 @@
     if (phone.replace(/\D/g, "").length < 7) { mark(fe.phone, true); setStatus(t("js.phone"), "err"); fe.phone.focus(); return; }
     if (!terms.checked) { setStatus(t("js.terms"), "err"); terms.focus(); return; }
     if (fe._honey && fe._honey.value) { form.reset(); setStatus(t("js.sent"), "ok"); return; }   // spam bot
+    var h = igHandle();
+    var checked = [].filter.call(form.querySelectorAll('input[name="addons"]'), function (c) { return c.checked; });
+    var igUser = (fe.instagram && fe.instagram.value.trim()) || "";
+    if (h) {
+      var interestHere = sel ? plain(t(sel.options[sel.selectedIndex].getAttribute("data-i18n"))) : "";
+      var lines = [t("js.dmIntro"), "", t("dm.name") + ": " + name];
+      if (fe.brand.value.trim()) lines.push(t("dm.brand") + ": " + fe.brand.value.trim());
+      lines.push(t("dm.phone") + ": " + phone);
+      if (igUser) lines.push(t("dm.insta") + ": " + igUser);
+      lines.push(t("dm.interest") + ": " + interestHere);
+      if (plan && sel && sel.value === "custom") lines.push(t("dm.plan") + ": " + planText());
+      if (checked.length) lines.push(t("dm.addons") + ": " + checked.map(function (c) { return plain(t(c.nextElementSibling.getAttribute("data-i18n"))); }).join(", "));
+      if (fe.message.value.trim()) lines.push(t("dm.msg") + ": " + fe.message.value.trim());
+      var dm = lines.join("\n");
+      copyText(dm);
+      window.open("https://ig.me/m/" + h, "_blank", "noopener");
+      if ($("dmText")) { $("dmText").textContent = dm; $("dmBox").hidden = false; }
+      setStatus(t("js.dmOpened"), "ok");
+    }
     var w3f = !C.formEndpoint && C.web3formsKey;   // backup service, used when its key is filled in
     var endpoint = C.formEndpoint || (w3f ? "https://api.web3forms.com/submit" : (C.formEmail ? "https://formsubmit.co/ajax/" + C.formEmail : ""));
-    if (!endpoint || !window.fetch) { setStatus(t("js.failed"), "err"); return; }
+    if (!endpoint || !window.fetch) { if (!h) setStatus(t("js.failed"), "err"); return; }
     var interest = sel ? plain(tEN(sel.options[sel.selectedIndex].getAttribute("data-i18n"))) : "";
     var data = {
       "Name": name,
       "Brand": fe.brand.value.trim() || "-",
-      "Phone / WhatsApp": phone,
+      "Phone": phone,
+      "Instagram": igUser || "-",
+      "Sent via": h ? "Instagram DM (copy of the request)" : "Website form",
       "Interested in": interest,
       "Message": fe.message.value.trim() || "-",
       "Accepted Terms & Conditions": "Yes",
@@ -509,11 +546,12 @@
       "_captcha": "false"
     };
     if (plan && sel && sel.value === "custom") data["Build Your Bamboo"] = planEN();
-    var addonNames = [].filter.call(form.querySelectorAll('input[name="addons"]'), function (c) { return c.checked; })
-      .map(function (c) { return plain(tEN(c.nextElementSibling.getAttribute("data-i18n"))); });
+    var addonNames = checked.map(function (c) { return plain(tEN(c.nextElementSibling.getAttribute("data-i18n"))); });
     data["Add-ons"] = addonNames.length ? addonNames.join(", ") : "-";
     if (w3f) { data.access_key = C.web3formsKey; data.subject = data._subject; data.from_name = "The Panda Paw website"; delete data._subject; delete data._template; delete data._captcha; }
-    var btn = $("sendBtn"); if (btn) btn.disabled = true;
+    var btn = $("sendBtn");
+    if (h) { fetch(endpoint, { method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" }, body: JSON.stringify(data) }).catch(function () {}); return; }   // email = quiet backup copy
+    if (btn) btn.disabled = true;
     setStatus(t("js.sending"));
     fetch(endpoint, { method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" }, body: JSON.stringify(data) })
       .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok, j: j }; }); })
@@ -525,6 +563,7 @@
       .catch(function () { setStatus(t("js.failed"), "err"); })
       .then(function () { if (btn) btn.disabled = false; });
   });
+  if ($("dmCopy")) $("dmCopy").addEventListener("click", function () { copyText($("dmText").textContent); var b = $("dmCopy"), was = b.textContent; b.textContent = t("js.copied"); setTimeout(function () { b.textContent = was; }, 1600); });
   if (form) ["name", "phone"].forEach(function (n) { fe[n].addEventListener("input", function () { mark(fe[n], false); }); });
   if ($("f-terms")) $("f-terms").addEventListener("change", function () { mark($("f-terms"), false); });
 

@@ -9,7 +9,7 @@ ARABIC:     https://thepandapaw.com/?lang=ar
    packages.html  Paw Packages  - social media packages, Build Your Bamboo,
                                  Add-ons, Free designs, How we work, Portfolio
    branding.html  Paw Branding  - branding packages, How we work, Portfolio
-   contact.html   Contact us   - WhatsApp, Instagram and the request form
+   contact.html   Contact us   - Instagram DM and the request form
    The menu and footer are repeated on every page: if you change them,
    change all 4 pages.
 
@@ -22,8 +22,7 @@ ARABIC:     https://thepandapaw.com/?lang=ar
    "Save & publish". The live site updates about a minute later.
 
 2) CHANGE YOUR DETAILS AND PRICES BY HAND  ->  js/config.js
-   - whatsapp / whatsappDisplay : your WhatsApp number
-   - instagram                  : your Instagram handle, e.g. "@thepandapaw"
+   - instagram                  : your Instagram handle, e.g. "@thepandapaw.official"
    - formEmail                  : where requests from the form are sent
    - price_...                  : package prices (English and Arabic)
    (Add-ons have no fixed price: clients request them in the form.)
