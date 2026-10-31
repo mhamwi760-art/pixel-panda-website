@@ -29,7 +29,7 @@ window.PP_CONFIG =
 {
   "instagram": "@thepandapaw.official",
   "formEmail": "",
-  "web3formsKey": "",
+  "web3formsKey": "68c9f5ee-f0f2-4271-ac2a-f934e3433066",
   "price_cub": {
     "en": "80 KWD",
     "ar": "80 د.ك"
