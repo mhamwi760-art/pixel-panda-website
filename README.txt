@@ -30,13 +30,13 @@ ARABIC:     https://thepandapaw.com/?lang=ar
    Anything still in [square brackets] shows in red on the site so you
    can spot what is missing.
 
-3) REQUEST FORM (emails come to formEmail)
-   The form uses the free service FormSubmit (formsubmit.co).
-   FIRST TIME ONLY: send one test request from the Contact page. FormSubmit
-   then emails "Activate form" to [your email] (check Junk).
-   Click Activate. From then on every request arrives in that inbox.
+3) REQUEST FORM
+   "Send on Instagram" copies the client's request and opens your Instagram
+   DMs so they can paste it. A copy is also emailed to you through Web3Forms
+   (web3forms.com), using the access key in js/config.js (web3formsKey).
+   Your email address is not stored anywhere on the website.
    Clients must tick "I accept the Terms & Conditions" before sending.
-   Clients get no email, and your email address is never shown to them.
+   Clients get no email.
 
 4) PORTFOLIO GALLERIES
    Put your photos in a folder called assets/portfolio/ and add one line

@@ -11,11 +11,10 @@
 
    - instagram: your Instagram username. The site opens DMs with it
      (ig.me/m/...) and links to your profile.
-   - formEmail: every request from the Contact page is emailed here through
-     FormSubmit (formsubmit.co). The first request triggers an "Activate
-     form" email to this address: click Activate once (check Junk too).
-   - web3formsKey: backup form service. Get a free key at web3forms.com
-     and paste it here if FormSubmit's activation email never arrives.
+   - web3formsKey: your Web3Forms access key. Every request from the Contact
+     page is emailed to the inbox you registered at web3forms.com, so your
+     email address never appears on the website. Keep formEmail empty.
+   - formEmail: only used if web3formsKey is empty (FormSubmit). Leave empty.
    - Anything in [square brackets] shows on the site in red, so you can see
      what is not filled in yet.
    - pk_... : the numbers in each package card. 0 means "not included" (—).
