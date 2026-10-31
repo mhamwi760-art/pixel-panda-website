@@ -105,17 +105,20 @@
   }
 
   /* ---------- light / dark mode ---------- */
-  var themeBtn = $("themeBtn"), themeTimer = 0;
+  var themeBtn = $("themeBtn");
   function themeLabel() {
     if (!themeBtn) return;
     var dark = root.getAttribute("data-theme") === "dark";
     themeBtn.setAttribute("aria-label", t(dark ? "js.toLight" : "js.toDark"));
     themeBtn.setAttribute("aria-pressed", dark ? "true" : "false");
   }
-  function setTheme(th, remember) {
-    if (!reduceMotion) {
-      root.classList.add("theme-anim");
-      clearTimeout(themeTimer); themeTimer = setTimeout(function () { root.classList.remove("theme-anim"); }, 520);
+  function themeSwitchOff() { root.classList.remove("theme-switch"); }
+  function setTheme(th, remember, animate) {
+    // one cross-fade for the whole page, so every text and background changes together
+    if (animate && !reduceMotion && document.startViewTransition) {
+      var vt = document.startViewTransition(function () { root.classList.add("theme-switch"); setTheme(th, remember, false); });
+      vt.finished.then(themeSwitchOff, themeSwitchOff);
+      return;
     }
     root.setAttribute("data-theme", th);
     if (remember) { try { localStorage.setItem("pp-theme", th); } catch (e) {} }
@@ -123,10 +126,10 @@
     if (meta) meta.setAttribute("content", bar || (th === "dark" ? "#08494B" : "#006D6F"));
     themeLabel();
   }
-  if (themeBtn) themeBtn.addEventListener("click", function () { setTheme(root.getAttribute("data-theme") === "dark" ? "light" : "dark", true); });
+  if (themeBtn) themeBtn.addEventListener("click", function () { setTheme(root.getAttribute("data-theme") === "dark" ? "light" : "dark", true, true); });
   if (window.matchMedia) {
     var mq = matchMedia("(prefers-color-scheme: dark)");
-    var follow = function (e) { var saved = null; try { saved = localStorage.getItem("pp-theme"); } catch (er) {} if (!saved) setTheme(e.matches ? "dark" : "light", false); };
+    var follow = function (e) { var saved = null; try { saved = localStorage.getItem("pp-theme"); } catch (er) {} if (!saved) setTheme(e.matches ? "dark" : "light", false, true); };
     if (mq.addEventListener) mq.addEventListener("change", follow); else if (mq.addListener) mq.addListener(follow);
   }
   setTheme(root.getAttribute("data-theme") || "light", false);

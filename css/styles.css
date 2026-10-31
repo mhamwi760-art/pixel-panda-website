@@ -65,10 +65,9 @@ body {
   margin: 0; font-family: var(--font); color: var(--text); background: var(--bg);
   font-size: 16px; line-height: 1.6; overflow-x: hidden;
 }
-/* smooth switch between light and dark (only while switching) */
-html.theme-anim, html.theme-anim *, html.theme-anim *::before, html.theme-anim *::after {
-  transition: background-color .45s ease, color .45s ease, border-color .45s ease, box-shadow .45s ease, fill .45s ease !important;
-}
+/* smooth switch between light and dark: the whole page cross-fades at once */
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: .45s; animation-timing-function: ease; }
+html.theme-switch, html.theme-switch *, html.theme-switch *::before, html.theme-switch *::after { transition: none !important; }
 /* Arabic visitors: hide the English text for a moment until Arabic is applied */
 html.pp-ar-pending body { visibility: hidden; }
 html[lang="ar"] body { font-size: 17.5px; line-height: 1.75; }
