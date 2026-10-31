@@ -615,7 +615,20 @@ td.yes { color: var(--accent-text); font-weight: 700; }
 .addons-hint { margin-top: 8px; font-size: 12.5px; color: var(--text-2); }
  (max-width: 420px) { .addon-checks { grid-template-columns: 1fr; } }
 @media (max-width: 900px) { .addons { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 560px) { .addons { grid-template-columns: 1fr; } }
+/* phones: two compact add-on cards per row (icon on top, smaller text, full-width button) */
+@media (max-width: 560px) {
+  .addons { gap: 10px; }
+  .addon { flex-direction: column; gap: 10px; padding: 14px 12px 12px; }
+  .addon .ico { width: 34px; height: 34px; border-radius: 8px; }
+  .addon .ico svg { width: 18px; height: 18px; }
+  .addon h3 { font-size: 14.5px; line-height: 1.25; }
+  html[lang="ar"] .addon h3 { font-size: 15.5px; }
+  .addon p { font-size: 12px; line-height: 1.4; margin: 4px 0 10px; }
+  html[lang="ar"] .addon p { font-size: 13px; }
+  .addon-pick { align-self: stretch; text-align: center; font-size: 12px; padding: 7px 6px; }
+  .addon-bar { flex-direction: column; align-items: stretch; text-align: center; padding: 12px; gap: 10px; }
+  .addon-bar .btn { width: 100%; }
+}
 
 /* offer */
 .offer-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(32px, 6vw, 72px); align-items: center; }
@@ -632,6 +645,8 @@ td.yes { color: var(--accent-text); font-weight: 700; }
 html[dir="rtl"] .offer-cards img:nth-child(1) { transform: rotate(6deg); }
 html[dir="rtl"] .offer-cards img:nth-child(3) { transform: rotate(-6deg); }
 .section.dark .corner-steps { inset-inline-start: 0; bottom: 0; }
+/* Paw Packages: the free-designs offer sits right under the teal page top, so it uses the deeper teal */
+.section.dark.offer-top { background: var(--brand-bg-2); }
 @media (max-width: 860px) { .offer-grid { grid-template-columns: 1fr; } }
 
 /* policies accordion */

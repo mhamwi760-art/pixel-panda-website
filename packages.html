@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=14">
+<link rel="stylesheet" href="css/styles.css?v=16">
 <link rel="stylesheet" href="css/theme.css?v=1">
 <script>
   (function (d) {
@@ -107,10 +107,10 @@
     <h1 id="page-title" data-i18n="pp.title">Social media packages that <em>grow with you.</em></h1>
     <p class="lead" data-i18n="pp.lead">Pick a ready package or build your own. Every package covers one month of content, and you get 3 free designs before you choose.</p>
     <ul class="jump">
+      <li><a href="#offer" data-i18n="nav.offer">Free designs</a></li>
       <li><a href="#packages" data-i18n="nav.packages">Packages</a></li>
       <li><a href="#custom" data-i18n="pk.p4">Build Your Bamboo</a></li>
       <li><a href="#addons" data-i18n="ad.label">Add-ons</a></li>
-      <li><a href="#offer" data-i18n="nav.offer">Free designs</a></li>
       <li><a href="#how" data-i18n="nav.how">How we work</a></li>
       <li><a href="#work" data-i18n="nav.work">Our work</a></li>
     </ul>
@@ -122,12 +122,36 @@
   </div>
 </section>
 
-<!-- ============ 01 PACKAGES ============ -->
+<!-- ============ 01 FREE DESIGNS (welcome offer, first thing on the page) ============ -->
+<section class="section dark offer-top" id="offer" aria-labelledby="offer-title">
+  <div class="wrap offer-grid">
+    <div class="reveal">
+      <p class="label"><b>01</b> <span data-i18n="of.label">Our welcome offer</span></p>
+      <h2 id="offer-title" data-i18n="of.title">3 free designs, <em>before you choose.</em></h2>
+      <p class="big" data-i18n="of.body">Before you pick a package, we design 3 free sample designs for your brand, so you can see our work on your brand first.</p>
+      <span class="pill" data-i18n="of.pill">One time only, per brand</span>
+      <p class="fine" data-i18n="of.fine">If you like the samples, choose a package and we start once the package and scope are confirmed.</p>
+      <a class="btn btn-yellow" href="contact.html?plan=free"><span data-i18n="of.cta">Claim my 3 free designs</span> <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+    <div class="offer-cards reveal" aria-hidden="true">
+      <img data-depth="12" src="assets/mockups/free-design-1.png?v=3" alt="" width="720" height="932">
+      <img data-depth="24" src="assets/mockups/free-design-3.png?v=3" alt="" width="720" height="932">
+      <img data-depth="16" src="assets/mockups/free-design-2.png?v=3" alt="" width="720" height="932">
+    </div>
+  </div>
+  <div class="pixels corner-steps" data-depth="-9" style="--cols:3" aria-hidden="true">
+    <i class="y"></i><i></i><i></i>
+    <i class="q"></i><i class="y"></i><i></i>
+    <i class="q"></i><i class="d"></i><i class="q"></i>
+  </div>
+</section>
+
+<!-- ============ 02 PACKAGES ============ -->
 <section class="section mist" id="packages" aria-labelledby="packages-title">
   <div class="wrap">
     <div class="sec-head reveal">
       <div>
-        <p class="label"><b>01</b> <span data-i18n="pk.label">Our packages</span></p>
+        <p class="label"><b>02</b> <span data-i18n="pk.label">Our packages</span></p>
         <h2 id="packages-title" data-i18n="pk.title">Pick your bamboo</h2>
         <p class="sub" data-i18n="pk.sub">Every package lasts 1 month. Ad budget is not included: you pay the platforms directly.</p>
       </div>
@@ -359,12 +383,12 @@
   </div>
 </section>
 
-<!-- ============ 02 ADD-ONS ============ -->
+<!-- ============ 03 ADD-ONS ============ -->
 <section class="section" id="addons" aria-labelledby="addons-title">
   <div class="wrap">
     <div class="sec-head reveal">
       <div>
-        <p class="label"><b>02</b> <span data-i18n="ad.label">Add-ons</span></p>
+        <p class="label"><b>03</b> <span data-i18n="ad.label">Add-ons</span></p>
         <h2 id="addons-title" data-i18n="ad.title">Need a little extra?</h2>
         <p class="sub" data-i18n="ad.sub">Add more to any package. Prices depend on your business, so pick what you need and we'll include it in your quote.</p>
       </div>
@@ -384,32 +408,8 @@
   </div>
 </section>
 
-<!-- ============ 03 FREE DESIGNS (welcome offer) ============ -->
-<section class="section dark" id="offer" aria-labelledby="offer-title">
-  <div class="wrap offer-grid">
-    <div class="reveal">
-      <p class="label"><b>03</b> <span data-i18n="of.label">Our welcome offer</span></p>
-      <h2 id="offer-title" data-i18n="of.title">3 free designs, <em>before you choose.</em></h2>
-      <p class="big" data-i18n="of.body">Before you pick a package, we design 3 free sample designs for your brand, so you can see our work on your brand first.</p>
-      <span class="pill" data-i18n="of.pill">One time only, per brand</span>
-      <p class="fine" data-i18n="of.fine">If you like the samples, choose a package and we start once the package and scope are confirmed.</p>
-      <a class="btn btn-yellow" href="contact.html?plan=free"><span data-i18n="of.cta">Claim my 3 free designs</span> <span class="arrow" aria-hidden="true">→</span></a>
-    </div>
-    <div class="offer-cards reveal" aria-hidden="true">
-      <img data-depth="12" src="assets/mockups/free-design-1.png?v=3" alt="" width="720" height="932">
-      <img data-depth="24" src="assets/mockups/free-design-3.png?v=3" alt="" width="720" height="932">
-      <img data-depth="16" src="assets/mockups/free-design-2.png?v=3" alt="" width="720" height="932">
-    </div>
-  </div>
-  <div class="pixels corner-steps" data-depth="-9" style="--cols:3" aria-hidden="true">
-    <i class="y"></i><i></i><i></i>
-    <i class="q"></i><i class="y"></i><i></i>
-    <i class="q"></i><i class="d"></i><i class="q"></i>
-  </div>
-</section>
-
 <!-- ============ 04 HOW WE WORK ============ -->
-<section class="section" id="how" aria-labelledby="how-title">
+<section class="section mist" id="how" aria-labelledby="how-title">
   <div class="wrap how">
     <div class="reveal">
       <div class="sec-head"><div>
@@ -431,7 +431,7 @@
 </section>
 
 <!-- ============ 05 PORTFOLIO (images in js/config.js: portfolio) ============ -->
-<section class="section mist" id="work" aria-labelledby="work-title">
+<section class="section" id="work" aria-labelledby="work-title">
   <div class="wrap">
     <div class="sec-head reveal">
       <div>
