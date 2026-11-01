@@ -31,9 +31,9 @@ ARABIC:     https://thepandapaw.com/?lang=ar
    can spot what is missing.
 
 3) REQUEST FORM
-   "Send on Instagram" copies the client's request and opens your Instagram
-   DMs so they can paste it. A copy is also emailed to you through Web3Forms
-   (web3forms.com), using the access key in js/config.js (web3formsKey).
+   "Send request" emails the client's request straight to you through
+   Web3Forms (web3forms.com), using the access key in js/config.js
+   (web3formsKey). It arrives at the email the key was created with.
    Your email address is not stored anywhere on the website.
    Clients must tick "I accept the Terms & Conditions" before sending.
    Clients get no email.
