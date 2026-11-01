@@ -275,6 +275,10 @@ html[lang="ar"] .clients-title { letter-spacing: 0; font-size: 15px; }
 .logo-set img { display: block; width: auto; height: auto; max-height: 70px; max-width: 230px; }
 .logo-set img[src*="bisht"] { max-width: 300px; }
 @keyframes pplogos { to { transform: translateX(-50%); } }
+/* during the light/dark switch the logos keep moving live instead of fading a frozen picture */
+.logo-strip { view-transition-name: client-logos; }
+::view-transition-group(client-logos), ::view-transition-new(client-logos) { animation: none; }
+::view-transition-old(client-logos) { display: none; }
 @media (prefers-reduced-motion: reduce) {
   .logo-track { animation: none; }
   .logo-strip { overflow-x: auto; -webkit-mask-image: none; mask-image: none; }
