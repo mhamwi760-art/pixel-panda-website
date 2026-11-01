@@ -109,59 +109,35 @@ window.PP_CONFIG =
   },
   "portfolio": [
     {
-      "image": "",
-      "alt": "",
+      "image": "assets/portfolio/fatayer-labneh.webp",
+      "alt": "Fatayer Labneh post design for Al Forn",
       "label": {
-        "en": "Product photography",
-        "ar": "تصوير المنتجات"
+        "en": "Restaurant post",
+        "ar": "منشور مطعم"
       }
     },
     {
-      "image": "",
-      "alt": "",
+      "image": "assets/portfolio/plaza-athenee-sea-view.webp",
+      "alt": "Sea view post design for Plaza Athenee Hotel",
       "label": {
-        "en": "Model photography",
-        "ar": "تصوير العارضين"
+        "en": "Hotel post",
+        "ar": "منشور فندق"
       }
     },
     {
-      "image": "",
-      "alt": "",
+      "image": "assets/portfolio/kraft-mortadella.webp",
+      "alt": "Kraft and mortadella pastry delivery ad",
       "label": {
-        "en": "Posts",
-        "ar": "منشورات"
+        "en": "Delivery ad",
+        "ar": "إعلان توصيل"
       }
     },
     {
-      "image": "",
-      "alt": "",
+      "image": "assets/portfolio/smile-vibes.webp",
+      "alt": "Smile Vibes summer post design for Smile",
       "label": {
-        "en": "Stories",
-        "ar": "قصص"
-      }
-    },
-    {
-      "image": "",
-      "alt": "",
-      "label": {
-        "en": "Highlights",
-        "ar": "هايلايت"
-      }
-    },
-    {
-      "image": "",
-      "alt": "",
-      "label": {
-        "en": "Reels",
-        "ar": "ريلز"
-      }
-    },
-    {
-      "image": "",
-      "alt": "",
-      "label": {
-        "en": "Ads",
-        "ar": "إعلانات"
+        "en": "Summer campaign",
+        "ar": "حملة صيفية"
       }
     }
   ],
