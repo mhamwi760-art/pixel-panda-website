@@ -139,6 +139,14 @@ window.PP_CONFIG =
         "en": "",
         "ar": ""
       }
+    },
+    {
+      "image": "assets/portfolio/blak-amber-beads.png",
+      "alt": "Polish amber prayer beads post design for Blak",
+      "label": {
+        "en": "",
+        "ar": ""
+      }
     }
   ],
   "portfolio_branding": [
