@@ -112,32 +112,32 @@ window.PP_CONFIG =
       "image": "assets/portfolio/fatayer-labneh.webp",
       "alt": "Fatayer Labneh post design for Al Forn",
       "label": {
-        "en": "Restaurant post",
-        "ar": "منشور مطعم"
+        "en": "",
+        "ar": ""
       }
     },
     {
       "image": "assets/portfolio/plaza-athenee-sea-view.webp",
       "alt": "Sea view post design for Plaza Athenee Hotel",
       "label": {
-        "en": "Hotel post",
-        "ar": "منشور فندق"
+        "en": "",
+        "ar": ""
       }
     },
     {
       "image": "assets/portfolio/kraft-mortadella.webp",
       "alt": "Kraft and mortadella pastry delivery ad",
       "label": {
-        "en": "Delivery ad",
-        "ar": "إعلان توصيل"
+        "en": "",
+        "ar": ""
       }
     },
     {
       "image": "assets/portfolio/smile-vibes.webp",
       "alt": "Smile Vibes summer post design for Smile",
       "label": {
-        "en": "Summer campaign",
-        "ar": "حملة صيفية"
+        "en": "",
+        "ar": ""
       }
     }
   ],

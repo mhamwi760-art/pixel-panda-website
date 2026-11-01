@@ -160,7 +160,7 @@
         var label = it.label ? (it.label[lang] || it.label.en) : "";
         if (it.image) {
           any = true;
-          return '<figure class="has-img"><img src="' + esc(it.image) + '" alt="' + esc(it.alt || label) + '" loading="lazy"><figcaption>' + esc(label) + "</figcaption></figure>";
+          return '<figure class="has-img"><img src="' + esc(it.image) + '" alt="' + esc(it.alt || label) + '" loading="lazy">' + (label ? "<figcaption>" + esc(label) + "</figcaption>" : "") + "</figure>";
         }
         return '<figure><svg aria-hidden="true"><use href="#i-image"/></svg><span class="ph-img">' + esc(t("wk.ph")) + "</span><figcaption>" + esc(label) + "</figcaption></figure>";
       }).join("");
