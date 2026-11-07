@@ -461,8 +461,10 @@ html[lang="ar"] .bg-intro .ar-name { display: none; }
 .bg-facts { list-style: none; padding: 0; margin: 22px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
 .bg-facts li { padding: 6px 12px; border-radius: 999px; font-size: 13px; font-weight: 600; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.22); }
 
-.bg-stage { position: relative; min-height: 440px; display: grid; place-items: center; }
-.bg-stage.playing { min-height: 0; }
+/* one fixed height for the bamboo and the question card, so nothing jumps and both sit centred */
+.bg-stage { position: relative; min-height: 530px; display: grid; place-items: center; }
+.bg-stage .glass { z-index: 4; }
+.bg-stage.playing { min-height: 530px; }
 .bg-bamboo { display: flex; flex-direction: column; align-items: center; gap: 14px; }
 .bg-stage.playing .bg-bamboo { display: none; }
 .bamboo-float { width: 128px; animation: bgFloat 4.2s ease-in-out infinite; filter: drop-shadow(0 18px 22px rgba(0,0,0,.28)); }
@@ -579,8 +581,7 @@ html[dir="rtl"] .bg-back .arrow { transform: scaleX(-1); }
 @keyframes bgPop { to { transform: translate(var(--x), var(--y)) rotate(var(--r)); opacity: 0; } }
 @media (max-width: 860px) {
   .bamboo-game { grid-template-columns: 1fr; min-height: 0; }
-  .bg-stage { min-height: 360px; }
-  .bg-stage.playing { min-height: 0; }
+  .bg-stage, .bg-stage.playing { min-height: 530px; }
   .glass { margin-inline: auto; }
 }
 @media (max-width: 600px) {

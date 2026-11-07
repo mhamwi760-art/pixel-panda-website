@@ -377,11 +377,16 @@
   }
   function box(b, radius) { return { left: b.l + "px", top: b.t + "px", width: b.w + "px", height: b.h + "px", borderRadius: radius + "px" }; }
   function morphRun(from, to, toGlass, done) {
-    var D = 820;
+    /* the layer sits at the card's size and is scaled down onto the stalk: moving and scaling only (no re-layout),
+       so the browser's graphics chip keeps it smooth */
+    var D = toGlass ? 720 : 600;
+    var big = toGlass ? to : from, small = toGlass ? from : to;
     morph.hidden = false;
-    var a = box(from, from.r || 30), z = box(to, to.r || 30);
-    for (var p in a) morph.style[p] = a[p];
-    var anim = morph.animate([a, z], { duration: D, easing: toGlass ? GROW : "cubic-bezier(.5,0,.3,1)", fill: "forwards" });
+    var b = box(big, 30); for (var p in b) morph.style[p] = b[p];
+    morph.style.transformOrigin = "0 0";
+    var tiny = "translate(" + (small.l - big.l) + "px," + (small.t - big.t) + "px) scale(" + (small.w / big.w) + "," + (small.h / big.h) + ")";
+    var full = "translate(0px,0px) scale(1,1)";
+    var anim = morph.animate(toGlass ? [{ transform: tiny }, { transform: full }] : [{ transform: full }, { transform: tiny }], { duration: D, easing: toGlass ? "cubic-bezier(.45,0,.2,1)" : "cubic-bezier(.55,0,.55,1)", fill: "forwards" });
     var bam = morph.querySelector(".m-bamboo"), gl = morph.querySelector(".m-glass"), nodes = morph.querySelectorAll(".m-bamboo b");
     var fade = toGlass ? [[1, 0], [0, 1]] : [[0, 1], [1, 0]];
     bam.animate([{ opacity: fade[0][0] }, { opacity: fade[0][0], offset: .3 }, { opacity: fade[0][1] }], { duration: D, fill: "forwards" });
@@ -453,7 +458,7 @@
       return;
     }
     if (busy) return; busy = true;
-    var from = stalkBox(), oldH = stage.offsetHeight;
+    var from = stalkBox();
     /* 1. a little squash, while the button and shadow fade away */
     var intro = [$("bgFloat").querySelector("svg").animate([{ transform: "none" }, { transform: "scale(1.08, .92)" }], { duration: 160, easing: "ease-out", fill: "forwards" })];
     [].forEach.call($("bgBamboo").querySelectorAll(".bg-start, .bg-tap, .bg-ground"), function (el) { intro.push(el.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 160, fill: "forwards" })); });
@@ -461,13 +466,14 @@
       /* 2. lay out the card where it will end up (invisible), then stretch the stalk into it */
       intro.forEach(function (x) { x.cancel(); });
       stage.classList.add("playing"); card.hidden = false; card.style.opacity = "0"; showStep(at || 0, 0);
-      var newH = stage.offsetHeight, to = rel(card.getBoundingClientRect()); to.r = 30;
-      stage.animate([{ height: oldH + "px" }, { height: newH + "px" }], { duration: 820, easing: GROW });
+      var to = rel(card.getBoundingClientRect()); to.r = 30;
+      /* the real card fades in over the growing glass while it is still finishing, so there is no pause at the end */
+      var cardIn = card.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, delay: 440, easing: "ease-out", fill: "both" });
+      cardIn.onfinish = function () { card.style.opacity = ""; cardIn.cancel(); };
+      [].forEach.call(card.children, function (el, n) {
+        el.animate([{ transform: "translateY(10px)" }, { transform: "none" }], { duration: 380, delay: 440 + Math.min(n, 4) * 30, easing: EASE, fill: "backwards" });
+      });
       morphRun(from, to, true, function () {
-        card.style.opacity = "";
-        [].forEach.call(card.children, function (el) {
-          el.animate([{ opacity: 0, transform: "translateY(10px)" }, { opacity: 1, transform: "none" }], { duration: 360, easing: EASE, fill: "backwards", delay: el.classList.contains("bg-top") || el.classList.contains("bg-progress") ? 0 : 80 });
-        });
         focusQ();
         if (card.getBoundingClientRect().top < 70) card.scrollIntoView({ behavior: "smooth", block: "start" });
       });
@@ -482,12 +488,11 @@
     if (reduceMotion || !card.animate || !morph) { done(); return; }
     if (busy) return; busy = true;
     /* the card's content fades, then the glass shrinks back into the bamboo stalk */
-    var from = rel(card.getBoundingClientRect()), oldH = stage.offsetHeight; from.r = 30;
+    var from = rel(card.getBoundingClientRect()); from.r = 30;
     card.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 160, fill: "forwards" }).onfinish = function () {
       card.getAnimations().forEach(function (x) { x.cancel(); });
       card.hidden = true; stage.classList.remove("playing"); $("bgBamboo").style.opacity = "0";
-      var to = stalkBox(), newH = stage.offsetHeight;
-      stage.animate([{ height: oldH + "px" }, { height: newH + "px" }], { duration: 820, easing: "cubic-bezier(.5,0,.3,1)" });
+      var to = stalkBox();
       morphRun(from, to, false, function () {
         done();
         $("bgBamboo").animate([{ opacity: 0 }, { opacity: 1 }], { duration: 260, easing: "ease-out" });
