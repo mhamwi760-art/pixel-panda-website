@@ -165,6 +165,11 @@
         return '<figure><svg aria-hidden="true"><use href="#i-image"/></svg><span class="ph-img">' + esc(t("wk.ph")) + "</span><figcaption>" + esc(label) + "</figcaption></figure>";
       }).join("");
       var tag = document.querySelector('[data-folio-tag="' + box.id + '"]'); if (tag) tag.hidden = any;
+      // no real designs yet: hide the whole section and its jump link (it comes back once images are added)
+      var sec = box.closest("section"); if (sec) {
+        sec.hidden = !any;
+        document.querySelectorAll('a[href="#' + sec.id + '"]').forEach(function (a) { (a.closest("li") || a).hidden = !any; });
+      }
       box.scrollLeft = 0;
       folioState(box);
     });
