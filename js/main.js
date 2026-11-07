@@ -7,6 +7,8 @@
   var AR = window.PP_AR || {};
   var root = document.documentElement;
   var page = document.body.getAttribute("data-page") || "";
+  // the policies moved to their own page: old links to the home page section still land there
+  if (page === "home" && /^#(policies|p\d+)$/.test(location.hash)) { location.replace("policies.html" + location.search + (location.hash === "#policies" ? "" : location.hash)); return; }
   var titleEN = document.title;
   var reduceMotion = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
   function $(id) { return document.getElementById(id); }
@@ -307,7 +309,7 @@
   }
   function setVal(k, v, bump) {
     var r = $("b-" + k), out = $("o-" + k); if (!r) return;
-    var min = +r.min || 1, max = +r.max || 100;
+    var min = r.min === "" ? 1 : +r.min, max = +r.max || 100;
     v = Math.max(min, Math.min(max, Math.round(+v) || min));
     bState[k] = v; r.value = v;
     r.style.setProperty("--p", ((v - min) / (max - min) * 100) + "%");
@@ -318,7 +320,7 @@
   }
   /* the big number box: typed values stay between 1 and 100 */
   function typedNumber(k, out, done) {
-    var r = $("b-" + k), min = +r.min || 1, max = +r.max || 100, s = out.value.replace(/\D/g, "");
+    var r = $("b-" + k), min = r.min === "" ? 1 : +r.min, max = +r.max || 100, s = out.value.replace(/\D/g, "");
     if (s === "") { if (done) out.value = bState[k]; return; }    // still typing, or left empty
     var v = Math.min(max, +s);
     if (done) v = Math.max(min, v);
@@ -387,7 +389,63 @@
     nodes.forEach(function (n) { n.animate(toGlass ? [{ opacity: 1 }, { opacity: 0, offset: .3 }, { opacity: 0 }] : [{ opacity: 0 }, { opacity: 0, offset: .7 }, { opacity: 1 }], { duration: D, fill: "forwards" }); });
     anim.onfinish = function () { done(); morph.getAnimations({ subtree: true }).forEach(function (x) { x.cancel(); }); morph.hidden = true; busy = false; };
   }
+  /* phones: the questions open as a full-screen sheet (moved to <body> so nothing on the page can clip it) */
+  var sheetHome = document.createComment("bgCard"), sheetMQ = window.matchMedia && matchMedia("(max-width: 600px)");
+  function isSheet() { return card.parentNode === document.body; }
+  /* the growing: a green circle swells out of the bamboo (scaling only, so the phone's graphics chip keeps it smooth)
+     while the bamboo zooms up and fades; the questions fade in while it is still growing */
+  function bambooCircle() {
+    var s = $("bgFloat").querySelector("svg").getBoundingClientRect(), x = s.left + s.width / 2, y = s.top + s.height / 2;
+    var R = Math.ceil(Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y))) + 2;
+    var g = document.createElement("div"); g.className = "bg-grow"; g.setAttribute("aria-hidden", "true");
+    g.style.cssText = "left:" + (x - R) + "px;top:" + (y - R) + "px;width:" + 2 * R + "px;height:" + 2 * R + "px";
+    document.body.appendChild(g);
+    return { el: g, small: "scale(" + (20 / R) + ")" };
+  }
+  function sheetParts() { return [].slice.call(card.children); }
+  function openSheet(animate, at) {
+    function show() {
+      card.parentNode.insertBefore(sheetHome, card); document.body.appendChild(card);
+      root.classList.add("bg-full"); card.hidden = false; showStep(at || 0, 0); card.scrollTop = 0;
+      try { history.pushState({ bgSheet: 1 }, ""); } catch (e) {}      // the phone's back gesture closes the sheet
+    }
+    if (!animate || reduceMotion || !card.animate) { show(); if (animate) focusQ(); return; }
+    if (busy) return; busy = true;
+    var D = 640, c = bambooCircle();
+    $("bgFloat").animate([{ transform: "scale(1)", opacity: 1 }, { transform: "scale(1.7)", opacity: 0 }], { duration: 420, easing: "cubic-bezier(.4,0,.2,1)", fill: "forwards" });
+    $("bgStart").animate([{ opacity: 1 }, { opacity: 0 }], { duration: 160, fill: "forwards" });
+    card.classList.add("growing"); show();                          // see-through while the circle grows behind it
+    sheetParts().forEach(function (el, n) {
+      el.animate([{ opacity: 0, transform: "translateY(14px)" }, { opacity: 1, transform: "none" }], { duration: 360, easing: "cubic-bezier(.2,.8,.2,1)", fill: "backwards", delay: 380 + Math.min(n, 4) * 35 });
+    });
+    c.el.animate([{ transform: c.small }, { transform: "scale(1)" }], { duration: D, easing: "cubic-bezier(.45,0,.2,1)", fill: "forwards" }).onfinish = function () {
+      card.classList.remove("growing"); c.el.remove(); busy = false;
+    };
+    focusQ();
+  }
+  function closeSheet() {
+    function done() {
+      card.hidden = true; card.classList.remove("growing"); card.getAnimations({ subtree: true }).forEach(function (x) { x.cancel(); });
+      sheetHome.parentNode.insertBefore(card, sheetHome); sheetHome.remove(); root.classList.remove("bg-full");
+      $("bgFloat").getAnimations().forEach(function (x) { if (!x.animationName) x.cancel(); });
+      $("bgStart").getAnimations().forEach(function (x) { if (!x.animationName) x.cancel(); });
+      busy = false; $("bgStart").focus({ preventScroll: true });
+    }
+    if (reduceMotion || !card.animate) { done(); return; }
+    if (busy) return; busy = true;
+    var D = 540, c = bambooCircle();
+    c.el.style.transform = "scale(1)";
+    sheetParts().forEach(function (el) { el.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 180, fill: "forwards" }); });
+    card.classList.add("growing");
+    c.el.animate([{ transform: "scale(1)" }, { transform: c.small }], { duration: D, delay: 120, easing: "cubic-bezier(.55,0,.55,1)", fill: "forwards" }).onfinish = function () { c.el.remove(); done(); };
+    $("bgFloat").animate([{ transform: "scale(1.7)", opacity: 0 }, { transform: "scale(1)", opacity: 1 }], { duration: 380, delay: 300, easing: "cubic-bezier(.2,.8,.2,1)", fill: "both" });
+    $("bgStart").animate([{ opacity: 0 }, { opacity: 1 }], { duration: 260, delay: 420, fill: "both" });
+  }
+  window.addEventListener("popstate", function () { if (card && isSheet()) closeSheet(); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && card && isSheet()) closeGame(); });
+
   function openGame(animate, at) {
+    if (sheetMQ && sheetMQ.matches) { if (!isSheet()) openSheet(animate, at); return; }
     var canAnimate = animate && !reduceMotion && card.animate && morph;
     if (!canAnimate) {
       stage.classList.add("playing"); card.hidden = false; showStep(at || 0, 0);
@@ -416,6 +474,7 @@
     }, 160);
   }
   function closeGame() {
+    if (isSheet()) { if (history.state && history.state.bgSheet) history.back(); else closeSheet(); return; }
     function done() {
       card.hidden = true; card.style.opacity = ""; stage.classList.remove("playing"); $("bgBamboo").style.opacity = "";
       $("bgStart").focus({ preventScroll: true });
@@ -438,7 +497,7 @@
   if (game && card) {
     PLAN_KEYS.forEach(function (k) {
       var start = qp(k), r = $("b-" + k), out = $("o-" + k);           // values come back from the contact page's "Change" link
-      setVal(k, start && +start >= 1 && +start <= 100 ? start : DEFAULTS[k]);
+      setVal(k, start && +start >= 0 && +start <= 100 ? start : DEFAULTS[k]);
       r.addEventListener("input", function () { setVal(k, r.value); });
       out.addEventListener("input", function () { typedNumber(k, out, false); });
       out.addEventListener("change", function () { typedNumber(k, out, true); });
@@ -477,7 +536,7 @@
     else if (qp("addons") && sel) sel.value = "addons";   // came from the add-ons bar only
     if (want === "custom" && qp("posts")) {
       plan = {};
-      PLAN_KEYS.forEach(function (k) { var n = parseInt(qp(k), 10); plan[k] = isNaN(n) ? 1 : Math.max(1, Math.min(100, n)); });
+      PLAN_KEYS.forEach(function (k) { var n = parseInt(qp(k), 10); plan[k] = isNaN(n) ? 0 : Math.max(0, Math.min(100, n)); });
       plan.rush = qp("rush") === "1";
     }
     if (sel) sel.addEventListener("change", function () { renderPlan(); });

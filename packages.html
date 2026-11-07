@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=27">
+<link rel="stylesheet" href="css/styles.css?v=38">
 <link rel="stylesheet" href="css/theme.css?v=1">
 <script>
   (function (d) {
@@ -56,6 +56,10 @@
     <symbol id="i-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></symbol>
     <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 019.5 4a8.5 8.5 0 1010.5 10.5z"/></symbol>
     <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></symbol>
+    <symbol id="tb-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 10.5L12 3.5l8.5 7"/><path d="M5.5 9v10.5h4.5v-6h4v6h4.5V9"/></symbol>
+    <symbol id="tb-pack" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></symbol>
+    <symbol id="tb-brand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.5a8.5 8.5 0 110-17c4.7 0 8.5 3.4 8.5 7.6 0 2.6-2.1 4.2-4.6 4.2h-1.6a1.7 1.7 0 00-1.2 2.9c.6.6.4 2.3-1.1 2.3z"/><circle cx="7.6" cy="11" r="1.1" fill="currentColor" stroke="none"/><circle cx="10.4" cy="7.4" r="1.1" fill="currentColor" stroke="none"/><circle cx="14.8" cy="7.6" r="1.1" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="tb-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 11.6c0 4.2-3.8 7.6-8.5 7.6-1.2 0-2.3-.2-3.3-.6L3.5 20l1.4-4.1a7.2 7.2 0 01-1.4-4.3C3.5 7.4 7.3 4 12 4s8.5 3.4 8.5 7.6z"/></symbol>
   </defs>
 </svg>
 
@@ -73,7 +77,7 @@
           <ul class="sub">
             <li><a href="index.html#about" data-i18n="nav.about">About us</a></li>
             <li><a href="index.html#services" data-i18n="nav.services">Services</a></li>
-            <li><a href="index.html#policies" data-i18n="nav.policies">Policies</a></li>
+            <li><a href="policies.html" data-i18n="nav.policies">Policies</a></li>
           </ul></li>
         <li class="has-sub"><a class="top active" aria-current="page" href="packages.html" data-i18n="nav.pkgs">Paw Packages</a><button class="sub-toggle" type="button" aria-expanded="false" aria-label="Paw Packages sections" data-i18n-attr="aria-label:nav.pkgsSub"><svg aria-hidden="true"><use href="#i-chev"/></svg></button>
           <ul class="sub">
@@ -100,34 +104,12 @@
 
 <main id="main">
 
-<!-- ============ PAGE HERO ============ -->
-<section class="page-hero" aria-labelledby="page-title">
-  <div class="wrap">
-    <p class="label" data-i18n="pp.label">Paw Packages</p>
-    <h1 id="page-title" data-i18n="pp.title">Social media packages that <em>grow with you.</em></h1>
-    <p class="lead" data-i18n="pp.lead">Pick a ready package or build your own. Every package covers one month of content, and you get 3 free designs before you choose.</p>
-    <ul class="jump">
-      <li><a href="#offer" data-i18n="nav.offer">Free designs</a></li>
-      <li><a href="#packages" data-i18n="nav.packages">Packages</a></li>
-      <li><a href="#custom" data-i18n="pk.p4">Build Your Bamboo</a></li>
-      <li><a href="#addons" data-i18n="ad.label">Add-ons</a></li>
-      <li><a href="#how" data-i18n="nav.how">How we work</a></li>
-      <li><a href="#work" data-i18n="nav.work">Our work</a></li>
-    </ul>
-  </div>
-  <div class="pixels corner-steps" data-depth="-9" style="--cols:3" aria-hidden="true">
-    <i></i><i></i><i class="y"></i>
-    <i></i><i class="q"></i><i class="c"></i>
-    <i class="q"></i><i class="d"></i><i class="q"></i>
-  </div>
-</section>
-
 <!-- ============ 01 FREE DESIGNS (welcome offer, first thing on the page) ============ -->
 <section class="section dark offer-top" id="offer" aria-labelledby="offer-title">
   <div class="wrap offer-grid">
     <div class="reveal">
       <p class="label"><b>01</b> <span data-i18n="of.label">Our welcome offer</span></p>
-      <h2 id="offer-title" data-i18n="of.title">3 free designs, <em>before you choose.</em></h2>
+      <h1 id="offer-title" data-i18n="of.title">3 free designs, <em>before you choose.</em></h1>
       <p class="big" data-i18n="of.body">Before you pick a package, we design 3 free sample designs for your brand, so you can see our work on your brand first.</p>
       <span class="pill" data-i18n="of.pill">One time only, per brand</span>
       <p class="fine" data-i18n="of.fine">If you like the samples, choose a package and we start once the package and scope are confirmed.</p>
@@ -298,39 +280,39 @@
 
           <div class="bg-step" data-step="posts" hidden>
             <h4 class="bg-q" id="q-posts" tabindex="-1" data-i18n="bg.q.posts">How many Instagram post designs do you need each month?</h4>
-            <div class="bg-num"><button class="bg-pm" type="button" data-delta="-1" aria-label="Less" data-i18n-attr="aria-label:bg.less">−</button><input class="bg-big" type="number" id="o-posts" min="1" max="100" step="1" inputmode="numeric" value="10" aria-labelledby="q-posts"><button class="bg-pm" type="button" data-delta="1" aria-label="More" data-i18n-attr="aria-label:bg.more">+</button></div>
-            <input type="range" id="b-posts" data-key="posts" min="1" max="100" value="10" aria-labelledby="q-posts"><div class="scale" aria-hidden="true"><span>1</span><span>100</span></div>
-            <div class="bg-chips"><button type="button" data-v="5">5</button><button type="button" data-v="10">10</button><button type="button" data-v="20">20</button><button type="button" data-v="30">30</button><button type="button" data-v="50">50</button></div>
+            <div class="bg-num"><button class="bg-pm" type="button" data-delta="-1" aria-label="Less" data-i18n-attr="aria-label:bg.less">−</button><input class="bg-big" type="number" id="o-posts" min="0" max="100" step="1" inputmode="numeric" value="10" aria-labelledby="q-posts"><button class="bg-pm" type="button" data-delta="1" aria-label="More" data-i18n-attr="aria-label:bg.more">+</button></div>
+            <input type="range" id="b-posts" data-key="posts" min="0" max="100" value="10" aria-labelledby="q-posts"><div class="scale" aria-hidden="true"><span>0</span><span>100</span></div>
+            <div class="bg-chips"><button type="button" data-v="0">0</button><button type="button" data-v="5">5</button><button type="button" data-v="10">10</button><button type="button" data-v="20">20</button><button type="button" data-v="30">30</button><button type="button" data-v="50">50</button></div>
           </div>
           <div class="bg-step" data-step="stories" hidden>
             <h4 class="bg-q" id="q-stories" tabindex="-1" data-i18n="bg.q.stories">How many Instagram story designs?</h4>
-            <div class="bg-num"><button class="bg-pm" type="button" data-delta="-1" aria-label="Less" data-i18n-attr="aria-label:bg.less">−</button><input class="bg-big" type="number" id="o-stories" min="1" max="100" step="1" inputmode="numeric" value="15" aria-labelledby="q-stories"><button class="bg-pm" type="button" data-delta="1" aria-label="More" data-i18n-attr="aria-label:bg.more">+</button></div>
-            <input type="range" id="b-stories" data-key="stories" min="1" max="100" value="15" aria-labelledby="q-stories"><div class="scale" aria-hidden="true"><span>1</span><span>100</span></div>
-            <div class="bg-chips"><button type="button" data-v="10">10</button><button type="button" data-v="15">15</button><button type="button" data-v="25">25</button><button type="button" data-v="35">35</button><button type="button" data-v="50">50</button></div>
+            <div class="bg-num"><button class="bg-pm" type="button" data-delta="-1" aria-label="Less" data-i18n-attr="aria-label:bg.less">−</button><input class="bg-big" type="number" id="o-stories" min="0" max="100" step="1" inputmode="numeric" value="15" aria-labelledby="q-stories"><button class="bg-pm" type="button" data-delta="1" aria-label="More" data-i18n-attr="aria-label:bg.more">+</button></div>
+            <input type="range" id="b-stories" data-key="stories" min="0" max="100" value="15" aria-labelledby="q-stories"><div class="scale" aria-hidden="true"><span>0</span><span>100</span></div>
+            <div class="bg-chips"><button type="button" data-v="0">0</button><button type="button" data-v="10">10</button><button type="button" data-v="15">15</button><button type="button" data-v="25">25</button><button type="button" data-v="35">35</button><button type="button" data-v="50">50</button></div>
           </div>
           <div class="bg-step" data-step="highlights" hidden>
             <h4 class="bg-q" id="q-highlights" tabindex="-1" data-i18n="bg.q.highlights">How many Instagram highlights?</h4>
-            <div class="bg-num"><button class="bg-pm" type="button" data-delta="-1" aria-label="Less" data-i18n-attr="aria-label:bg.less">−</button><input class="bg-big" type="number" id="o-highlights" min="1" max="100" step="1" inputmode="numeric" value="3" aria-labelledby="q-highlights"><button class="bg-pm" type="button" data-delta="1" aria-label="More" data-i18n-attr="aria-label:bg.more">+</button></div>
-            <input type="range" id="b-highlights" data-key="highlights" min="1" max="100" value="3" aria-labelledby="q-highlights"><div class="scale" aria-hidden="true"><span>1</span><span>100</span></div>
-            <div class="bg-chips"><button type="button" data-v="1">1</button><button type="button" data-v="3">3</button><button type="button" data-v="5">5</button><button type="button" data-v="10">10</button></div>
+            <div class="bg-num"><button class="bg-pm" type="button" data-delta="-1" aria-label="Less" data-i18n-attr="aria-label:bg.less">−</button><input class="bg-big" type="number" id="o-highlights" min="0" max="100" step="1" inputmode="numeric" value="3" aria-labelledby="q-highlights"><button class="bg-pm" type="button" data-delta="1" aria-label="More" data-i18n-attr="aria-label:bg.more">+</button></div>
+            <input type="range" id="b-highlights" data-key="highlights" min="0" max="100" value="3" aria-labelledby="q-highlights"><div class="scale" aria-hidden="true"><span>0</span><span>100</span></div>
+            <div class="bg-chips"><button type="button" data-v="0">0</button><button type="button" data-v="1">1</button><button type="button" data-v="3">3</button><button type="button" data-v="5">5</button><button type="button" data-v="10">10</button></div>
           </div>
           <div class="bg-step" data-step="reels" hidden>
             <h4 class="bg-q" id="q-reels" tabindex="-1"><span data-i18n="bg.q.reels">How many reels?</span><small data-i18n="pk.reelsAny">Any type of reel</small></h4>
-            <div class="bg-num"><button class="bg-pm" type="button" data-delta="-1" aria-label="Less" data-i18n-attr="aria-label:bg.less">−</button><input class="bg-big" type="number" id="o-reels" min="1" max="100" step="1" inputmode="numeric" value="2" aria-labelledby="q-reels"><button class="bg-pm" type="button" data-delta="1" aria-label="More" data-i18n-attr="aria-label:bg.more">+</button></div>
-            <input type="range" id="b-reels" data-key="reels" min="1" max="100" value="2" aria-labelledby="q-reels"><div class="scale" aria-hidden="true"><span>1</span><span>100</span></div>
-            <div class="bg-chips"><button type="button" data-v="1">1</button><button type="button" data-v="2">2</button><button type="button" data-v="3">3</button><button type="button" data-v="5">5</button><button type="button" data-v="10">10</button></div>
+            <div class="bg-num"><button class="bg-pm" type="button" data-delta="-1" aria-label="Less" data-i18n-attr="aria-label:bg.less">−</button><input class="bg-big" type="number" id="o-reels" min="0" max="100" step="1" inputmode="numeric" value="2" aria-labelledby="q-reels"><button class="bg-pm" type="button" data-delta="1" aria-label="More" data-i18n-attr="aria-label:bg.more">+</button></div>
+            <input type="range" id="b-reels" data-key="reels" min="0" max="100" value="2" aria-labelledby="q-reels"><div class="scale" aria-hidden="true"><span>0</span><span>100</span></div>
+            <div class="bg-chips"><button type="button" data-v="0">0</button><button type="button" data-v="1">1</button><button type="button" data-v="2">2</button><button type="button" data-v="3">3</button><button type="button" data-v="5">5</button><button type="button" data-v="10">10</button></div>
           </div>
           <div class="bg-step" data-step="ads" hidden>
             <h4 class="bg-q" id="q-ads" tabindex="-1" data-i18n="bg.q.ads">How many ad designs?</h4>
-            <div class="bg-num"><button class="bg-pm" type="button" data-delta="-1" aria-label="Less" data-i18n-attr="aria-label:bg.less">−</button><input class="bg-big" type="number" id="o-ads" min="1" max="100" step="1" inputmode="numeric" value="1" aria-labelledby="q-ads"><button class="bg-pm" type="button" data-delta="1" aria-label="More" data-i18n-attr="aria-label:bg.more">+</button></div>
-            <input type="range" id="b-ads" data-key="ads" min="1" max="100" value="1" aria-labelledby="q-ads"><div class="scale" aria-hidden="true"><span>1</span><span>100</span></div>
-            <div class="bg-chips"><button type="button" data-v="1">1</button><button type="button" data-v="2">2</button><button type="button" data-v="5">5</button><button type="button" data-v="10">10</button></div>
+            <div class="bg-num"><button class="bg-pm" type="button" data-delta="-1" aria-label="Less" data-i18n-attr="aria-label:bg.less">−</button><input class="bg-big" type="number" id="o-ads" min="0" max="100" step="1" inputmode="numeric" value="1" aria-labelledby="q-ads"><button class="bg-pm" type="button" data-delta="1" aria-label="More" data-i18n-attr="aria-label:bg.more">+</button></div>
+            <input type="range" id="b-ads" data-key="ads" min="0" max="100" value="1" aria-labelledby="q-ads"><div class="scale" aria-hidden="true"><span>0</span><span>100</span></div>
+            <div class="bg-chips"><button type="button" data-v="0">0</button><button type="button" data-v="1">1</button><button type="button" data-v="2">2</button><button type="button" data-v="5">5</button><button type="button" data-v="10">10</button></div>
           </div>
           <div class="bg-step" data-step="photos" hidden>
             <h4 class="bg-q" id="q-photos" tabindex="-1" data-i18n="bg.q.photos">How many photography images?</h4>
-            <div class="bg-num"><button class="bg-pm" type="button" data-delta="-1" aria-label="Less" data-i18n-attr="aria-label:bg.less">−</button><input class="bg-big" type="number" id="o-photos" min="1" max="100" step="1" inputmode="numeric" value="5" aria-labelledby="q-photos"><button class="bg-pm" type="button" data-delta="1" aria-label="More" data-i18n-attr="aria-label:bg.more">+</button></div>
-            <input type="range" id="b-photos" data-key="photos" min="1" max="100" value="5" aria-labelledby="q-photos"><div class="scale" aria-hidden="true"><span>1</span><span>100</span></div>
-            <div class="bg-chips"><button type="button" data-v="5">5</button><button type="button" data-v="10">10</button><button type="button" data-v="20">20</button><button type="button" data-v="30">30</button></div>
+            <div class="bg-num"><button class="bg-pm" type="button" data-delta="-1" aria-label="Less" data-i18n-attr="aria-label:bg.less">−</button><input class="bg-big" type="number" id="o-photos" min="0" max="100" step="1" inputmode="numeric" value="5" aria-labelledby="q-photos"><button class="bg-pm" type="button" data-delta="1" aria-label="More" data-i18n-attr="aria-label:bg.more">+</button></div>
+            <input type="range" id="b-photos" data-key="photos" min="0" max="100" value="5" aria-labelledby="q-photos"><div class="scale" aria-hidden="true"><span>0</span><span>100</span></div>
+            <div class="bg-chips"><button type="button" data-v="0">0</button><button type="button" data-v="5">5</button><button type="button" data-v="10">10</button><button type="button" data-v="20">20</button><button type="button" data-v="30">30</button></div>
           </div>
           <div class="bg-step" data-step="rush" hidden>
             <h4 class="bg-q" id="q-rush" tabindex="-1" data-i18n="bg.q.rush">Do you need rush delivery?</h4>
@@ -348,7 +330,7 @@
             </div>
           </div>
 
-          <p class="bg-help" id="bgHelp" data-i18n="bg.help">Slide, tap − / + or type a number from 1 to 100.</p>
+          <p class="bg-help" id="bgHelp" data-i18n="bg.help">Slide, tap − / + or type a number from 0 to 100.</p>
           <div class="bg-nav" id="bgNav">
             <button class="bg-back" type="button" id="bgBack"><span class="arrow" aria-hidden="true">←</span> <span data-i18n="bg.back">Back</span></button>
             <button class="btn btn-teal bg-next" type="button" id="bgNext"><span data-i18n="bg.next">Next</span> <span class="arrow" aria-hidden="true">→</span></button>
@@ -460,7 +442,7 @@
       <li><a href="packages.html" data-i18n="nav.pkgs">Paw Packages</a></li>
       <li><a href="branding.html" data-i18n="nav.branding">Paw Branding</a></li>
       <li><a href="contact.html" data-i18n="nav.contact">Contact us</a></li>
-      <li><a href="index.html#policies" data-i18n="ft.terms">Terms &amp; Conditions</a></li>
+      <li><a href="policies.html" data-i18n="ft.terms">Terms &amp; Conditions</a></li>
     </ul>
     <p>© <span id="year">2026</span> The Panda Paw</p>
   </div>
@@ -468,11 +450,17 @@
 
 <button class="motion-btn" type="button" id="motionBtn" hidden><span class="motion-dots" aria-hidden="true"><i></i><i></i></span><span data-i18n="mo.enable">Enable motion</span></button>
 
+<nav class="tabbar" aria-label="Main" data-i18n-attr="aria-label:navLabel">
+  <a href="index.html"><svg aria-hidden="true"><use href="#tb-home"/></svg><span data-i18n="nav.time">Panda Time</span></a>
+  <a href="packages.html" aria-current="page"><svg aria-hidden="true"><use href="#tb-pack"/></svg><span data-i18n="nav.pkgs">Paw Packages</span></a>
+  <a href="branding.html"><svg aria-hidden="true"><use href="#tb-brand"/></svg><span data-i18n="nav.branding">Paw Branding</span></a>
+  <a href="contact.html"><svg aria-hidden="true"><use href="#tb-chat"/></svg><span data-i18n="nav.contact">Contact us</span></a>
+</nav>
 <a class="wa-float" data-link="dm" target="_blank" rel="noopener" aria-label="Message us on Instagram" data-i18n-attr="aria-label:ct.dmLabel"><svg aria-hidden="true"><use href="#i-insta"/></svg></a>
 
 <script src="js/config.js?v=18"></script>
-<script src="js/i18n-ar.js?v=16"></script>
-<script src="js/main.js?v=18"></script>
+<script src="js/i18n-ar.js?v=18"></script>
+<script src="js/main.js?v=25"></script>
 <script src="js/motion.js?v=14"></script>
 </body>
 </html>

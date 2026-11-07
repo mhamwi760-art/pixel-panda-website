@@ -8,7 +8,7 @@
   var REPO = "mhamwi760-art/pixel-panda-website", BRANCH = "main";
   var API = "https://api.github.com/repos/" + REPO;
   var START = "/* PP-SETTINGS-START */", END = "/* PP-SETTINGS-END */";
-  var PAGES = [["index.html", "Panda Time"], ["packages.html", "Paw Packages"], ["branding.html", "Paw Branding"], ["contact.html", "Contact"]];
+  var PAGES = [["index.html", "Panda Time"], ["packages.html", "Paw Packages"], ["branding.html", "Paw Branding"], ["contact.html", "Contact"], ["policies.html", "Terms & Conditions"]];
   var DEFAULT_COLORS = { teal: "#006D6F", turq: "#3DBCA8", yellow: "#FFC857", coral: "#FF6F61", pink: "#FF4D8D" };
   var COLOR_INFO = [
     ["teal", "Main teal", "Header, page tops, buttons, links"],

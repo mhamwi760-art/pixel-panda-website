@@ -662,8 +662,8 @@ td.yes { color: var(--accent-text); font-weight: 700; }
 
 /* offer */
 .offer-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(32px, 6vw, 72px); align-items: center; }
-.offer-grid h2 { font-size: clamp(36px, 5.4vw, 62px); margin: 16px 0 22px; }
-.offer-grid h2 em { font-style: normal; color: var(--yellow); }
+.offer-grid h1, .offer-grid h2 { font-size: clamp(36px, 5.4vw, 62px); margin: 16px 0 22px; }
+.offer-grid h1 em, .offer-grid h2 em { font-style: normal; color: var(--yellow); }
 .offer-grid .big { font-size: clamp(17px, 1.6vw, 20px); color: var(--on-brand); max-width: 40ch; }
 .pill { display: inline-block; margin: 30px 0 14px; padding: 12px 22px; background: var(--yellow); color: var(--ink); font-weight: 700; border-radius: 999px; }
 .offer-grid .fine { font-size: 14px; color: var(--on-brand-2); max-width: 46ch; margin-bottom: 28px; }
@@ -932,4 +932,142 @@ html[dir="rtl"] .form-card::before { box-shadow: -28px 0 0 var(--coral); }
   /* floating WhatsApp a little smaller */
   .wa-float { width: 52px; height: 52px; bottom: 14px; inset-inline-end: 14px; }
   .wa-float svg { width: 25px; height: 25px; }
+}
+
+/* ---------- phones: app-style bottom bar (replaces the ☰ menu) ---------- */
+.tabbar { display: none; }
+@media (max-width: 900px) {
+  .tabbar {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px;
+    position: fixed; inset-inline: 0; bottom: 0; z-index: 70;
+    padding: 6px 8px calc(6px + env(safe-area-inset-bottom));
+    background: color-mix(in srgb, var(--surface) 92%, transparent); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+    border-top: 1px solid var(--line); box-shadow: 0 -6px 24px rgba(0, 30, 30, .08);
+  }
+  .tabbar a {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; min-height: 52px; padding: 6px 2px;
+    border-radius: 14px; color: var(--text-2); text-decoration: none; font-size: 11px; font-weight: 600; line-height: 1.15; text-align: center;
+    -webkit-tap-highlight-color: transparent; transition: background-color .2s ease, color .2s ease;
+  }
+  html[lang="ar"] .tabbar a { font-size: 12px; }
+  .tabbar span { white-space: nowrap; letter-spacing: -.01em; }
+  .tabbar svg { width: 23px; height: 23px; }
+  .tabbar a[aria-current="page"] { color: var(--accent-text); background: var(--mist); font-weight: 700; }
+  .tabbar a:active { background: var(--mist); }
+  .burger, .mainnav { display: none !important; }
+  body { padding-bottom: calc(68px + env(safe-area-inset-bottom)); }
+  .wa-float { bottom: calc(80px + env(safe-area-inset-bottom)); }
+  .motion-btn { bottom: calc(84px + env(safe-area-inset-bottom)); }
+}
+
+/* ---------- phones: shorter home page ---------- */
+@media (max-width: 600px) {
+  .hero-art { height: clamp(230px, 62vw, 290px); max-width: 340px; }
+  .hero-art .phone { width: 44%; }
+  .hero-art .phone-a { inset-inline-start: 10%; }
+  .hero-art .phone-b { inset-inline-start: 46%; top: 36px; }
+  .about-art { padding: 6px 0 0; }
+  .about-art .phone { width: min(42%, 170px); }
+  .about-art .card { width: min(34%, 140px); inset-inline-end: 10%; }
+  .about-copy p.big { margin: 14px 0 20px; }
+  .pillars { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .pillar { flex-direction: column; gap: 8px; padding: 12px; }
+  .pillar .ico { width: 36px; height: 36px; }
+  .services { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .service { min-height: 0; padding: 14px; }
+  .service h3 { font-size: 15px; margin: 12px 0 6px; line-height: 1.25; }
+  .service p { font-size: 13px; line-height: 1.45; }
+  .service .ico { width: 36px; height: 36px; }
+  .service .num { display: none; }
+  .service .more { padding-top: 10px; font-size: 13px; }
+}
+
+/* ---------- phones: Build Your Bamboo grows into a full-screen bamboo screen (js moves the card into <body>) ---------- */
+html.bg-full, html.bg-full body { overflow: hidden; }
+/* the layer that stretches from the bamboo stalk to the whole screen */
+.bg-grow { position: fixed; z-index: 99; border-radius: 50%; background: #0E625E; pointer-events: none; transform-origin: 50% 50%; will-change: transform; }
+body > .glass, [data-theme="dark"] body > .glass { background: #0E625E; }
+body > .glass.growing, [data-theme="dark"] body > .glass.growing { background: transparent; }
+
+body > .glass {
+  --acc: var(--yellow); --soft: rgba(255,255,255,.2); --tile: rgba(255,255,255,.1); --line: rgba(255,255,255,.22); --bar: #0E625E;
+  position: fixed; inset: 0; z-index: 100; width: auto; max-width: none; margin: 0; border: 0; border-radius: 0; color: var(--white);
+  display: flex; flex-direction: column; overflow-y: auto; overscroll-behavior: contain;
+  padding: calc(16px + env(safe-area-inset-top)) 20px 0; padding-inline-start: 58px;
+  -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: none;
+}
+[data-theme="dark"] body > .glass { color: var(--white); border: 0; box-shadow: none; --acc: var(--yellow); --soft: rgba(255,255,255,.2); --tile: rgba(255,255,255,.1);
+  }
+body > .glass::before { display: none; }
+
+/* the bamboo on the side grows one segment per question */
+body > .glass .bg-progress {
+  position: fixed; z-index: 1; margin: 0; inset-inline-start: 20px; width: 16px;
+  top: calc(74px + env(safe-area-inset-top)); bottom: calc(96px + env(safe-area-inset-bottom));
+  display: flex; flex-direction: column-reverse; gap: 6px;
+}
+body > .glass .bg-progress::before {                 /* a leaf on top */
+  content: ""; position: absolute; top: -20px; inset-inline-start: 10px; width: 22px; height: 12px; border-radius: 0 100% 0 100%;
+  background: linear-gradient(135deg, #8BE6D6, #2FA996); transform: rotate(-24deg);
+}
+html[dir="rtl"] body > .glass .bg-progress::before { border-radius: 100% 0 100% 0; transform: rotate(24deg); }
+body > .glass .bg-progress i { flex: 1; width: 16px; height: auto; border-radius: 7px; background: rgba(255,255,255,.13); }
+body > .glass .bg-progress i::after {
+  background: linear-gradient(90deg, #2FA996, #8BE6D6 45%, #278F7F); transform: scaleY(0); transform-origin: bottom;
+  box-shadow: inset 0 -4px 0 #1F8C7C;
+}
+body > .glass .bg-progress i.now::after { transform: scaleY(.45); }
+body > .glass .bg-progress i.on::after { transform: none; }
+
+body > .glass .bg-top { margin-bottom: 18px; }
+body > .glass .bg-count { color: var(--yellow); }
+body > .glass .bg-close { background: rgba(255,255,255,.14); color: var(--white); width: 40px; height: 40px; }
+body > .glass .bg-step { padding-top: 6px; }
+body > .glass .bg-q { font-size: 26px; line-height: 1.2; margin-bottom: 22px; }
+body > .glass .bg-num { margin: 10px 0 18px; }
+body > .glass .bg-big { font-size: 64px; color: var(--white); border-bottom-color: rgba(255,255,255,.3); }
+body > .glass .bg-big:focus { border-bottom-color: var(--yellow); }
+body > .glass .bg-pm { color: var(--white); background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.28); box-shadow: none; }
+body > .glass .bg-chips { flex-wrap: nowrap; gap: 6px; }
+body > .glass .bg-chips button { flex: 1 1 0; min-width: 0; padding: 9px 0; color: var(--white); background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.25); }
+body > .glass .bg-chips button.on { background: var(--yellow); border-color: var(--yellow); color: var(--ink); }
+body > .glass .bg-choice { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.22); }
+body > .glass .bg-choice.on { border-color: var(--yellow); background: rgba(255,200,87,.16); }
+body > .glass .bg-sum button { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.2); padding: 11px 14px; }
+body > .glass .bg-sum b { color: var(--yellow); }
+body > .glass .bg-help, body > .glass .scale { display: none; }
+body > .glass input[type="range"] { margin-bottom: 4px; }
+body > .glass .bg-next { background: var(--yellow); color: var(--ink); border-color: var(--yellow); }
+body > .glass .bg-back { color: var(--white); }
+/* Next / Back and "Request your quote" always stay at the bottom of the screen */
+body > .glass .bg-nav, body > .glass .bg-actions {
+  position: sticky; bottom: 0; z-index: 2; margin-top: auto; background: var(--bar);
+  margin-inline-start: -58px; margin-inline-end: -20px; padding: 12px 20px calc(14px + env(safe-area-inset-bottom));
+  border-top: 1px solid rgba(255,255,255,.14);
+}
+body > .glass .bg-actions { margin-top: 6px; flex-wrap: nowrap; }
+body > .glass .bg-actions .btn { flex: 1 1 auto; }
+body > .glass .bg-actions .link-btn { flex: none; color: var(--white); }
+@media (max-width: 600px) { .bg-blobs i { display: none; } }
+
+/* ---------- phones: compact Build Your Bamboo box (text, a small bamboo beside it, Start underneath) ---------- */
+@media (max-width: 600px) {
+  .bamboo-game {
+    grid-template-columns: 1fr 84px; grid-template-areas: "intro bam" "start start";
+    gap: 16px 12px; padding: 20px 18px 18px; border-radius: 22px; align-items: center;
+  }
+  .bg-stage, .bg-bamboo { display: contents; }
+  .bg-intro { grid-area: intro; }
+  .bg-intro h3 { font-size: 28px; margin: 0; }
+  .bg-intro .ar-name { font-size: 15px; }
+  .bg-intro p { font-size: 14px; line-height: 1.5; margin-top: 8px; }
+  .bg-intro .num, .bg-intro .ar-name, .bg-intro p { display: none; }
+  .bg-facts { margin: 8px 0 0; gap: 0; }
+  .bg-facts li { padding: 0; border: 0; background: none; font-size: 13px; font-weight: 600; color: var(--on-brand); }
+  .bg-facts li:nth-child(2) { display: none; }
+  .bg-facts li + li::before { content: "·"; margin: 0 7px; opacity: .7; }
+  .bamboo-float { grid-area: bam; width: 84px; padding: 8px 12px; justify-self: center; align-self: center; border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(255,255,255,.26), rgba(255,255,255,.08) 70%, transparent); }
+  .bg-ground, .bg-tap { display: none; }
+  .bg-start { grid-area: start; width: 100%; justify-content: center; }
 }
