@@ -186,6 +186,7 @@
   document.querySelectorAll("[data-folio-for]").forEach(function (b) {
     b.addEventListener("click", function () {
       var box = $(b.getAttribute("data-folio-for")); if (!box) return;
+      box.classList.add("snap");
       var first = box.firstElementChild, gap = 14;
       var stepW = first ? first.getBoundingClientRect().width + gap : box.clientWidth;
       var per = Math.max(1, Math.floor((box.clientWidth + gap) / stepW));
@@ -195,6 +196,9 @@
   });
   document.querySelectorAll("[data-folio]").forEach(function (box) {
     box.addEventListener("scroll", function () { folioState(box); }, { passive: true });
+    ["pointerdown", "touchstart", "wheel", "focus"].forEach(function (ev) {
+      box.addEventListener(ev, function () { box.classList.add("snap"); }, { passive: true, once: true });
+    });
   });
   window.addEventListener("resize", function () { document.querySelectorAll("[data-folio]").forEach(folioState); });
 

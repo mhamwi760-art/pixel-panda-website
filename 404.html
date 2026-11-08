@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found | The Panda Paw</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#006D6F">
+<link rel="icon" type="image/png" sizes="512x512" href="/assets/share/icon-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/styles.css?v=42">
+<link rel="stylesheet" href="/css/theme.css?v=1">
+<script>
+  (function (d) {
+    var t; try { t = localStorage.getItem('pp-theme'); } catch (e) {}
+    if (!t) t = window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    d.setAttribute('data-theme', t);
+  })(document.documentElement);
+</script>
+<style>
+  /* This page can open at any address, so every link here starts with "/". */
+  html, body.nf { background: var(--brand-bg); }
+  .nf .page-hero { min-height: 100vh; min-height: 100dvh; }
+  .nf .wrap { text-align: center; }
+  .nf .page-hero h1 { margin-inline: auto; }
+  .nf img.mark { width: 120px; height: auto; margin: 0 auto 8px; display: block; }
+  .nf .lead { margin-inline: auto; max-width: 46ch; }
+  .nf .ar { font-family: "Tajawal", sans-serif; }
+  .nf .links { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 28px; }
+</style>
+</head>
+<body class="nf">
+<main id="main">
+  <section class="page-hero" aria-labelledby="nf-title">
+    <div class="wrap">
+      <a href="/" aria-label="The Panda Paw, home"><img class="mark" src="/assets/logo/the-panda-paw-logo-white.svg" alt="The Panda Paw" width="1188" height="792"></a>
+      <p class="label">404</p>
+      <h1 id="nf-title">This page wandered off <em>into the bamboo.</em></h1>
+      <p class="lead">The page you're looking for isn't here. Try one of these instead.</p>
+      <p class="lead ar" lang="ar" dir="rtl">هذه الصفحة غير موجودة. جرّب إحدى الصفحات التالية.</p>
+      <div class="links">
+        <a class="btn btn-yellow" href="/">Home · الرئيسية</a>
+        <a class="btn btn-ghost" href="/packages.html">Social media packages · باقات السوشيال ميديا</a>
+        <a class="btn btn-ghost" href="/branding.html">Branding · الهوية البصرية</a>
+        <a class="btn btn-ghost" href="/contact.html">Contact us · تواصل معنا</a>
+      </div>
+    </div>
+  </section>
+</main>
+</body>
+</html>
