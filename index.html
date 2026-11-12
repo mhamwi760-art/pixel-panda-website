@@ -20,11 +20,15 @@
 <meta property="og:image" content="https://thepandapaw.com/assets/share/og-image.png?v=3">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
 <meta property="og:image:alt" content="The Panda Paw: social media that makes brands look good online">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://thepandapaw.com/assets/share/og-image.png?v=3">
 <!-- Icons: browser tab, iPhone/iPad home screen, Android home screen -->
-<link rel="icon" type="image/png" sizes="512x512" href="assets/share/icon-512.png">
-<link rel="apple-touch-icon" href="assets/share/apple-touch-icon.png">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/svg+xml" href="/assets/share/favicon.svg">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/share/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/share/apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
 <meta name="apple-mobile-web-app-title" content="The Panda Paw">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -62,8 +66,21 @@
     "Panda Paw"
    ],
    "url": "https://thepandapaw.com/",
-   "logo": "https://thepandapaw.com/assets/share/icon-512.png",
-   "image": "https://thepandapaw.com/assets/share/og-image.png",
+   "logo": {
+    "@type": "ImageObject",
+    "@id": "https://thepandapaw.com/#logo",
+    "url": "https://thepandapaw.com/assets/share/icon-512.png",
+    "contentUrl": "https://thepandapaw.com/assets/share/icon-512.png",
+    "width": 512,
+    "height": 512,
+    "caption": "The Panda Paw"
+   },
+   "image": {
+    "@type": "ImageObject",
+    "url": "https://thepandapaw.com/assets/share/og-image.png",
+    "width": 1200,
+    "height": 630
+   },
    "description": "The Panda Paw is a social media and branding company based in Kuwait, working with brands across the GCC: product and model photography, Instagram posts, stories and highlights, reels, ad design, account management and logo and brand identity design.",
    "slogan": "Social media that makes brands look good online.",
    "address": {
@@ -171,6 +188,26 @@
    "publisher": {
     "@id": "https://thepandapaw.com/#organization"
    }
+  },
+  {
+   "@type": "WebPage",
+   "@id": "https://thepandapaw.com/#webpage",
+   "url": "https://thepandapaw.com/",
+   "name": "Social Media & Branding Company in Kuwait | The Panda Paw",
+   "isPartOf": {
+    "@id": "https://thepandapaw.com/#website"
+   },
+   "about": {
+    "@id": "https://thepandapaw.com/#organization"
+   },
+   "inLanguage": "en",
+   "primaryImageOfPage": {
+    "@type": "ImageObject",
+    "url": "https://thepandapaw.com/assets/share/og-image.png",
+    "width": 1200,
+    "height": 630
+   },
+   "thumbnailUrl": "https://thepandapaw.com/assets/share/icon-512.png"
   }
  ]
 }
