@@ -69,4 +69,13 @@ ARABIC:     https://thepandapaw.com/?lang=ar
    The live site updates about a minute later. If you changed a css or js
    file, raise the ?v=9 number on its line in all 4 pages first.
 
+8) BLOG
+   Posts live in _blog/posts/ as <name>.en.md and <name>.ar.md (same name for
+   both languages; the format is explained at the top of _blog/build.js).
+   After adding or editing a post, run in this folder:
+       node _blog/build.js
+   It rebuilds blog/ (English), ar/blog/ (Arabic), the RSS feeds and
+   sitemap.xml. Don't edit the files in blog/ or ar/blog/ by hand.
+   To hold a post back, add "draft: true" to its top block.
+
 Logos used are the original brand files in assets/logo/ (never edit them).

@@ -10,6 +10,8 @@
   // the policies moved to their own page: old links to the home page section still land there
   if (page === "home" && /^#(policies|p\d+)$/.test(location.hash)) { location.replace("policies.html" + location.search + (location.hash === "#policies" ? "" : location.hash)); return; }
   var titleEN = document.title;
+  // blog pages are written in one language each (/blog/… English, /ar/blog/… Arabic): the language button opens the other version
+  var lock = root.getAttribute("data-lang-lock");
   var reduceMotion = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
   function $(id) { return document.getElementById(id); }
   var EN = {};      // filled from the English text in the page
@@ -101,7 +103,12 @@
       btn.innerHTML = lang === "ar" ? '<span lang="en">English</span>' : '<span lang="ar">عربي</span>';
       btn.setAttribute("aria-label", t("js.langBtn"));
     }
-    document.title = lang === "ar" ? (AR["title." + page] || titleEN) : titleEN;
+    if (!lock) document.title = lang === "ar" ? (AR["title." + page] || titleEN) : titleEN;
+    // links that have their own Arabic address (the blog)
+    document.querySelectorAll("[data-ar-href]").forEach(function (a) {
+      if (!a.hasAttribute("data-en-href")) a.setAttribute("data-en-href", a.getAttribute("href"));
+      a.setAttribute("href", a.getAttribute(lang === "ar" ? "data-ar-href" : "data-en-href"));
+    });
     root.classList.remove("pp-ar-pending");
     try { localStorage.setItem("pp-lang", lang); } catch (e) {}
   }
@@ -627,10 +634,15 @@
   } else { rev.forEach(function (el) { el.classList.add("in"); }); }
 
   /* ---------- language toggle ---------- */
-  if ($("langBtn")) $("langBtn").addEventListener("click", function () { applyLang(lang === "ar" ? "en" : "ar"); });
+  if ($("langBtn")) $("langBtn").addEventListener("click", function () {
+    var other = $("langBtn").getAttribute("data-href");
+    if (other) { try { localStorage.setItem("pp-lang", lang === "ar" ? "en" : "ar"); } catch (e) {} location.href = other; return; }
+    applyLang(lang === "ar" ? "en" : "ar");
+  });
   var start = "en";
   var q = qp("lang");
-  if (q === "ar" || q === "en") start = q; else { try { start = localStorage.getItem("pp-lang") || "en"; } catch (e) {} }
+  if (lock) start = lock;
+  else if (q === "ar" || q === "en") start = q; else { try { start = localStorage.getItem("pp-lang") || "en"; } catch (e) {} }
   applyLang(start);
   var y = $("year"); if (y) y.textContent = new Date().getFullYear();
   window.PP_READY = true;
