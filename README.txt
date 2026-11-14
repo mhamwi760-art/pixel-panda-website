@@ -76,6 +76,9 @@ ARABIC:     https://thepandapaw.com/?lang=ar
        node _blog/build.js
    It rebuilds blog/ (English), ar/blog/ (Arabic), the RSS feeds and
    sitemap.xml. Don't edit the files in blog/ or ar/blog/ by hand.
+   A post only goes live on or after its "date" (Kuwait time), so run the
+   build and push on that day. To see every post before its date:
+       BLOG_PREVIEW=1 node _blog/build.js     (don't push that build)
    To hold a post back, add "draft: true" to its top block.
 
 Logos used are the original brand files in assets/logo/ (never edit them).

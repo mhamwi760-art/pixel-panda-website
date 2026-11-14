@@ -260,6 +260,18 @@ if (fs.existsSync(SRC)) {
   });
 }
 if (problems.length) { console.error("Fix these first:\n - " + problems.join("\n - ")); process.exit(1); }
+
+// Posts go live on their date (Kuwait time): run the build on or after that day and push.
+// To preview every post locally, run:  BLOG_PREVIEW=1 node _blog/build.js   (don't push a preview build)
+const kuwaitToday = new Date(Date.now() + 3 * 3600 * 1000).toISOString().slice(0, 10);
+const waiting = [];
+if (!process.env.BLOG_PREVIEW) ["en", "ar"].forEach((l) => {
+  posts[l] = posts[l].filter((p) => { if (p.meta.date > kuwaitToday) { waiting.push(p.slug + "." + l + " (" + p.meta.date + ")"); return false; } return true; });
+});
+// links to posts that aren't live yet become plain text until they are
+["en", "ar"].forEach((l) => posts[l].forEach((p) => {
+  p.html = p.html.replace(/<a href="(?:\/ar)?\/blog\/([a-z0-9-]+)\.html">([\s\S]*?)<\/a>/g, (m, slug, text) => (posts[l].some((q) => q.slug === slug) ? m : text));
+}));
 ["en", "ar"].forEach((l) => posts[l].sort((a, b) => (b.meta.date + b.slug).localeCompare(a.meta.date + a.slug)));
 const has = (lang, slug) => posts[lang].some((p) => p.slug === slug);
 const url = (lang, slug) => (lang === "ar" ? "/ar" : "") + "/blog/" + (slug ? slug + ".html" : "");
@@ -391,9 +403,13 @@ ${items}
 
 /* ---------------- sitemap ---------------- */
 const today = new Date().toISOString().slice(0, 10);
-const entries = MAIN_PAGES.map((p) => ({ loc: p, lastmod: today }));
+// keep the main pages' dates from the current sitemap, so the daily rebuild only changes it when a post goes live
+const oldMap = fs.existsSync(path.join(ROOT, "sitemap.xml")) ? fs.readFileSync(path.join(ROOT, "sitemap.xml"), "utf8") : "";
+const kept = (loc) => { const m = new RegExp("<loc>" + (SITE + loc).replace(/[.?]/g, "\\$&") + "</loc><lastmod>([\\d-]+)</lastmod>").exec(oldMap); return m ? m[1] : today; };
+const newest = [...posts.en, ...posts.ar].map((p) => p.meta.updated || p.meta.date).sort().pop() || kept("/blog/");
+const entries = MAIN_PAGES.map((p) => ({ loc: p, lastmod: kept(p) }));
 const pair = (en, ar) => [
-  { loc: en, lastmod: today, alt: { en, ar } }, { loc: ar, lastmod: today, alt: { en, ar } }];
+  { loc: en, lastmod: newest, alt: { en, ar } }, { loc: ar, lastmod: newest, alt: { en, ar } }];
 entries.push(...pair("/blog/", "/ar/blog/"));
 const slugs = new Set([...posts.en, ...posts.ar].map((p) => p.slug));
 slugs.forEach((s) => {
@@ -409,4 +425,4 @@ ${entries.map((e) => "  <url><loc>" + SITE + e.loc + "</loc><lastmod>" + e.lastm
 </urlset>
 `);
 
-console.log("Blog built: " + posts.en.length + " English and " + posts.ar.length + " Arabic posts.\n  " + written.join("\n  "));
+console.log("Blog built: " + posts.en.length + " English and " + posts.ar.length + " Arabic posts live." + (waiting.length ? "\nWaiting for their date: " + waiting.join(", ") : "") + "\n  " + written.join("\n  "));
