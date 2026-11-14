@@ -1,0 +1,34 @@
+# Publishes blog posts on their date: every morning at 6 AM Kuwait time it rebuilds the blog
+# and commits the result if a post is due. It can also be run by hand from the Actions tab.
+name: Publish blog posts on their date
+
+on:
+  schedule:
+    - cron: "0 3 * * *"        # 03:00 UTC = 06:00 Kuwait
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: blog-publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Build the blog
+        run: node _blog/build.js
+      - name: Commit if a post went live
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then echo "No post due today."; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A blog ar sitemap.xml
+          git commit -m "Publish blog posts due $(TZ=Asia/Kuwait date +%F)"
+          git push

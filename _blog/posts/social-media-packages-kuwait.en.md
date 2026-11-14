@@ -2,7 +2,7 @@
 title: "Social media packages in Kuwait: what's included and what it costs"
 meta_title: "Social Media Packages in Kuwait: What's Included & Costs"
 meta_description: "What a social media package in Kuwait should include, what it costs in KWD, and how to pick the right one for your brand. Real prices, no surprises."
-date: 2026-11-19
+date: 2026-11-14
 keyword: social media packages Kuwait
 category: Social media
 excerpt: "What a monthly social media package in Kuwait should include, what it really costs in KWD, and the questions to ask before you sign."

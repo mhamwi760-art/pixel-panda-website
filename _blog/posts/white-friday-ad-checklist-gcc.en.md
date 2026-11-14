@@ -1,8 +1,8 @@
 ---
-title: "White Friday ad checklist for GCC brands"
+title: "White Friday ads: a checklist for GCC brands"
 meta_title: "White Friday Ads: A Checklist for GCC Brands"
 meta_description: "Planning White Friday ads in Kuwait or the GCC? A step-by-step checklist for offers, creative, Arabic copy, platform rules and landing pages."
-date: 2026-11-26
+date: 2026-11-21
 keyword: White Friday ads
 category: Guides
 excerpt: "Everything to check before your White Friday ads go live: the offer, the creative, the Arabic and English copy, platform rules and the page people land on."

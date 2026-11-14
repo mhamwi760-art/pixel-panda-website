@@ -1,8 +1,8 @@
 ---
-title: "How to prepare your products for a professional photoshoot"
+title: "Product photography in Kuwait: how to prepare your products for a shoot"
 meta_title: "Product Photography in Kuwait: How to Prepare Your Products"
 meta_description: "Booking product photography in Kuwait? A simple checklist to prepare your products, props and brief so your shoot day is faster and the photos sell."
-date: 2026-11-23
+date: 2026-11-18
 keyword: product photography Kuwait
 category: Photography
 excerpt: "A practical checklist for getting your products, props and brief ready before a shoot, so the day runs smoothly and every photo is usable."

@@ -261,7 +261,7 @@ if (fs.existsSync(SRC)) {
 }
 if (problems.length) { console.error("Fix these first:\n - " + problems.join("\n - ")); process.exit(1); }
 
-// Posts go live on their date (Kuwait time): run the build on or after that day and push.
+// Posts go live on their date (Kuwait time). .github/workflows/blog-publish.yml rebuilds daily at 6 AM Kuwait and pushes any post that is due.
 // To preview every post locally, run:  BLOG_PREVIEW=1 node _blog/build.js   (don't push a preview build)
 const kuwaitToday = new Date(Date.now() + 3 * 3600 * 1000).toISOString().slice(0, 10);
 const waiting = [];
