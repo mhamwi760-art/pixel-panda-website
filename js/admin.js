@@ -18,14 +18,14 @@
     ["pink", "Pink", "Small accents"]
   ];
   var SITE_PICS = [
-    ["assets/mockups/phone-profile.png", "Panda Time: phone (profile)"],
-    ["assets/mockups/phone-story.png", "Panda Time: phone (story)"],
-    ["assets/mockups/phone-feed.png", "About us: phone (feed)"],
-    ["assets/mockups/post-stories.png", "About us: post card"],
-    ["assets/mockups/content-plan.png", "Paw Packages: content calendar"],
-    ["assets/mockups/free-design-1.png", "Paw Packages: free design 1"],
-    ["assets/mockups/free-design-3.png", "Paw Packages: free design 2 (middle)"],
-    ["assets/mockups/free-design-2.png", "Paw Packages: free design 3"],
+    ["assets/mockups/phone-profile.webp", "Panda Time: phone (profile)"],
+    ["assets/mockups/phone-story.webp", "Panda Time: phone (story)"],
+    ["assets/mockups/phone-feed.webp", "About us: phone (feed)"],
+    ["assets/mockups/post-stories.webp", "About us: post card"],
+    ["assets/mockups/content-plan.webp", "Paw Packages: content calendar"],
+    ["assets/mockups/free-design-1.webp", "Paw Packages: free design 1"],
+    ["assets/mockups/free-design-3.webp", "Paw Packages: free design 2 (middle)"],
+    ["assets/mockups/free-design-2.webp", "Paw Packages: free design 3"],
     ["assets/share/og-image.png", "Link preview picture (WhatsApp, iMessage…)"]
   ];
   var KEY_STORE = "pp-admin-token";
@@ -382,7 +382,7 @@
           h("button", { class: "btn teal small", type: "button", text: "Replace", onclick: function () {
             pick().then(function (file) {
               if (!file) return;
-              return resize(file, p[0].indexOf("og-image") >= 0 ? 1200 : 1600, "image/png").then(function (r) { S.uploads[p[0]] = r.b64; S.previews[p[0]] = r.dataURL; renderSitePics(); refresh(); });
+              return resize(file, p[0].indexOf("og-image") >= 0 ? 1200 : 1600, /\.webp$/.test(p[0]) ? "image/webp" : "image/png").then(function (r) { S.uploads[p[0]] = r.b64; S.previews[p[0]] = r.dataURL; renderSitePics(); refresh(); });
             }).catch(function (e) { alert(e.message); });
           } }),
           staged ? h("button", { class: "btn ghost small", type: "button", text: "Undo", onclick: function () { delete S.uploads[p[0]]; delete S.previews[p[0]]; renderSitePics(); refresh(); } }) : null
@@ -449,6 +449,7 @@
       return Promise.all(PAGES.map(function (p) { return getFile(p[0], head); })).then(function (pages) {
         pages.forEach(function (pg, n) {
           var t = pg.text;
+          if (cfgChanged && window.PP_PRERENDER) t = window.PP_PRERENDER(t, S.cfg);   // prices, numbers, portfolio and structured data written into the HTML for search engines
           if (cfgChanged) t = t.replace(/js\/config\.js\?v=[\w.-]*/g, "js/config.js?v=" + stamp);
           if (colorsChanged) t = t.replace(/css\/theme\.css\?v=[\w.-]*/g, "css/theme.css?v=" + stamp);
           if (t !== pg.text) files.push({ path: PAGES[n][0], b64: textToB64(t) });

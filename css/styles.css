@@ -665,6 +665,8 @@ td.yes { color: var(--accent-text); font-weight: 700; }
 .offer-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(32px, 6vw, 72px); align-items: center; }
 .offer-grid h1, .offer-grid h2 { font-size: clamp(36px, 5.4vw, 62px); margin: 16px 0 22px; }
 .offer-grid h1 em, .offer-grid h2 em { font-style: normal; color: var(--yellow); }
+.offer-grid h1.label { font-size: 12px; margin: 0; line-height: 1.5; }
+html[lang="ar"] .offer-grid h1.label { font-size: 15px; }
 .offer-grid .big { font-size: clamp(17px, 1.6vw, 20px); color: var(--on-brand); max-width: 40ch; }
 .pill { display: inline-block; margin: 30px 0 14px; padding: 12px 22px; background: var(--yellow); color: var(--ink); font-weight: 700; border-radius: 999px; }
 .offer-grid .fine { font-size: 14px; color: var(--on-brand-2); max-width: 46ch; margin-bottom: 28px; }
@@ -718,10 +720,12 @@ html[dir="rtl"] .offer-cards img:nth-child(3) { transform: rotate(-6deg); }
 html[dir="rtl"] .folio-btn .back { transform: none; }
 .folio {
   display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 28px) / 3); gap: 14px;
-  overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; padding: 4px 2px 6px;
+  overflow-x: auto; scroll-behavior: smooth; scrollbar-width: none; padding: 4px 2px 6px;
   overscroll-behavior-x: contain;
 }
 .folio::-webkit-scrollbar { display: none; }
+/* snapping starts on the first touch: snapping at page load counts as a scroll and stops Google measuring the page (LCP) */
+.folio.snap { scroll-snap-type: x mandatory; }
 .folio figure { scroll-snap-align: start; margin: 0; position: relative; border: 2px dashed var(--dash); border-radius: 12px; background: var(--surface); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; aspect-ratio: 4 / 5; overflow: hidden; }
 /* real designs: square frames, each design fills its frame */
 .folio figure.has-img { border-style: solid; border-color: var(--line); padding: 0; aspect-ratio: 1 / 1; }
@@ -819,6 +823,8 @@ html[dir="rtl"] .form-card::before { box-shadow: -28px 0 0 var(--coral); }
 .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
 .reveal.in { opacity: 1; transform: none; }
 .no-js .reveal { opacity: 1; transform: none; }
+/* the first section is already on screen: show it straight away (fast first paint, and Google can measure it) */
+main > section:first-child .reveal { opacity: 1; transform: none; }
 
 /* ---------- motion (parallax + tilt, driven by js/motion.js) ---------- */
 [data-depth] { will-change: translate; }

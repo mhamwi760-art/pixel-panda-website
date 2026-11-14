@@ -4,12 +4,16 @@ THE PANDA PAW WEBSITE - QUICK GUIDE FOR MOHAMMED
 LIVE SITE:  https://thepandapaw.com/
 ARABIC:     https://thepandapaw.com/?lang=ar
 
-1) THE 4 PAGES
+1) THE PAGES
    index.html     Panda Time   - About us, Services, Policies (Terms & Conditions)
    packages.html  Paw Packages  - social media packages, Build Your Bamboo,
                                  Add-ons, Free designs, How we work, Portfolio
    branding.html  Paw Branding  - branding packages, How we work, Portfolio
    contact.html   Contact us   - Instagram DM and the request form
+   policies.html  Terms & Conditions (17 policies)
+   404.html       shown for any address that doesn't exist
+   robots.txt and sitemap.xml tell search engines what to read: add any
+   new page to sitemap.xml.
    The menu and footer are repeated on every page: if you change them,
    change all 4 pages.
 
@@ -29,6 +33,10 @@ ARABIC:     https://thepandapaw.com/?lang=ar
    - portfolio / portfolio_branding : gallery images (see 4)
    Anything still in [square brackets] shows in red on the site so you
    can spot what is missing.
+   After editing config.js BY HAND, run   node js/prerender.js   in this
+   folder: it copies prices, package numbers, the portfolio and the
+   structured data into the pages, so Google and AI search tools can read
+   them. (The dashboard does this for you on every "Save & publish".)
 
 3) REQUEST FORM
    "Send request" emails the client's request straight to you through

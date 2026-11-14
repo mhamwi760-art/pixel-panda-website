@@ -1,0 +1,7 @@
+# The Panda Paw: thepandapaw.com
+# Search engines and AI assistants are welcome to read the public pages.
+User-agent: *
+Allow: /
+Disallow: /admin.html
+
+Sitemap: https://thepandapaw.com/sitemap.xml
