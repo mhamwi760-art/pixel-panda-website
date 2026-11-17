@@ -219,9 +219,9 @@ html[dir="rtl"] .services li { padding: 30px 0 36px 28px; }
 .logo-track { display: flex; width: max-content; animation: marquee 42s linear infinite; }
 .logo-strip:hover .logo-track { animation-play-state: paused; }
 .logo-set { display: flex; align-items: center; gap: 72px; padding-inline-end: 72px; }
-.logo-set img { height: 58px; width: auto; max-width: 190px; object-fit: contain; filter: grayscale(1) contrast(1.15); mix-blend-mode: multiply; opacity: .85; }
+.logo-set img { height: 58px; width: auto; max-width: 190px; object-fit: contain; filter: grayscale(1) contrast(1.15); opacity: .85; }
 @media (max-width: 600px) { .logo-set { gap: 40px; padding-inline-end: 40px; } .logo-set img { height: 44px; max-width: 140px; } }
-[data-theme="dark"] .logo-set img { filter: grayscale(1) invert(1) contrast(1.1); mix-blend-mode: screen; }
+[data-theme="dark"] .logo-set img { filter: grayscale(1) invert(1) contrast(1.1); }
 @keyframes marquee { to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .logo-track { animation: none; flex-wrap: wrap; } }
 
