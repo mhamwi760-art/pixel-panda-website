@@ -193,11 +193,9 @@ window.PP_CONFIG =
   ],
   "text": {},
   "colors": {
-    "teal": "#006D6F",
-    "turq": "#3DBCA8",
-    "yellow": "#FFC857",
-    "coral": "#FF6F61",
-    "pink": "#FF4D8D"
+    "navy": "#101F3C",
+    "orange": "#FF681F",
+    "black": "#111111"
   }
 }
 /* PP-SETTINGS-END */
