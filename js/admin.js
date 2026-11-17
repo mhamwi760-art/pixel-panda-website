@@ -1,6 +1,6 @@
 /* The Panda Paw dashboard (admin.html).
    Loads the site's settings (js/config.js), all page text and the Arabic text from GitHub, lets the
-   owner change numbers, prices, contact details, text, images and colours, then publishes everything
+   owner change package numbers, contact details, text, images and colours, then publishes everything
    as ONE commit. GitHub Pages rebuilds the live site about a minute later.
    The GitHub key is kept only in this browser (localStorage) and is sent only to api.github.com. */
 (function () {
@@ -9,23 +9,14 @@
   var API = "https://api.github.com/repos/" + REPO;
   var START = "/* PP-SETTINGS-START */", END = "/* PP-SETTINGS-END */";
   var PAGES = [["index.html", "Panda Time"], ["packages.html", "Paw Packages"], ["branding.html", "Paw Branding"], ["contact.html", "Contact"], ["policies.html", "Terms & Conditions"]];
-  var DEFAULT_COLORS = { teal: "#006D6F", turq: "#3DBCA8", yellow: "#FFC857", coral: "#FF6F61", pink: "#FF4D8D" };
+  /* brand guidelines v2.0 */
+  var DEFAULT_COLORS = { navy: "#101F3C", orange: "#FF681F", black: "#111111" };
   var COLOR_INFO = [
-    ["teal", "Main teal", "Header, page tops, buttons, links"],
-    ["turq", "Turquoise", "Sliders, ticks, icons, Build Your Bamboo"],
-    ["yellow", "Yellow", "Contact buttons, highlights, Start button"],
-    ["coral", "Coral", "Tags, accents, branding package"],
-    ["pink", "Pink", "Small accents"]
+    ["navy", "Midnight navy (main)", "Page tops, bands, Build Your Bamboo, contact page"],
+    ["orange", "Vivid orange (accent)", "Buttons, small labels, highlighted words, shapes"],
+    ["black", "Rich black", "Text, footer, dark mode background"]
   ];
   var SITE_PICS = [
-    ["assets/mockups/phone-profile.webp", "Panda Time: phone (profile)"],
-    ["assets/mockups/phone-story.webp", "Panda Time: phone (story)"],
-    ["assets/mockups/phone-feed.webp", "About us: phone (feed)"],
-    ["assets/mockups/post-stories.webp", "About us: post card"],
-    ["assets/mockups/content-plan.webp", "Paw Packages: content calendar"],
-    ["assets/mockups/free-design-1.webp", "Paw Packages: free design 1"],
-    ["assets/mockups/free-design-3.webp", "Paw Packages: free design 2 (middle)"],
-    ["assets/mockups/free-design-2.webp", "Paw Packages: free design 3"],
     ["assets/share/og-image.png", "Link preview picture (WhatsApp, iMessage…)"]
   ];
   var KEY_STORE = "pp-admin-token";
@@ -111,7 +102,7 @@
           var cfgFile = files[0], i = cfgFile.text.indexOf(START), j = cfgFile.text.indexOf(END);
           if (i < 0 || j < 0) throw new Error("js/config.js is missing the settings markers");
           var cfg = JSON.parse(cfgFile.text.slice(i + START.length, j));
-          cfg.text = cfg.text || {}; cfg.colors = cfg.colors || clone(DEFAULT_COLORS);
+          cfg.text = cfg.text || {}; cfg.colors = cfg.colors && cfg.colors.navy ? cfg.colors : clone(DEFAULT_COLORS);   // older settings used the v1.0 teal palette
           var w = {}; try { new Function("window", files[1].text)(w); } catch (e) { w.PP_AR = {}; }
           S = {
             head: head, cfgSha: cfgFile.sha, prefix: cfgFile.text.slice(0, i + START.length), suffix: cfgFile.text.slice(j),
@@ -158,7 +149,7 @@
     });
     return out;
   }
-  var NAMES = { packages: "packages & prices", contact: "contact", text: "text", images: "images", colors: "colours" };
+  var NAMES = { packages: "packages", contact: "contact", text: "text", images: "images", colors: "colours" };
   function refresh() {
     var c = changes(), msg = $("saveMsg");
     document.querySelectorAll(".tabs [data-tab]").forEach(function (b) {
@@ -174,18 +165,10 @@
   window.addEventListener("beforeunload", function (e) { if (S && changes().length) { e.preventDefault(); e.returnValue = ""; } });
 
   /* ---------- packages & prices ---------- */
-  function priceNum(o) { var m = /^\s*(\d+(?:\.\d+)?)\s*KWD\s*$/i.exec(o && o.en || ""); return m ? m[1] : ""; }
-  function priceObj(n) { n = String(n).trim(); return n === "" ? { en: "[Price]", ar: "[السعر]" } : { en: n + " KWD", ar: n + " د.ك" }; }
   function numField(label, get, set, orig, min) {
     var inp = h("input", { type: "number", min: String(min || 0), step: "1", inputmode: "numeric", value: String(get()) });
     inp.addEventListener("input", function () { var v = inp.value === "" ? 0 : Math.max(min || 0, Math.round(+inp.value) || 0); set(v); mark(inp, v !== orig()); refresh(); });
     mark(inp, get() !== orig());
-    return h("div", {}, [h("label", { class: "f", text: label }), inp]);
-  }
-  function priceField(label, key) {
-    var inp = h("input", { type: "number", min: "0", step: "1", inputmode: "decimal", placeholder: "not set", value: priceNum(S.cfg[key]) });
-    inp.addEventListener("input", function () { S.cfg[key] = priceObj(inp.value); mark(inp, !same(S.cfg[key], S.orig[key])); refresh(); });
-    mark(inp, !same(S.cfg[key], S.orig[key]));
     return h("div", {}, [h("label", { class: "f", text: label }), inp]);
   }
   function pkNum(pk, k, label) {
@@ -194,25 +177,22 @@
   }
   function renderPackages() {
     var box = $("socialPk"); box.innerHTML = "";
-    [["pk_cub", "The Cub", "#3DBCA8", "price_cub"], ["pk_grove", "The Bamboo Grove", "#006D6F", "price_grove"], ["pk_empire", "The Panda Empire", "#111414", "price_empire"]].forEach(function (p) {
+    [["pk_cub", "The Cub", "#FF681F"], ["pk_grove", "The Bamboo Grove", "#101F3C"], ["pk_empire", "The Panda Empire", "#111111"]].forEach(function (p) {
       box.appendChild(h("div", { class: "pk" }, [
         h("h3", {}, [h("i", { style: "background:" + p[2] }), p[1]]),
         h("div", { class: "grid g6" }, [
           pkNum(p[0], "posts", "Post designs"), pkNum(p[0], "stories", "Story designs"), pkNum(p[0], "highlights", "Highlights"),
           pkNum(p[0], "reels", "Reels"), pkNum(p[0], "ads", "Ad designs"), pkNum(p[0], "photos", "Photos")
-        ]),
-        h("div", { class: "grid g3", style: "margin-top:10px" }, [priceField("Price per month (KWD)", p[3])])
+        ])
       ]));
     });
     var bp = $("brandPk"); bp.innerHTML = "";
-    [["br_paw", "The Paw Print", "#FF6F61", "price_paw"], ["br_signature", "The Panda Signature", "#006D6F", "price_signature"]].forEach(function (p) {
+    [["br_paw", "The Paw Print", "#FF681F"], ["br_signature", "The Panda Signature", "#101F3C"]].forEach(function (p) {
       bp.appendChild(h("div", { class: "pk" }, [
         h("h3", {}, [h("i", { style: "background:" + p[2] }), p[1]]),
-        h("div", { class: "grid g3" }, [pkNum(p[0], "logos", "Logo concepts"), priceField("One-time price (KWD)", p[3])])
+        h("div", { class: "grid g3" }, [pkNum(p[0], "logos", "Logo concepts")])
       ]));
     });
-    bindText($("pc-en"), function () { return (S.cfg.price_custom || {}).en || ""; }, function (v) { S.cfg.price_custom = S.cfg.price_custom || {}; S.cfg.price_custom.en = v; }, function () { return (S.orig.price_custom || {}).en || ""; });
-    bindText($("pc-ar"), function () { return (S.cfg.price_custom || {}).ar || ""; }, function (v) { S.cfg.price_custom = S.cfg.price_custom || {}; S.cfg.price_custom.ar = v; }, function () { return (S.orig.price_custom || {}).ar || ""; });
   }
   function bindText(inp, get, set, orig, clean) {
     inp.value = get();
@@ -399,9 +379,9 @@
     var head = "/* Brand colours chosen in the dashboard (admin.html → Colours).\n   The dashboard rewrites this file; it is empty while the original colours are used. */\n";
     if (same(c, DEFAULT_COLORS)) return head;
     return head +
-      ":root {\n  --teal: " + c.teal + "; --teal-dark: " + mix(c.teal, "#000000", .19) + "; --turq: " + c.turq + "; --yellow: " + c.yellow + "; --coral: " + c.coral + "; --pink: " + c.pink + ";\n" +
-      "  --brand-bg: " + c.teal + "; --brand-bg-2: " + mix(c.teal, "#000000", .19) + "; --accent-text: " + c.teal + ";\n}\n" +
-      "[data-theme=\"dark\"] {\n  --brand-bg: " + mix(c.teal, "#000000", .33) + "; --brand-bg-2: " + mix(c.teal, "#000000", .45) + "; --accent-text: " + mix(c.turq, "#FFFFFF", .25) + ";\n}\n";
+      ":root {\n  --navy: " + c.navy + "; --navy-2: " + mix(c.navy, "#FFFFFF", .07) + "; --orange: " + c.orange + "; --black: " + c.black + ";\n" +
+      "}\n:root:not([data-theme=\"dark\"]) {\n  --text: " + c.black + "; --mark: " + c.navy + ";\n}\n" +
+      "[data-theme=\"dark\"] {\n  --bg: " + c.black + "; --soft: " + mix(c.black, "#FFFFFF", .04) + "; --surface: " + mix(c.black, "#FFFFFF", .06) + ";\n}\n";
   }
   function renderColors() {
     var box = $("cols"); box.innerHTML = "";
@@ -417,8 +397,9 @@
   }
   function preview() {
     var c = S.cfg.colors;
-    $("pvBar").style.background = c.teal; $("pvBtn").style.background = c.yellow; $("pvBtn").style.color = "#111414";
-    $("pvTeal").style.background = c.teal; $("pvQ").style.background = c.turq; $("pvY").style.background = c.yellow; $("pvC").style.background = c.coral; $("pvP").style.background = c.pink;
+    $("pvBar").style.background = c.navy; $("pvBtn").style.background = c.orange; $("pvBtn").style.color = c.black;
+    $("pvTeal").style.background = c.orange; $("pvTeal").style.color = c.black; $("pvQ").style.background = c.navy; $("pvY").style.background = c.orange; $("pvC").style.background = c.black;
+    $("pvText").style.color = c.black;
   }
   $("colReset").addEventListener("click", function () { S.cfg.colors = clone(DEFAULT_COLORS); renderColors(); refresh(); });
 

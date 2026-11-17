@@ -4,6 +4,15 @@ THE PANDA PAW WEBSITE - QUICK GUIDE FOR MOHAMMED
 LIVE SITE:  https://thepandapaw.com/
 ARABIC:     https://thepandapaw.com/?lang=ar
 
+DESIGN (brand guidelines v2.0, November 2026)
+   Midnight navy #101F3C leads, white and black for balance, vivid orange
+   #FF681F only for buttons and small highlights. Montserrat (English) and
+   Tajawal (Arabic). Graphics are abstract: grid lines, diagonal lines,
+   circles and squares. All colours are at the top of css/styles.css.
+   Package prices are NOT shown on the website: every package has a
+   "Request a quote" button. The price fields in the dashboard are kept
+   but no longer appear on the pages.
+
 1) THE PAGES
    index.html     Panda Time   - About us, Services, Policies (Terms & Conditions)
    packages.html  Paw Packages  - social media packages, Build Your Bamboo,

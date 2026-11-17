@@ -3,8 +3,8 @@
   "short_name": "The Panda Paw",
   "start_url": "./",
   "display": "browser",
-  "background_color": "#006D6F",
-  "theme_color": "#006D6F",
+  "background_color": "#101F3C",
+  "theme_color": "#101F3C",
   "icons": [
     {
       "src": "assets/share/favicon-192.png",

@@ -14,7 +14,10 @@
 <!-- The Panda Paw dashboard: edits js/config.js, css/theme.css and images, then publishes them to GitHub.
      Not linked from the website. Nothing can be changed without a GitHub key that only the owner has. -->
 <style>
-  :root { --teal: #006D6F; --teal-d: #00585A; --turq: #3DBCA8; --yellow: #FFC857; --coral: #FF6F61; --ink: #111414; --ink2: #4A5556; --line: #DCE6E5; --mist: #EEF4F3; --bg: #F5F8F8; --card: #fff; --bad: #B4302A; }
+  /* brand guidelines v2.0: the old variable names are kept so the rules below stay short */
+  :root { --teal: #101F3C; --teal-d: #0A1530; --turq: #FF681F; --yellow: #FF681F; --coral: #FF681F; --ink: #111111; --ink2: #555B66; --line: #E1E3E8; --mist: #F3F4F6; --bg: #F3F4F6; --card: #fff; --bad: #C2410C; }
+  .btn, .tabs button, .top a, .top button, .card, .pk, .tx, .im, .col, .preview, input[type="text"], input[type="number"], input[type="password"], input[type="email"], textarea, select, .thumb, .preview .pill { border-radius: 0 !important; }
+  .label-o { color: var(--yellow); }
   * { box-sizing: border-box; }
   body { margin: 0; font-family: "Montserrat", "Segoe UI", Arial, sans-serif; color: var(--ink); background: var(--bg); font-size: 15px; line-height: 1.5; }
   [dir="rtl"], .ar { font-family: "Tajawal", "Segoe UI", Tahoma, sans-serif; }
@@ -43,7 +46,7 @@
     width: 100%; padding: 10px 12px; border: 1.5px solid #C5D3D2; border-radius: 10px; background: #fff; font-size: 15px;
   }
   textarea { resize: vertical; min-height: 44px; line-height: 1.45; }
-  input:focus, textarea:focus, select:focus { outline: none; border-color: var(--teal); box-shadow: 0 0 0 3px rgba(61,188,168,.3); }
+  input:focus, textarea:focus, select:focus { outline: none; border-color: var(--teal); box-shadow: 0 0 0 3px rgba(255,104,31,.25); }
   .changed { border-color: #E3A92B !important; background: #FFFBEF !important; }
   .grid { display: grid; gap: 12px; }
   .g2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } .g3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } .g6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
@@ -111,7 +114,7 @@
 </head>
 <body>
 <header class="top"><div class="in">
-  <img src="assets/logo/the-panda-paw-logo-white.png" alt="">
+  <img src="assets/logo/the-panda-paw-logo-white.svg" alt="">
   <h1>THE PANDA PAW<small>DASHBOARD</small></h1>
   <a href="./" target="_blank" rel="noopener">View site ↗</a>
   <button type="button" id="logout" hidden>Log out</button>
@@ -147,7 +150,7 @@
   <div class="loading" id="loading">Loading your website…</div>
   <div id="app" hidden>
     <nav class="tabs" role="tablist" aria-label="Sections">
-      <button type="button" role="tab" data-tab="packages" aria-selected="true">Packages &amp; prices</button>
+      <button type="button" role="tab" data-tab="packages" aria-selected="true">Packages</button>
       <button type="button" role="tab" data-tab="contact" aria-selected="false">Contact</button>
       <button type="button" role="tab" data-tab="text" aria-selected="false">Text</button>
       <button type="button" role="tab" data-tab="images" aria-selected="false">Images</button>
@@ -157,20 +160,12 @@
     <section data-panel="packages">
       <div class="card">
         <h2>Social media packages</h2>
-        <p class="hint">Numbers shown on each package card and in the comparison table. Put <b>0</b> for "not included" (shows —). Prices are in KWD; the Arabic "د.ك" is added for you.</p>
+        <p class="hint">Numbers shown on each package card. Put <b>0</b> for "not included" (shows —). Prices are not shown on the website: every package has a "Request a quote" button.</p>
         <div id="socialPk"></div>
       </div>
       <div class="card">
-        <h2>Build Your Bamboo</h2>
-        <p class="hint">The price line shown for the custom plan in the comparison table.</p>
-        <div class="grid g2">
-          <div><label class="f" for="pc-en">Price text (English)</label><input type="text" id="pc-en"></div>
-          <div><label class="f" for="pc-ar">Price text (Arabic)</label><input type="text" id="pc-ar" dir="rtl"></div>
-        </div>
-      </div>
-      <div class="card">
         <h2>Branding packages</h2>
-        <p class="hint">One-time prices in KWD and how many logo concepts each package includes.</p>
+        <p class="hint">How many logo concepts each branding package includes.</p>
         <div id="brandPk"></div>
       </div>
     </section>
@@ -190,7 +185,7 @@
     <section data-panel="text" hidden>
       <div class="card">
         <h2>Text on the website</h2>
-        <p class="hint">Every sentence on the site, in English and Arabic. Change what you need; changed lines are highlighted. Words between <code>&lt;em&gt;</code> and <code>&lt;/em&gt;</code> show in yellow on the site, keep those tags around the words you want highlighted.</p>
+        <p class="hint">Every sentence on the site, in English and Arabic. Change what you need; changed lines are highlighted. Words between <code>&lt;em&gt;</code> and <code>&lt;/em&gt;</code> show in orange on the site, keep those tags around the words you want highlighted.</p>
         <div class="tx-tools">
           <input type="text" id="txSearch" placeholder="Search text, e.g. free designs">
           <select id="txPage" aria-label="Page">
@@ -211,7 +206,7 @@
     <section data-panel="images" hidden>
       <div class="card">
         <h2>Portfolio: Paw Packages</h2>
-        <p class="hint">The gallery with arrows on Paw Packages. Photos are resized automatically for the web. Use ↑ ↓ to change the order.</p>
+        <p class="hint">The "Selected work" gallery on Panda Time and Paw Packages. Photos are resized automatically for the web. Use ↑ ↓ to change the order.</p>
         <div class="imgs" id="folio1"></div>
         <button class="btn ghost small" type="button" data-add="portfolio" style="margin-top:10px">+ Add a gallery item</button>
       </div>
@@ -222,8 +217,8 @@
         <button class="btn ghost small" type="button" data-add="portfolio_branding" style="margin-top:10px">+ Add a gallery item</button>
       </div>
       <div class="card">
-        <h2>Pictures on the pages</h2>
-        <p class="hint">Replace a picture with your own. PNG with a transparent background looks best for the phone pictures. The logo is not editable here, to protect the brand files.</p>
+        <h2>Link preview picture</h2>
+        <p class="hint">The picture shown when someone shares your website link. Use 1200 × 630. The logo is not editable here, to protect the brand files.</p>
         <div class="imgs" id="sitePics"></div>
       </div>
     </section>
@@ -231,11 +226,11 @@
     <section data-panel="colors" hidden>
       <div class="card">
         <h2>Brand colours</h2>
-        <p class="hint">Changes the colours across the whole site, in light and dark mode. Use <b>Reset</b> to go back to the original The Panda Paw colours.</p>
+        <p class="hint">The three brand colours from the brand guidelines (version 2.0). Changing them updates the whole site, in light and dark mode. Use <b>Reset</b> to go back to the brand colours.</p>
         <div class="cols" id="cols"></div>
         <div class="preview" id="preview" aria-hidden="true">
           <div class="bar" id="pvBar"><span>THE PANDA PAW</span><span class="pill" id="pvBtn">Contact us</span></div>
-          <div class="body"><span class="pill" id="pvTeal" style="color:#fff">Choose this package</span><i class="sq" id="pvQ"></i><i class="sq" id="pvY"></i><i class="sq" id="pvC"></i><i class="sq" id="pvP"></i></div>
+          <div class="body"><b id="pvText" style="font-size:18px">Monthly packages</b><span class="pill" id="pvTeal">Request a quote →</span><i class="sq" id="pvQ"></i><i class="sq" id="pvY"></i><i class="sq" id="pvC"></i></div>
         </div>
         <button class="btn ghost small" type="button" id="colReset" style="margin-top:12px">Reset to original colours</button>
       </div>
@@ -249,7 +244,7 @@
   <button class="btn yellow" type="button" id="save" disabled>Save &amp; publish</button>
 </div></div>
 
-<script src="js/prerender.js?v=1"></script>
-<script src="js/admin.js?v=3"></script>
+<script src="js/prerender.js?v=2"></script>
+<script src="js/admin.js?v=4"></script>
 </body>
 </html>

@@ -124,8 +124,8 @@
     }
     root.setAttribute("data-theme", th);
     if (remember) { try { localStorage.setItem("pp-theme", th); } catch (e) {} }
-    var meta = document.querySelector('meta[name="theme-color"]'), bar = getComputedStyle(root).getPropertyValue("--brand-bg").trim();
-    if (meta) meta.setAttribute("content", bar || (th === "dark" ? "#08494B" : "#006D6F"));
+    var meta = document.querySelector('meta[name="theme-color"]'), bar = getComputedStyle(root).getPropertyValue("--bg").trim();
+    if (meta) meta.setAttribute("content", bar || (th === "dark" ? "#111111" : "#FFFFFF"));
     themeLabel();
   }
   if (themeBtn) themeBtn.addEventListener("click", function () { setTheme(root.getAttribute("data-theme") === "dark" ? "light" : "dark", true, true); });
@@ -363,7 +363,7 @@
   }
   function celebrate() {
     var box = $("bgConfetti"); if (!box || reduceMotion) return;
-    var colors = ["#FFC857", "#3DBCA8", "#FF6F61", "#FF4D8D", "#006D6F"], html = "";
+    var colors = ["#FF681F", "#101F3C", "#111111", "#FF681F", "#101F3C"], html = "";
     for (var n = 0; n < 18; n++) {
       var a = Math.random() * Math.PI * 2, d = 90 + Math.random() * 120;
       html += '<i style="background:' + colors[n % 5] + ";--x:" + Math.round(Math.cos(a) * d) + "px;--y:" + Math.round(Math.sin(a) * d - 40) + "px;--r:" + Math.round(Math.random() * 360) + 'deg"></i>';
@@ -440,7 +440,7 @@
       $("bgStart").getAnimations().forEach(function (x) { if (!x.animationName) x.cancel(); });
       busy = false; $("bgStart").focus({ preventScroll: true });
     }
-    if (reduceMotion || !card.animate) { done(); return; }
+    if (true) { done(); return; }          // brand v2.0: the sheet opens and closes without the bamboo animation
     if (busy) return; busy = true;
     var D = 540, c = bambooCircle();
     c.el.style.transform = "scale(1)";
@@ -454,7 +454,7 @@
   document.addEventListener("keydown", function (e) { if (e.key === "Escape" && card && isSheet()) closeGame(); });
 
   function openGame(animate, at) {
-    if (sheetMQ && sheetMQ.matches) { if (!isSheet()) openSheet(animate, at); return; }
+    if (sheetMQ && sheetMQ.matches) { if (!isSheet()) { openSheet(false, at); if (animate) focusQ(); } return; }
     var canAnimate = animate && !reduceMotion && card.animate && morph;
     if (!canAnimate) {
       stage.classList.add("playing"); card.hidden = false; showStep(at || 0, 0);
