@@ -39,7 +39,8 @@
 
   function offer(cfg, priceKey, name, desc, extra) {
     var o = { "@type": "Offer", "name": name, "description": desc, "url": extra.url, "availability": "https://schema.org/InStock" };
-    var a = amount(en(cfg, priceKey));
+    // brand v2.0: prices are not shown on the website (quote on request), so they stay out of the structured data too
+    var a = null;
     if (a) { o.price = a.price; o.priceCurrency = a.currency; }
     if (extra.monthly && a) o.priceSpecification = { "@type": "UnitPriceSpecification", "price": a.price, "priceCurrency": a.currency, "unitCode": "MON", "referenceQuantity": { "@type": "QuantitativeValue", "value": 1, "unitCode": "MON" } };
     return o;
