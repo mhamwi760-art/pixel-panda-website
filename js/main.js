@@ -124,7 +124,7 @@
       return;
     }
     root.setAttribute("data-theme", th);
-    if (remember) { try { localStorage.setItem("pp-theme", th); } catch (e) {} }
+    if (remember) { try { localStorage.setItem("pp-theme-v2", th); } catch (e) {} }
     var meta = document.querySelector('meta[name="theme-color"]'), bar = getComputedStyle(root).getPropertyValue("--bg").trim();
     if (meta) meta.setAttribute("content", bar || (th === "dark" ? "#111111" : "#FFFFFF"));
     themeLabel();
