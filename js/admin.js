@@ -8,16 +8,23 @@
   var REPO = "mhamwi760-art/pixel-panda-website", BRANCH = "main";
   var API = "https://api.github.com/repos/" + REPO;
   var START = "/* PP-SETTINGS-START */", END = "/* PP-SETTINGS-END */";
-  var PAGES = [["index.html", "Panda Time"], ["packages.html", "Paw Packages"], ["branding.html", "Paw Branding"], ["contact.html", "Contact"], ["policies.html", "Terms & Conditions"]];
+  var PAGES = [["index.html", "Home"], ["about.html", "About"], ["packages.html", "Packages"], ["branding.html", "Branding"], ["work.html", "Work"], ["contact.html", "Contact"], ["policies.html", "Terms & Conditions"]];
   /* brand guidelines v2.0 */
   var DEFAULT_COLORS = { navy: "#101F3C", orange: "#FF681F", black: "#111111" };
   var COLOR_INFO = [
-    ["navy", "Midnight navy (main)", "Page tops, bands, Build Your Bamboo, contact page"],
+    ["navy", "Midnight navy (main)", "Dark backgrounds: page tops, bands, Director's Cut, contact page"],
     ["orange", "Vivid orange (accent)", "Buttons, small labels, highlighted words, shapes"],
     ["black", "Rich black", "Text, footer, dark mode background"]
   ];
   var SITE_PICS = [
-    ["assets/share/og-image.png", "Link preview picture (WhatsApp, iMessage…)"]
+    ["assets/share/og-image.png", "Link preview picture (WhatsApp, iMessage…)"],
+    ["assets/studio/hero.jpg", "Home: big picture at the top (tall)"],
+    ["assets/studio/about.jpg", "About: picture next to the title"],
+    ["assets/studio/approach.jpg", "About: Our approach picture"],
+    ["assets/studio/s4.jpg", "Home: Production card"],
+    ["assets/studio/s2.jpg", "Home: Content card"],
+    ["assets/studio/s3.jpg", "Home: Campaigns card"],
+    ["assets/studio/s1.jpg", "Home: Branding card"]
   ];
   var KEY_STORE = "pp-admin-token";
   var token = "", S = null;
@@ -177,7 +184,7 @@
   }
   function renderPackages() {
     var box = $("socialPk"); box.innerHTML = "";
-    [["pk_cub", "The Cub", "#FF681F"], ["pk_grove", "The Bamboo Grove", "#101F3C"], ["pk_empire", "The Panda Empire", "#111111"]].forEach(function (p) {
+    [["pk_cub", "Take One", "#FF681F"], ["pk_grove", "Prime Time", "#101F3C"], ["pk_empire", "Full Production", "#111111"]].forEach(function (p) {
       box.appendChild(h("div", { class: "pk" }, [
         h("h3", {}, [h("i", { style: "background:" + p[2] }), p[1]]),
         h("div", { class: "grid g6" }, [
@@ -187,7 +194,7 @@
       ]));
     });
     var bp = $("brandPk"); bp.innerHTML = "";
-    [["br_paw", "The Paw Print", "#FF681F"], ["br_signature", "The Panda Signature", "#101F3C"]].forEach(function (p) {
+    [["br_paw", "Opening Scene", "#FF681F"], ["br_signature", "Final Cut", "#101F3C"]].forEach(function (p) {
       bp.appendChild(h("div", { class: "pk" }, [
         h("h3", {}, [h("i", { style: "background:" + p[2] }), p[1]]),
         h("div", { class: "grid g3" }, [pkNum(p[0], "logos", "Logo concepts")])
@@ -362,7 +369,7 @@
           h("button", { class: "btn teal small", type: "button", text: "Replace", onclick: function () {
             pick().then(function (file) {
               if (!file) return;
-              return resize(file, p[0].indexOf("og-image") >= 0 ? 1200 : 1600, /\.webp$/.test(p[0]) ? "image/webp" : "image/png").then(function (r) { S.uploads[p[0]] = r.b64; S.previews[p[0]] = r.dataURL; renderSitePics(); refresh(); });
+              return resize(file, p[0].indexOf("og-image") >= 0 ? 1200 : 1600, /\.webp$/.test(p[0]) ? "image/webp" : /\.jpe?g$/.test(p[0]) ? "image/jpeg" : "image/png").then(function (r) { S.uploads[p[0]] = r.b64; S.previews[p[0]] = r.dataURL; renderSitePics(); refresh(); });
             }).catch(function (e) { alert(e.message); });
           } }),
           staged ? h("button", { class: "btn ghost small", type: "button", text: "Undo", onclick: function () { delete S.uploads[p[0]]; delete S.previews[p[0]]; renderSitePics(); refresh(); } }) : null

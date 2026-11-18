@@ -22,10 +22,11 @@
     "js.dmOpened": "Instagram is opening in a new tab. Your request is copied: paste it in the chat and send.",
     "js.dmIntro": "Hi The Panda Paw! Here is my request from your website:",
     "js.copied": "Copied!",
-    "dm.name": "Name", "dm.brand": "Brand", "dm.phone": "Phone", "dm.insta": "Instagram", "dm.interest": "Interested in", "dm.plan": "Build Your Bamboo", "dm.addons": "Add-ons", "dm.msg": "Message",
+    "dm.name": "Name", "dm.brand": "Brand", "dm.phone": "Phone", "dm.insta": "Instagram", "dm.interest": "Interested in", "dm.plan": "Director's Cut", "dm.addons": "Add-ons", "dm.msg": "Message",
     "js.failed": "That didn't go through. Please try again in a moment.",
     "js.activate": "The form is almost ready: the request email still needs to be activated. Please message us on Instagram for now.",
     "js.langBtn": "اقرأ الموقع بالعربية",
+    "wk.cAll": "All", "wk.cSocial": "Social media", "wk.cBrand": "Branding",
     "js.toDark": "Switch to dark mode",
     "js.toLight": "Switch to light mode",
     "js.openAll": "Open all",
@@ -95,10 +96,10 @@
       el.getAttribute("data-i18n-attr").split(";").forEach(function (pair) { var p = pair.split(":"); el.setAttribute(p[0], t(p[1])); });
     });
     document.querySelectorAll("[data-cfg]").forEach(function (el) { el.innerHTML = show(val(el.getAttribute("data-cfg"))); });
-    renderNums(); renderContact(); renderFolios(); renderPlan(); themeLabel(); accAllLabel(); refreshGame(); addonState();
+    renderNums(); renderContact(); renderFolios(); renderWork(); renderPlan(); themeLabel(); accAllLabel(); refreshGame(); addonState();
     var btn = $("langBtn");
     if (btn) {
-      btn.innerHTML = lang === "ar" ? '<span lang="en">English</span>' : '<span lang="ar">عربي</span>';
+      btn.innerHTML = '<span' + (lang === "en" ? ' class="on"' : "") + '>EN</span><i aria-hidden="true">|</i><span lang="ar"' + (lang === "ar" ? ' class="on"' : "") + '>AR</span>';
       btn.setAttribute("aria-label", t("js.langBtn"));
     }
     document.title = lang === "ar" ? (AR["title." + page] || titleEN) : titleEN;
@@ -129,12 +130,8 @@
     themeLabel();
   }
   if (themeBtn) themeBtn.addEventListener("click", function () { setTheme(root.getAttribute("data-theme") === "dark" ? "light" : "dark", true, true); });
-  if (window.matchMedia) {
-    var mq = matchMedia("(prefers-color-scheme: dark)");
-    var follow = function (e) { var saved = null; try { saved = localStorage.getItem("pp-theme"); } catch (er) {} if (!saved) setTheme(e.matches ? "dark" : "light", false, true); };
-    if (mq.addEventListener) mq.addEventListener("change", follow); else if (mq.addListener) mq.addListener(follow);
-  }
-  setTheme(root.getAttribute("data-theme") || "light", false);
+  /* dark is the studio look; the button switches to light and remembers it */
+  setTheme(root.getAttribute("data-theme") || "dark", false);
 
   /* ---------- contact links ---------- */
   /* Instagram handle from the settings; accepts "@name", "name" or a full instagram.com link */
@@ -176,6 +173,36 @@
       folioState(box);
     });
   }
+  /* ---------- work grid (home + work page): every portfolio image, with filter chips ---------- */
+  var workCat = "all";
+  function renderWork() {
+    var lists = [["portfolio", "social"], ["portfolio_branding", "brand"]], all = [];
+    lists.forEach(function (l) { (C[l[0]] || []).forEach(function (it) { if (it.image) all.push({ it: it, cat: l[1] }); }); });
+    var cats = ["social", "brand"].filter(function (c) { return all.some(function (x) { return x.cat === c; }); });
+    var chips = $("workChips");
+    if (chips) {
+      chips.hidden = cats.length < 2;
+      chips.innerHTML = ["all"].concat(cats).map(function (c) {
+        var k = { all: "wk.cAll", social: "wk.cSocial", brand: "wk.cBrand" }[c];
+        return '<button type="button" data-cat="' + c + '" aria-pressed="' + (workCat === c) + '">' + esc(t(k)) + "</button>";
+      }).join("");
+    }
+    document.querySelectorAll("[data-work]").forEach(function (box) {
+      var lim = parseInt(box.getAttribute("data-limit"), 10) || 0;
+      var items = all.filter(function (x) { return lim || workCat === "all" || x.cat === workCat; });
+      if (lim) items = items.slice(0, lim);
+      box.innerHTML = items.map(function (x) {
+        var label = x.it.label ? (x.it.label[lang] || x.it.label.en) : "";
+        return '<figure><img src="' + esc(x.it.image) + '" alt="' + esc(x.it.alt || label) + '" loading="lazy">' + (label ? "<figcaption>" + esc(label) + "</figcaption>" : "") + "</figure>";
+      }).join("");
+      var sec = box.closest("section"); if (sec && !lim) sec.hidden = false; else if (sec) sec.hidden = !items.length;
+    });
+  }
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest && e.target.closest("#workChips button"); if (!b) return;
+    workCat = b.getAttribute("data-cat"); renderWork();
+    var nb = document.querySelector('#workChips [data-cat="' + workCat + '"]'); if (nb) nb.focus();
+  });
   function folioState(box) {
     var max = box.scrollWidth - box.clientWidth, pos = Math.abs(box.scrollLeft);
     document.querySelectorAll('[data-folio-for="' + box.id + '"]').forEach(function (b) {
@@ -298,7 +325,7 @@
   }
   openFromHash(location.hash);
 
-  /* ---------- Build Your Bamboo: floating bamboo → glass question card ---------- */
+  /* ---------- Director's Cut (custom plan) → glass question card ---------- */
   var game = $("custom"), card = $("bgCard"), stage = $("bgStage"), sendLink = $("builderSend");
   var STEPS = PLAN_KEYS.concat(["rush", "summary"]);            // 6 number questions, rush, then the summary
   var DEFAULTS = { posts: 10, stories: 15, highlights: 3, reels: 2, ads: 1, photos: 5 };
@@ -599,7 +626,7 @@
       "_template": "table",
       "_captcha": "false"
     };
-    if (plan && sel && sel.value === "custom") data["Build Your Bamboo"] = planEN();
+    if (plan && sel && sel.value === "custom") data["Director's Cut"] = planEN();
     var addonNames = checked.map(function (c) { return plain(tEN(c.nextElementSibling.getAttribute("data-i18n"))); });
     data["Add-ons"] = addonNames.length ? addonNames.join(", ") : "-";
     if (w3f) { data.access_key = C.web3formsKey; data.subject = data._subject; data.from_name = "The Panda Paw website"; delete data._subject; delete data._template; delete data._captcha; }

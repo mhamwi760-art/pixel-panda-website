@@ -26,13 +26,13 @@
   }
 
   var PACKAGES = [
-    ["price_cub", "pk_cub", "The Cub", "A strong, steady start for new and growing brands."],
-    ["price_grove", "pk_grove", "The Bamboo Grove", "More content, highlights and ads for brands ready to grow."],
-    ["price_empire", "pk_empire", "The Panda Empire", "Full-scale content for brands that want to own their feed."]
+    ["price_cub", "pk_cub", "Take One", "A strong, steady start for new and growing brands."],
+    ["price_grove", "pk_grove", "Prime Time", "More content, highlights and ads for brands ready to grow."],
+    ["price_empire", "pk_empire", "Full Production", "Full-scale content for brands that want to own their feed."]
   ];
   var BRANDING = [
-    ["price_paw", "The Paw Print", "5 logo concepts, colours chosen from your logos and a moodboard, plus 5 free social media designs."],
-    ["price_signature", "The Panda Signature", "5 logo concepts, colours, moodboard, typography and mockups, plus 5 free social media designs."]
+    ["price_paw", "Opening Scene", "5 logo concepts, colours chosen from your logos and a moodboard, plus 5 free social media designs."],
+    ["price_signature", "Final Cut", "5 logo concepts, colours, moodboard, typography and mockups, plus 5 free social media designs."]
   ];
   var PROVIDER = { "@id": SITE + "#organization" };
   var AREA = ["Kuwait", "Saudi Arabia", "United Arab Emirates", "Qatar", "Bahrain", "Oman"].map(function (n) { return { "@type": "Country", "name": n }; });
@@ -59,9 +59,9 @@
         "name": "Social media management packages", "serviceType": "Social media management",
         "description": "Monthly social media packages: product and model photography, Instagram posts, stories, highlights, reels and ad designs, with a content calendar and a caption for every design.",
         "provider": PROVIDER, "areaServed": AREA, "url": SITE + "packages.html",
-        "hasOfferCatalog": { "@type": "OfferCatalog", "name": "Paw Packages",
+        "hasOfferCatalog": { "@type": "OfferCatalog", "name": "Social media packages",
           "itemListElement": PACKAGES.map(function (p) { return offer(cfg, p[0], p[2], pkgDesc(cfg, p[1], p[3]), { url: SITE + "packages.html#packages", monthly: true }); })
-            .concat([{ "@type": "Offer", "name": "Build Your Bamboo (custom plan)", "description": "Choose your own numbers of posts, stories, highlights, reels, ads and photos and get a free quote.", "url": SITE + "packages.html#packages" }]) }
+            .concat([{ "@type": "Offer", "name": "Director's Cut (custom plan)", "description": "Choose your own numbers of posts, stories, highlights, reels, ads and photos and get a free quote.", "url": SITE + "packages.html#packages" }]) }
       };
     }
     if (page === "branding") {
@@ -70,7 +70,7 @@
         "name": "Logo and brand identity design", "serviceType": "Brand identity design",
         "description": "Branding packages with 5 logo concepts, colours, moodboard, typography and mockups, plus 5 free social media designs.",
         "provider": PROVIDER, "areaServed": AREA, "url": SITE + "branding.html",
-        "hasOfferCatalog": { "@type": "OfferCatalog", "name": "Paw Branding",
+        "hasOfferCatalog": { "@type": "OfferCatalog", "name": "Branding packages",
           "itemListElement": BRANDING.map(function (b) { return offer(cfg, b[0], b[1], b[2], { url: SITE + "branding.html#packages" }); }) }
       };
     }
@@ -117,7 +117,7 @@
       var src = fs.readFileSync(path.join(dir, "js/config.js"), "utf8");
       var a = src.indexOf("/* PP-SETTINGS-START */"), b = src.indexOf("/* PP-SETTINGS-END */");
       var cfg = JSON.parse(src.slice(a + "/* PP-SETTINGS-START */".length, b));
-      ["index.html", "packages.html", "branding.html", "contact.html", "policies.html"].forEach(function (f) {
+      ["index.html", "about.html", "packages.html", "branding.html", "work.html", "contact.html", "policies.html"].forEach(function (f) {
         var p = path.join(dir, f), t = fs.readFileSync(p, "utf8"), out = prerender(t, cfg);
         if (out !== t) { fs.writeFileSync(p, out); console.log("updated " + f); }
       });
