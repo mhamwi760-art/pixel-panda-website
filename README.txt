@@ -14,17 +14,19 @@ DESIGN (brand guidelines v2.0, November 2026)
    but no longer appear on the pages.
 
 1) THE PAGES
-   index.html     Panda Time   - About us, Services, Policies (Terms & Conditions)
-   packages.html  Paw Packages  - social media packages, Build Your Bamboo,
-                                 Add-ons, Free designs, How we work, Portfolio
-   branding.html  Paw Branding  - branding packages, How we work, Portfolio
+   index.html     Home      - hero, Services (4 cards), Selected work, Free designs
+   about.html     About     - who we are, Our approach, How we work
+   packages.html  Packages  - Take One, Prime Time, Full Production,
+                              Director's Cut (custom plan), Add-ons, How we work
+   branding.html  Branding  - Opening Scene, Final Cut, How we work, Portfolio
+   work.html      Work      - every portfolio picture, with filters
    contact.html   Contact us   - Instagram DM and the request form
    policies.html  Terms & Conditions (17 policies)
    404.html       shown for any address that doesn't exist
    robots.txt and sitemap.xml tell search engines what to read: add any
    new page to sitemap.xml.
    The menu and footer are repeated on every page: if you change them,
-   change all 4 pages.
+   change all 7 pages.
 
 1b) DASHBOARD (the easy way to make small changes)
    Open https://thepandapaw.com/admin.html
@@ -57,9 +59,10 @@ DESIGN (brand guidelines v2.0, November 2026)
 
 4) PORTFOLIO GALLERIES
    Put your photos in a folder called assets/portfolio/ and add one line
-   per image to "portfolio" (Paw Packages) or "portfolio_branding"
-   (Paw Branding) in js/config.js, e.g. image: "assets/portfolio/shoot-01.jpg".
-   Add as many as you like: the left/right arrows scroll through them.
+   per image to "portfolio" (social media) or "portfolio_branding"
+   (branding) in js/config.js, e.g. image: "assets/portfolio/shoot-01.jpg".
+   Add as many as you like: they all show on the Work page.
+   The studio pictures (assets/studio/) can be replaced in the dashboard (Images).
 
 5) DARK MODE AND LANGUAGE
    The moon/sun button switches light and dark mode. The site starts in
