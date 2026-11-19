@@ -16,9 +16,9 @@ DESIGN (brand guidelines v2.0, November 2026)
 1) THE PAGES
    index.html     Home      - hero, Services (4 cards), Selected work, Free designs
    about.html     About     - who we are, Our approach, How we work
-   packages.html  Packages  - Take One, Prime Time, Full Production,
-                              Director's Cut (custom plan), Add-ons, How we work
-   branding.html  Branding  - Opening Scene, Final Cut, How we work, Portfolio
+   packages.html  Packages  - Think, Create, Impact,
+                              Tailored (custom plan), Add-ons, How we work
+   branding.html  Branding  - Essence, Icon, How we work, Portfolio
    work.html      Work      - every portfolio picture, with filters
    contact.html   Contact us   - Instagram DM and the request form
    policies.html  Terms & Conditions (17 policies)

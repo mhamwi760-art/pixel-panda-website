@@ -26,13 +26,13 @@
   }
 
   var PACKAGES = [
-    ["price_cub", "pk_cub", "Take One", "A strong, steady start for new and growing brands."],
-    ["price_grove", "pk_grove", "Prime Time", "More content, highlights and ads for brands ready to grow."],
-    ["price_empire", "pk_empire", "Full Production", "Full-scale content for brands that want to own their feed."]
+    ["price_cub", "pk_cub", "Think", "A strong, steady start for new and growing brands."],
+    ["price_grove", "pk_grove", "Create", "More content, highlights and ads for brands ready to grow."],
+    ["price_empire", "pk_empire", "Impact", "Full-scale content for brands that want to own their feed."]
   ];
   var BRANDING = [
-    ["price_paw", "Opening Scene", "5 logo concepts, colours chosen from your logos and a moodboard, plus 5 free social media designs."],
-    ["price_signature", "Final Cut", "5 logo concepts, colours, moodboard, typography and mockups, plus 5 free social media designs."]
+    ["price_paw", "Essence", "5 logo concepts, colours chosen from your logos and a moodboard, plus 5 free social media designs."],
+    ["price_signature", "Icon", "5 logo concepts, colours, moodboard, typography and mockups, plus 5 free social media designs."]
   ];
   var PROVIDER = { "@id": SITE + "#organization" };
   var AREA = ["Kuwait", "Saudi Arabia", "United Arab Emirates", "Qatar", "Bahrain", "Oman"].map(function (n) { return { "@type": "Country", "name": n }; });
@@ -61,7 +61,7 @@
         "provider": PROVIDER, "areaServed": AREA, "url": SITE + "packages.html",
         "hasOfferCatalog": { "@type": "OfferCatalog", "name": "Social media packages",
           "itemListElement": PACKAGES.map(function (p) { return offer(cfg, p[0], p[2], pkgDesc(cfg, p[1], p[3]), { url: SITE + "packages.html#packages", monthly: true }); })
-            .concat([{ "@type": "Offer", "name": "Director's Cut (custom plan)", "description": "Choose your own numbers of posts, stories, highlights, reels, ads and photos and get a free quote.", "url": SITE + "packages.html#packages" }]) }
+            .concat([{ "@type": "Offer", "name": "Tailored (custom plan)", "description": "Choose your own numbers of posts, stories, highlights, reels, ads and photos and get a free quote.", "url": SITE + "packages.html#packages" }]) }
       };
     }
     if (page === "branding") {

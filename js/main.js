@@ -22,7 +22,7 @@
     "js.dmOpened": "Instagram is opening in a new tab. Your request is copied: paste it in the chat and send.",
     "js.dmIntro": "Hi The Panda Paw! Here is my request from your website:",
     "js.copied": "Copied!",
-    "dm.name": "Name", "dm.brand": "Brand", "dm.phone": "Phone", "dm.insta": "Instagram", "dm.interest": "Interested in", "dm.plan": "Director's Cut", "dm.addons": "Add-ons", "dm.msg": "Message",
+    "dm.name": "Name", "dm.brand": "Brand", "dm.phone": "Phone", "dm.insta": "Instagram", "dm.interest": "Interested in", "dm.plan": "Tailored", "dm.addons": "Add-ons", "dm.msg": "Message",
     "js.failed": "That didn't go through. Please try again in a moment.",
     "js.activate": "The form is almost ready: the request email still needs to be activated. Please message us on Instagram for now.",
     "js.langBtn": "اقرأ الموقع بالعربية",
@@ -325,7 +325,7 @@
   }
   openFromHash(location.hash);
 
-  /* ---------- Director's Cut (custom plan) → glass question card ---------- */
+  /* ---------- Tailored (custom plan) → glass question card ---------- */
   var game = $("custom"), card = $("bgCard"), stage = $("bgStage"), sendLink = $("builderSend");
   var STEPS = PLAN_KEYS.concat(["rush", "summary"]);            // 6 number questions, rush, then the summary
   var DEFAULTS = { posts: 10, stories: 15, highlights: 3, reels: 2, ads: 1, photos: 5 };
@@ -626,7 +626,7 @@
       "_template": "table",
       "_captcha": "false"
     };
-    if (plan && sel && sel.value === "custom") data["Director's Cut"] = planEN();
+    if (plan && sel && sel.value === "custom") data["Tailored"] = planEN();
     var addonNames = checked.map(function (c) { return plain(tEN(c.nextElementSibling.getAttribute("data-i18n"))); });
     data["Add-ons"] = addonNames.length ? addonNames.join(", ") : "-";
     if (w3f) { data.access_key = C.web3formsKey; data.subject = data._subject; data.from_name = "The Panda Paw website"; delete data._subject; delete data._template; delete data._captcha; }

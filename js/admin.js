@@ -12,7 +12,7 @@
   /* brand guidelines v2.0 */
   var DEFAULT_COLORS = { navy: "#101F3C", orange: "#FF681F", black: "#111111" };
   var COLOR_INFO = [
-    ["navy", "Midnight navy (main)", "Dark backgrounds: page tops, bands, Director's Cut, contact page"],
+    ["navy", "Midnight navy (main)", "Dark backgrounds: page tops, bands, Tailored, contact page"],
     ["orange", "Vivid orange (accent)", "Buttons, small labels, highlighted words, shapes"],
     ["black", "Rich black", "Text, footer, dark mode background"]
   ];
@@ -184,7 +184,7 @@
   }
   function renderPackages() {
     var box = $("socialPk"); box.innerHTML = "";
-    [["pk_cub", "Take One", "#FF681F"], ["pk_grove", "Prime Time", "#101F3C"], ["pk_empire", "Full Production", "#111111"]].forEach(function (p) {
+    [["pk_cub", "Think", "#FF681F"], ["pk_grove", "Create", "#101F3C"], ["pk_empire", "Impact", "#111111"]].forEach(function (p) {
       box.appendChild(h("div", { class: "pk" }, [
         h("h3", {}, [h("i", { style: "background:" + p[2] }), p[1]]),
         h("div", { class: "grid g6" }, [
@@ -194,7 +194,7 @@
       ]));
     });
     var bp = $("brandPk"); bp.innerHTML = "";
-    [["br_paw", "Opening Scene", "#FF681F"], ["br_signature", "Final Cut", "#101F3C"]].forEach(function (p) {
+    [["br_paw", "Essence", "#FF681F"], ["br_signature", "Icon", "#101F3C"]].forEach(function (p) {
       bp.appendChild(h("div", { class: "pk" }, [
         h("h3", {}, [h("i", { style: "background:" + p[2] }), p[1]]),
         h("div", { class: "grid g3" }, [pkNum(p[0], "logos", "Logo concepts")])
